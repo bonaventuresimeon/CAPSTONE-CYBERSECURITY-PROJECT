@@ -1,5 +1,5 @@
-﻿# CAPSTONE PROJECT 138
-## HanTech â€” From Vulnerability to Compliance: Securing Legacy and Cloud Systems
+# CAPSTONE PROJECT 138
+## HanTech — From Vulnerability to Compliance: Securing Legacy and Cloud Systems
 
 **Programme:** TS Academy Cybersecurity Capstone  
 **Project evidence date:** 9 November 2026  
@@ -17,22 +17,22 @@ Assess the authorised training environment, discover services, identify five evi
 - Task 7 is completed as a desk-based cloud-security baseline. No provider, tenant, workload, authorised identity or written live-test scope was supplied.
 
 ## Verified discovery coverage
-- Full TCP connect/version-light discovery, 1â€“65535: 30 open and 65,505 closed; completed 8 November 2026.
-- Targeted TCP corroboration, 9 November: seven selected ports reconfirmed open; three service identified and four remain unknown.
+- Full TCP connect/version-light discovery, ports 1–65535: 30 open and 65,505 closed; completed 8 November 2026.
+- Targeted TCP corroboration, 9 November: seven selected ports reconfirmed open; three services identified and four remain unknown.
 - UDP top-100, 9 November: four confirmed open responses, three open|filtered/no-response and 93 closed. This is not full UDP coverage.
 - Machine-readable service inventory: 30 TCP records plus 7 UDP observations; duplicate protocol/port keys: 0.
-- Native Nmap `.nmap`, `.gnmap`, `.xml`, execution receipts and genuine screenshots are retained under `09_Evidence\02_System_Discovery`.
+- Native Nmap `.nmap`, `.gnmap`, `.xml`, execution receipts and genuine screenshots are retained under `09_Evidence\\02_System_Discovery`.
 
 ## Five canonical priority findings
 | ID | Finding | Contextual score |
 |---|---|---:|
-| F-01 | Wildcard writable NFS root export with `no_root_squash` | 20 â€” Critical |
-| F-02 | Anonymous SMB share enumeration and directory metadata disclosure | 8 â€” Moderate |
-| F-03 | Mutillidae configuration resource reachable over HTTP as text/plain | 16 â€” High |
-| F-04 | Default lab credential pair displayed on public HTTP landing page | 16 â€” High |
-| F-05 | Telnet and Berkeley r-services exposed on all IPv4 interfaces | 12 â€” High |
+| F-01 | Wildcard writable NFS root export with `no_root_squash` | 20 — Critical |
+| F-02 | Anonymous SMB share enumeration and directory metadata disclosure | 8 — Moderate |
+| F-03 | Mutillidae configuration resource reachable over HTTP as text/plain | 16 — High |
+| F-04 | Default lab credential pair displayed on public HTTP landing page | 16 — High |
+| F-05 | Telnet and Berkeley r-services exposed on all IPv4 interfaces | 12 — High |
 
-Scores use a qualitative 5Ã—5 likelihood/impact model. They are not CVSS scores or approved production risk acceptance. Samba CVE-2007-2447 remains a separate high-confidence applicability candidate with unresolved installed-binary patch provenance; it is not represented as confirmed exploitation.
+Scores use a qualitative 5×5 likelihood/impact model. They are not CVSS scores or approved production risk acceptance. Samba CVE-2007-2447 remains a separate high-confidence applicability candidate with unresolved installed-binary patch provenance; it is not represented as confirmed exploitation.
 
 ## Workstream deliverables
 - **Governance:** project charter, allocation register, scope decisions, status, execution log and action tracker.
@@ -44,18 +44,18 @@ Scores use a qualitative 5Ã—5 likelihood/impact model. They are not CVSS scor
 - **Security controls:** preventive, detective and corrective control matrix. Recommendations only; no control implementation is claimed.
 - **GRC:** five draft policy requirements and conditional legal/standards applicability. No formal adoption is claimed.
 - **Cloud security:** desk-based shared-responsibility baseline and evidence plan; no live tenant assessment.
-- **Final report:** integrated report master in Markdown and editable Word-compatible DOCX.
-- **Presentation:** 14-slide content and speaker notes in Markdown; no native PPTX is claimed.
+- **Final report:** integrated report master in Markdown, editable Word-compatible DOCX, and final PDF.
+- **Presentation:** 14-slide presentation supplied as a professional PowerPoint (.pptx), editable Word-compatible DOCX, Markdown slide script and speaker notes.
 - **References:** standards/framework starter list and public-source applicability log.
 
 ## Evidence classification and folder rules
-- `09_Evidence\00_Preflight`: pre-flight baseline and snapshots.
-- `09_Evidence\01_Network_Configuration`: lab topology, DHCP, VM console, interface and reachability evidence.
-- `09_Evidence\02_System_Discovery`: target identification, full TCP, targeted TCP and UDP top-100 scans only.
-- `09_Evidence\03_Vulnerability_Assessment`: vulnerability-specific research and read-only validation evidence; no native full-scan set.
-- `09_Evidence\04_Risk_Assessment`: risk scoring/basis artefacts only.
-- There is intentionally no `09_Evidence\05_Security_Controls` packet because the project has not implemented controls and there is no unique control-implementation evidence. The control design is maintained in `06_Security_Controls`.
-- `09_Evidence\06_Integrity_and_Transfer`: manifests, hashes, guest verification, transfer provenance and execution audit.
+- `09_Evidence\\00_Preflight`: pre-flight baseline and snapshots.
+- `09_Evidence\\01_Network_Configuration`: lab topology, DHCP, VM console, interface and reachability evidence.
+- `09_Evidence\\02_System_Discovery`: target identification, full TCP, targeted TCP and UDP top-100 scans only.
+- `09_Evidence\\03_Vulnerability_Assessment`: vulnerability-specific research and read-only validation evidence; no native full-scan set.
+- `09_Evidence\\04_Risk_Assessment`: risk scoring/basis artefacts only.
+- There is intentionally no `09_Evidence\\05_Security_Controls` packet because the project has not implemented controls and there is no unique control-implementation evidence. The control design is maintained in `06_Security_Controls`.
+- `09_Evidence\\06_Integrity_and_Transfer`: manifests, hashes, guest verification, transfer provenance and execution audit.
 - Duplicate technical evidence copies were removed only after SHA-256 equality was confirmed against a retained canonical copy. The complete action log records moves and duplicate-removal decisions.
 
 ## Top-level folder guide
@@ -72,7 +72,7 @@ Scores use a qualitative 5Ã—5 likelihood/impact model. They are not CVSS scor
 | `08_Cloud_Security` | Desk-based cloud-security baseline |
 | `09_Evidence` | Classified source evidence, screenshots, native scan outputs and integrity records |
 | `10_Final_Report` | Final report master, QA and working drafts |
-| `11_Presentation` | 14-slide presentation script and speaker notes |
+| `11_Presentation` | Final PPTX, DOCX, Markdown presentation and speaker notes |
 | `12_References` | Standards, frameworks and research source log |
 | `99_Archive` | Superseded indexes, historical drafts and receipts |
 
@@ -85,5 +85,4 @@ Scores use a qualitative 5Ã—5 likelihood/impact model. They are not CVSS scor
 - A SHA-256 match establishes byte-level integrity relative to the manifest, not the accuracy of every technical interpretation.
 
 ## Current completion boundary
-The report and presentation content are assembled. The final report has a Markdown master and a Word-compatible DOCX; presentation content remains a Markdown slide script and speaker notes. The project is not represented as a production penetration test, live cloud assessment, policy adoption or remediation implementation. Final submission readiness depends on the capstone rubric and any external requirements not contained in the available project scope.
-
+The final report is supplied in Markdown, editable DOCX and PDF formats. The final presentation is supplied as a professional PowerPoint (.pptx), editable DOCX, Markdown slide script and speaker notes. The project is not represented as a production penetration test, live cloud assessment, policy adoption or remediation implementation. Final submission readiness depends on the capstone rubric and any external requirements not contained in the available project scope.
