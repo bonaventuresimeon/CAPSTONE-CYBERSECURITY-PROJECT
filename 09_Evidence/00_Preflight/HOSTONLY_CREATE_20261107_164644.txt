@@ -1,0 +1,17 @@
+﻿Create dedicated VirtualBox host-only interface; no VM NICs changed in this step. 2026-11-07T16:46:44.1096526+01:00
+VBoxManage.exe : 0%...E_FAIL
+At line:6 char:1
++ & $vb hostonlyif create 2>&1 | Out-File -Append -Encoding utf8 $log
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (0%...E_FAIL:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+VBoxManage.exe: error: Failed to create the host-only adapter
+VBoxManage.exe: error: Could not find Host Interface Networking driver! Please reinstall
+VBoxManage.exe: error: Details: code E_FAIL (0x80004005), component HostNetworkInterfaceWrap, interface 
+IHostNetworkInterface
+VBoxManage.exe: error: Context: "enum RTEXITCODE __cdecl handleCreate(struct HandlerArg *)" at line 105 of file 
+VBoxManageHostonly.cpp
+=== HOST-ONLY INTERFACE INVENTORY ===
+Screenshot: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\00_Preflight\SCREENSHOT_HostOnlyCreated_20261107_164644.png
+Log: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\00_Preflight\HOSTONLY_CREATE_20261107_164644.txt

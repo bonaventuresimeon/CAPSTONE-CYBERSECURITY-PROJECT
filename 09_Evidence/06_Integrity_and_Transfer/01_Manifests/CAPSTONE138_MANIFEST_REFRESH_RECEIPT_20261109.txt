@@ -1,0 +1,8 @@
+﻿CAPSTONE PROJECT 138 — SHA-256 MANIFEST REFRESH RECEIPT
+Updated: 9 November 2026 (Africa/Lagos)
+The earlier 527-record manifest checkpoint predates the evidence-tree reorganisation, duplicate removal and current report/DOCX updates. It is superseded.
+The post-reorganisation manifest was regenerated after the current evidence structure and Word-compatible files were created. The current manifest contains 478 project file records, with zero missing paths and zero hash mismatches.
+The manifest sidecar is checked against the active CSV, and a separate per-entry rehash is performed after the final manifest run.
+Active files: SHA256_EVIDENCE_MANIFEST_CURRENT_20261109.csv and SHA256_EVIDENCE_MANIFEST_CURRENT_20261109.sha256.
+Any subsequent change to a project file requires another refresh. The manifest and sidecar are excluded from their own record set; the sidecar carries the active manifest SHA-256.
+The manifest verifies byte-level integrity only; it does not prove that a finding interpretation is correct or remediation has been implemented.

@@ -1,0 +1,47 @@
+﻿CAPSTONE PROJECT 138 - UDP TOP-100 DISCOVERY RECEIPT
+Execution date: 9 November 2026 (Africa/Lagos)
+Scanner: Kali Linux VM, Whisper, 192.168.138.10
+Target: Metasploitable 2, 192.168.138.20
+Network: VirtualBox Internal Network CAPSTONE138_ISOLATED; topology unchanged
+Nmap 7.98; privileged UDP scan; sudo authorization verified available
+
+COMMAND
+nmap -sU --top-ports 100 -sV --version-light -Pn -T2 --reason --max-retries 2 --host-timeout 10m -oA CAPSTONE138_UDP_TOP100_20261109 192.168.138.20
+Start: 2026-11-09T05:46:36 (Nmap output)
+End: 2026-11-09T05:49:24 (Nmap output)
+Elapsed: 167.99 seconds
+Exit status: 0
+Host state: up; ARP response; latency 0.0046 seconds
+Warning: one or more ports reached the retransmission cap (2).
+
+RESULTS
+Confirmed open UDP: 53/domain - ISC BIND 9.4.2; 111/rpcbind; 137/netbios-ns - Nmap reported WORKGROUP; 2049/rpcbind.
+Open|filtered (no response): 68/dhcpc; 69/tftp; 138/netbios-dgm. These are ambiguous states and are NOT confirmed open.
+Closed: 93 UDP ports, based on ICMP port-unreachable responses.
+Coverage: Nmap top 100 UDP ports; this is not a full 65,535-port UDP scan.
+Service identification is Nmap probe evidence, not proof of application configuration, vulnerability or exploitability.
+
+INTEGRITY
+Native .nmap, .gnmap, .xml and execution console log transferred from Kali.
+Guest-side final checksum list was generated after the scan execution log was complete, in a separate terminal so the log did not change during hashing.
+Independent guest-to-host SHA-256 comparison: 4/4 files MATCH; 0 mismatches.
+The earlier UDP_SHA256_FINAL_20261109.txt list is retained as preliminary; its console-log hash was stale because the checksum display itself was appended to the tee log. UDP_SHA256_VERIFIED_20261109.txt supersedes it.
+
+SAFETY / LIMITS
+No vulnerability NSE scripts, authentication, brute force, exploitation, service mutation or destructive testing performed.
+No UDP port in open|filtered state is counted as confirmed open.
+No new vulnerability finding is promoted solely from this scan.
+
+EVIDENCE
+09_Evidence/02_System_Discovery/CAPSTONE138_SCAN_FOLLOWUP_20261109/UDP_TOP100_20261109/CAPSTONE138_UDP_TOP100_20261109.nmap
+09_Evidence/02_System_Discovery/CAPSTONE138_SCAN_FOLLOWUP_20261109/UDP_TOP100_20261109/CAPSTONE138_UDP_TOP100_20261109.gnmap
+09_Evidence/02_System_Discovery/CAPSTONE138_SCAN_FOLLOWUP_20261109/UDP_TOP100_20261109/CAPSTONE138_UDP_TOP100_20261109.xml
+09_Evidence/02_System_Discovery/CAPSTONE138_SCAN_FOLLOWUP_20261109/UDP_TOP100_20261109/UDP_EXECUTION_CONSOLE_20261109.txt
+09_Evidence/02_System_Discovery/CAPSTONE138_SCAN_FOLLOWUP_20261109/UDP_TOP100_20261109/UDP_SHA256_VERIFIED_20261109.txt
+09_Evidence/02_System_Discovery/CAPSTONE138_SCAN_FOLLOWUP_20261109/UDP_TOP100_20261109/KALI_UDP_FINAL_CHECK_20261109.png
+
+GUEST/HOST HASH RESULTS
+CAPSTONE138_UDP_TOP100_20261109.nmap | MATCH | SHA256 0a9aa077ca521c1a9329b365abeb6856c7a6152902ef98458d98b93a8eccd98b
+CAPSTONE138_UDP_TOP100_20261109.gnmap | MATCH | SHA256 939a1ddd957c8810801a4a2b932385d648644c26fc66e754aac1bc3c5ce2ba74
+CAPSTONE138_UDP_TOP100_20261109.xml | MATCH | SHA256 7a47d4c9fbffe39277f0c50c06fb0819b5f8aaa85c6d390dfa438f4075912f22
+UDP_EXECUTION_CONSOLE_20261109.txt | MATCH | SHA256 646b93f43ed994109741a4150db2b87998d4d278a2c93f5ff857c4d101f4acd1

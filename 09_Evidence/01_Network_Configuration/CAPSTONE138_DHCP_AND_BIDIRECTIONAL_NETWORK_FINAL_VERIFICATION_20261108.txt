@@ -1,0 +1,47 @@
+CAPSTONE PROJECT 138 — DHCP SINGLE-CLIENT AND BIDIRECTIONAL NETWORK FINAL VERIFICATION
+Date: 2026-11-08 (Africa/Lagos)
+Host: PHAMOUS / CHINEDU
+Network: CAPSTONE138_ISOLATED (VirtualBox Internal Network; guest-only isolation)
+VMs: Kali Linux 8eefef2e-f9a7-44ed-bfda-cf280a9e0b6a; Metasploitable 2 396b158d-852c-463f-b179-0cc971418cc7
+Rollback checkpoint: CAPSTONE_DHCP_PRE_CORRECTION_20261108 / f975d0d1-b15f-440d-99d3-36b98e3de100
+
+CONSOLE DISPLAY
+- Metasploitable's first VBoxManage screenshot was black. A single Enter key woke its existing console. The logged-in msfadmin shell reappeared. No reboot or power-cycle was performed.
+- Kali desktop and terminal were visible during the final reverse-direction connectivity test.
+
+METASPLOITABLE DHCP PROCESS RECHECK
+- Fresh `ps -p 4742,4893 -o pid,ppid,args` showed PID 4742 only. PID 4893 was absent.
+- A separate full `ps` listing showed dhclient3 PID 4742 and no active generic dhclient process.
+- PID 4742 remains the expected ifupdown dhclient3 process using `/var/run/dhclient.eth0.pid`.
+- `/var/run/dhclient.pid` still contains 4893; it is a stale PID-file value after process removal. `/var/run/dhclient.eth0.pid` contains 4742. Neither PID file was edited or removed.
+- `eth0` remained UP/RUNNING with 192.168.138.20/24, MAC 08:00:27:f8:7d:a3.
+
+BIDIRECTIONAL CONNECTIVITY AFTER PROCESS CORRECTION
+- Metasploitable -> Kali 192.168.138.10: 3 transmitted, 3 received, 0% loss.
+- Kali -> Metasploitable 192.168.138.20: 4 transmitted, 4 received, 0% loss.
+- Both tests were run after the single-client correction and captured from the respective live guest consoles.
+
+VIRTUALBOX DHCP SERVER RECONCILIATION (READ-ONLY)
+- CAPSTONE138_ISOLATED server: 192.168.138.1/24; pool .10–.150; fixed binding Metasploitable MAC -> .20 and Kali MAC -> .10.
+- `VBoxManage dhcpserver findlease --network=CAPSTONE138_ISOLATED --mac-address=08:00:27:f8:7d:a3` returns 192.168.138.100, State `expired`, issued 2026-11-08T03:17:41Z, expired 2026-11-08T03:27:41Z, TTL 0 sec.
+- The retained XML file still contains the old .100 record with state=acked and original 600-second timer. File LastWriteTime is 2026-11-08 04:17:41 local and it has not been updated by this work. VirtualBox's current `findlease` evaluation explicitly classifies this record as EXPIRED, not active.
+- The current DHCP server log's later Metasploitable renewal (relative server log time 01:38:31) shows ciaddr .20 and ACK yiaddr .20, matching the fixed binding and guest address.
+- The .100 XML record is therefore explained as an expired historical lease record; no active .100 lease was identified. It is preserved unchanged. No manual lease-file edit, deletion, DHCP configuration change or DHCP service restart was performed.
+
+RESULT
+- Approved duplicate-client correction: PASS — PID 4893 is no longer running; PID 4742 remains active and untouched.
+- Guest addressing: PASS — Metasploitable .20/24; Kali .10/24; DHCP fixed bindings match both MACs.
+- Bidirectional guest connectivity: PASS — Metasploitable-to-Kali 3/3 and Kali-to-Metasploitable 4/4, both 0% loss.
+- Lease history: EXPIRED / HISTORICAL — .100 record retained for audit; TTL 0 and current `findlease` state expired.
+- Network readiness gate: PASS for proceeding to scoped system/service discovery on the authorised Metasploitable target. This receipt does not claim any vulnerability findings.
+- No system discovery, vulnerability scan or exploitation is included in this receipt. No host or guest DHCP configuration/lease file was modified. No third system was added to scope.
+
+EVIDENCE FILES AND SHA-256
+METASPLOITABLE_PS_RECHECK_20261108.png | 13512 bytes | 6F699BEC476C856A2134D2A15A17F76072F77E1250C0EB0A187D8CE7FD3C2BDF
+METASPLOITABLE_PIDFILE_CHECK_20261108.png | 12638 bytes | 45C66B8FC2401060710E89497C7C7667DEEB0EA7151B270569C044A2A07B55B6
+METASPLOITABLE_IFCONFIG_POSTCHECK_20261108.png | 12879 bytes | B23F27021EA19919B9E258247C0E9E39CECF9515504ABD0A8E7A7C6D4E2CD459
+METASPLOITABLE_PING_POSTCHECK_20261108.png | 14131 bytes | 6C9E99CA2FD5FF31B865D3062BEEFF26729909786101BDAE084330EFF0793B8D
+KALI_POST_CORRECTION_CONSOLE_CHECK_20261108.png | 376321 bytes | 8286213AFDA9BF1AF9DDA63A1473719AC4247198ED62F5FAF13E8750C0E3191C
+KALI_TO_METASPLOITABLE_POST_CORRECTION_20261108.png | 413002 bytes | F114B5B84F362F6B02204431C322306AA38A16423CCAB4C8FEA7E580CD3EB90E
+VBOX_DHCP_AND_VM_READONLY_RECHECK_20261108.txt | 5997 bytes | D0242DAEDD20C1432BA048E39CF8000954E298D9F42D10B843A21E30C7768ACA
+VBOX_DHCP_POST_CORRECTION_READONLY_20261108.txt | 15203 bytes | A692D46071147D63CE62AC07D02B8C9C750B5A95ED7D37C67D226848719804A8

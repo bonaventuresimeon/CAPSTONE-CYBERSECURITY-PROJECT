@@ -1,0 +1,26 @@
+﻿Status captured 2026-11-07T16:50:39.2822698+01:00
+Running VMs:
+"Metasploitable" {396b158d-852c-463f-b179-0cc971418cc7}
+[Metasploitable]
+
+VMState="running"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+nic2="none"
+
+
+[Kali Linux]
+
+VMState="aborted"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+nic2="none"
+
+
+[Dev Guru]
+
+VMState="poweroff"
+nic1="nat"
+nic2="none"
+
+

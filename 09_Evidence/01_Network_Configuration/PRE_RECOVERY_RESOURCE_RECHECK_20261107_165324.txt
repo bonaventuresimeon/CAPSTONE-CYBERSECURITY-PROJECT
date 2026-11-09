@@ -1,0 +1,80 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261107165324
+Username: PHAMOUS\CHINEDU
+RunAs User: PHAMOUS\CHINEDU
+Configuration Name: 
+Machine: PHAMOUS (Microsoft Windows NT 10.0.22631.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command $ErrorActionPreference='Stop'
+$vb='C:\Program Files\Oracle\VirtualBox\VBoxManage.exe'
+$root='C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138'
+$ev=Join-Path $root '09_Evidence\01_Network_Configuration'
+$ts=Get-Date -Format 'yyyyMMdd_HHmmss'
+$log=Join-Path $ev "PRE_RECOVERY_RESOURCE_RECHECK_$ts.txt"
+Start-Transcript -Path $log -Force | Out-Null
+"Pre-recovery resource check — $(Get-Date -Format o)"
+"=== Host memory ==="
+Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize,FreePhysicalMemory,TotalVirtualMemorySize,FreeVirtualMemory,SizeStoredInPagingFiles | Format-List
+"=== Pagefile ==="
+Get-CimInstance Win32_PageFileUsage | Select-Object Name,AllocatedBaseSize,CurrentUsage,PeakUsage | Format-List
+"=== Drive free space ==="
+Get-PSDrive -PSProvider FileSystem | Select-Object Name,Used,Free | Format-Table -AutoSize
+"=== VM states/settings ==="
+foreach($vm in @('Kali Linux','Metasploitable','Dev Guru')){
+ "[$vm]"
+ & $vb showvminfo $vm --machinereadable | Select-String '^VMState=|^memory=|^cpus=|^nic1=|^intnet1=|^nic2='
+}
+"=== Running VMs ==="
+& $vb list runningvms
+Stop-Transcript | Out-Null
+Get-FileHash $log -Algorithm SHA256 | Format-List
+"LOG=$log"
+Get-Content $log
+Process ID: 33076
+PSVersion: 5.1.22621.4391
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.4391
+BuildVersion: 10.0.22621.4391
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Pre-recovery resource check — 2026-11-07T16:53:24.5370566+01:00
+=== Host memory ===
+
+
+TotalVisibleMemorySize  : 16616664
+FreePhysicalMemory      : 933856
+TotalVirtualMemorySize  : 31211540
+FreeVirtualMemory       : 5336948
+SizeStoredInPagingFiles : 14594876
+
+
+
+=== Pagefile ===
+
+
+Name              : C:\pagefile.sys
+AllocatedBaseSize : 14252
+CurrentUsage      : 1895
+PeakUsage         : 3366
+
+
+
+=== Drive free space ===
+
+Name         Used        Free
+----         ----        ----
+C    123783135232  1034104832
+D    109914169344 20315820032
+
+
+=== VM states/settings ===
+[Kali Linux]
+
+
+**********************
+Windows PowerShell transcript end
+End time: 20261107165326
+**********************

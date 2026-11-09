@@ -1,0 +1,16 @@
+﻿Kali startup diagnosis — 2026-11-07T16:51:47.3477495+01:00
+Finding: VirtualBox startup failed while registering guest RAM.
+VBox.log evidence:
+- NEM reports Hyper-V/WHP mode (NEMR3Init; Snail execution mode).
+- Windows host reports Unhandled error 1455.
+- pgmR3PhysInitAndLinkRamWorker failed for Above 4GB Base RAM with VERR_UNRESOLVED_ERROR.
+Resource inspection:
+- Physical RAM total: 16,616,664 KB (~15.84 GiB)
+- Free physical RAM at inspection: 980,184 KB (~0.93 GiB)
+- Kali configured RAM: 8192 MB, 3 vCPUs
+- Metasploitable configured RAM: 2048 MB and was running
+- Free space on C: 1,087,451,136 bytes (~1.01 GiB)
+- C:\pagefile.sys allocated base size: 14,252 MB; usage 2,043 MB
+- Reported free virtual memory: 5,335,796 KB
+Interpretation: The immediate failure is consistent with Windows commit/pagefile or host-memory pressure while VirtualBox attempts to allocate Kali's 8 GiB guest memory. Hyper-V/WHP compatibility mode is also active, but the log's explicit 1455 allocation failure is the strongest direct evidence. This is diagnosis, not a confirmed single root cause.
+No VM memory settings, host pagefile settings, Windows features, or VM disks were modified.

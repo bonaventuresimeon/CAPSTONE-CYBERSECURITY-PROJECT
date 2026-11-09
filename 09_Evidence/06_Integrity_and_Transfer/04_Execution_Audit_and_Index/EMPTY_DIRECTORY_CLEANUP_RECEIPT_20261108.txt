@@ -1,0 +1,34 @@
+﻿CAPSTONE PROJECT 138 - EMPTY DIRECTORY CLEANUP RECEIPT
+Date: 8 November 2026 (Africa/Lagos)
+Method: deepest-first scan; only directories verified empty were removed.
+Directories removed: 29
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\01_Project_Brief_and_Scope\03_Assumptions_and_Clarifications
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\04_Vulnerability_Assessment\03_Validation_and_Limitations
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\08_Cloud_Security\02_IAM_and_Data_Protection
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\02_Lab_Environment\03_Snapshots_and_Recovery
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\04_Vulnerability_Assessment\02_CVE_Research
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\06_Security_Controls\03_Implementation_Plan
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\08_Cloud_Security\03_Threats_and_Controls
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\10_Final_Report\02_Individual_Submissions
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\03_Vulnerability_Assessment
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\06_Security_Controls\02_Recommendations
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\03_System_Discovery\03_Validation_Notes
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\08_Report_and_Presentation
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\07_GRC_Policies\03_Compliance_Mapping
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\03_System_Discovery\01_Host_Inventory
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\05_Risk_Assessment\03_Treatment_Plan
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\01_Project_Brief_and_Scope\01_Brief
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\10_Final_Report\03_QA_and_Approval
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\12_References\02_Vendor_Advisories
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\02_Lab_Environment\01_VM_Inventory
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\11_Presentation\03_Visual_Evidence
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\05_Risk_Assessment\02_Methodology
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\11_Presentation\02_Speaker_Notes
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\05_Security_Controls
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\07_GRC_Policies\02_Policy_Drafts
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\99_Archive\01_Superseded_Drafts
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\12_References\03_Cloud_Guidance
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\04_Risk_Assessment
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\07_Cloud_Security
+REMOVED: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\06_GRC
+No files were deleted or moved.

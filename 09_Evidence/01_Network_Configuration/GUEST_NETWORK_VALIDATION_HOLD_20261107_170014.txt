@@ -1,0 +1,15 @@
+﻿HAN TECH CAPSTONE 138 - GUEST NETWORK VALIDATION
+Timestamp: 2026-11-07T17:00:14.7790669+01:00
+
+Verified host-side:
+- Kali Linux: VM running; Adapter 1 = Internal Network CAPSTONE138_ISOLATED; Adapter 2 = none; Guest Additions reports interface eth0, but its IP/status data is dated 2026-09-05 and therefore predates current network isolation. It is stale and is NOT accepted as current guest IP evidence.
+- Metasploitable: VM running; Adapter 1 = Internal Network CAPSTONE138_ISOLATED; Adapter 2 = none; no Guest Additions network properties are exposed.
+- Dev Guru: powered off; NAT adapter retained; no changes made.
+
+Not yet verified:
+- Current guest-side interface/IP configuration for either active VM.
+- Guest-to-guest reachability.
+- No DHCP service has been configured for this VirtualBox Internal Network by this project. Do not assume DHCP exists.
+- No guest credentials have been supplied; no password guessing or guest login attempts made.
+
+Decision: HOLD guest network validation. No scanning or vulnerability discovery is authorized to proceed until guest interface/IP and reachability are verified. Next safe step is to inspect each VM console and configure static addresses only after confirming the active interface and existing configuration.

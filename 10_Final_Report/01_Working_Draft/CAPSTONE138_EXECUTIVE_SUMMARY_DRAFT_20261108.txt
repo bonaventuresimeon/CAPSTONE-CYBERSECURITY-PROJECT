@@ -1,0 +1,45 @@
+CAPSTONE PROJECT 138 — EXECUTIVE SUMMARY (DRAFT)
+Project: From Vulnerability to Compliance — HanTech
+Prepared: 8 November 2026
+Assessment environment: isolated VirtualBox lab; Metasploitable 2 target 192.168.138.20
+Status: Draft based on lab evidence only; not an assessment of HanTech production systems
+
+1. PURPOSE AND SCOPE
+This work establishes an evidence-backed security assessment baseline for the authorised Metasploitable 2 training target within the CAPSTONE138_ISOLATED VirtualBox Internal Network. The target was assessed from the Kali Linux VM at 192.168.138.10. No external network, Windows host, Dev Guru system or other unauthorised asset was scanned.
+
+2. EXECUTION AND VALIDATION
+The Metasploitable console initially appeared blank. A single Enter key restored the existing guest login shell; no reboot or power-cycle was required. A duplicate DHCP client process was identified and, after a rollback snapshot had been created, only the additional generic client was stopped. The configured ifupdown dhclient3 process remained active. Metasploitable retained 192.168.138.20/24 and Kali retained 192.168.138.10/24. Post-correction ICMP checks passed in both directions: Metasploitable to Kali 3/3 replies, and Kali to Metasploitable 4/4 replies, each with 0% packet loss. A previous .100 DHCP record was identified by VirtualBox as expired (TTL 0) and preserved as historical evidence.
+
+3. SYSTEM DISCOVERY
+Nmap 7.98 service/version discovery was run against 192.168.138.20 only, using `nmap -sV --version-light -T3` and the default top 1,000 TCP ports. Nmap reported one host up, 23 open TCP ports and 977 closed TCP ports in 16.52 seconds. Exposed services included FTP, SSH, Telnet, SMTP, DNS, HTTP, SMB, rsh/rlogin-family services, Java RMI, NFS/RPC, ProFTPD, MySQL, PostgreSQL, VNC, X11, IRC, AJP and Tomcat. This is an initial service inventory, not a vulnerability scan.
+
+4. PRIORITY SECURITY FINDINGS
+Five priority findings have been recorded in the evidence register:
+(1) NFS exports the entire root filesystem (`/`) to wildcard clients (`*`) with read/write access and `no_root_squash`. The configuration is directly confirmed from `/etc/exports` and `showmount`; it presents a potentially critical risk if an untrusted client can reach and mount the export. Remote mounting and filesystem impact were not tested.
+(2) Samba 3.0.20 has an active `username map script` configuration matching a prerequisite described in CVE-2007-2447. The configured `mapusers.sh` script is root-owned, executable and zero bytes. The version/configuration combination makes this a high-confidence CVE candidate, but exact package patch state and exploitability are not proven. No exploit request was sent.
+(3) Anonymous SMB share enumeration and anonymous directory listing of the `tmp` share were confirmed. Only share names and directory metadata were observed; file contents and write access were not tested.
+(4) The unauthenticated HTTP landing page disclosed the default lab pair `msfadmin/msfadmin`. Credential validity on SSH, Telnet or other services was not tested.
+(5) The web stack exposed Apache 2.2.8 and PHP 5.2.4, both from unsupported software branches. The specific versions and lifecycle status are evidenced; no single web CVE or exploitability claim is assigned.
+Telnet and rsh/rlogin listeners are separately recorded as legacy remote-administration exposures.
+
+5. RISK AND LIMITATIONS
+The NFS configuration is the highest-priority remediation item. The Samba CVE candidate requires package patch-state verification. Anonymous SMB access, public credential disclosure and unsupported software should be remediated or justified through documented compensating controls. Risk ratings are preliminary and must be adjusted for the actual network boundary, asset criticality and business impact. CVSS is not assigned to configuration findings without a suitable CVE or verified impact.
+No vulnerability NSE scripts, UDP scan, brute force, credential submission, NFS mount, remote file write, SMB content access, application login or exploit was performed. vsftpd CVE-2011-2523 was excluded: Ubuntu marks the official Ubuntu 8.04 Hardy package as not affected, and the target's service binary provenance was not established.
+All findings are from the Metasploitable training target. They must not be attributed to HanTech production assets unless the team separately validates the same conditions on authorised production systems.
+
+6. RECOMMENDED PRIORITIES
+Immediate: remove the root NFS export, restrict NFS/RPC to approved hosts, enable root squashing, and disable unnecessary shares/services.
+Next: verify the installed Samba package's security patch provenance; upgrade to a supported release and remove unused script hooks.
+Then: remove default credentials from accessible pages, rotate credentials, disable guest SMB access where unnecessary, and migrate unsupported Apache/PHP components to maintained versions.
+Finally: disable Telnet and rsh/rlogin; permit remote administration only through hardened SSH from approved management hosts.
+
+7. EVIDENCE AND AUDIT TRAIL
+Network correction receipt: 09_Evidence\01_Network_Configuration\CAPSTONE138_DHCP_AND_BIDIRECTIONAL_NETWORK_FINAL_VERIFICATION_20261108.txt
+Initial discovery receipt: 09_Evidence\02_System_Discovery\CAPSTONE138_INITIAL_TCP_SERVICE_DISCOVERY_20261108.txt
+Service/configuration validation: 09_Evidence\02_System_Discovery\CAPSTONE138_SERVICE_CONFIGURATION_VALIDATION_20261108.txt
+Five-findings register: 09_Evidence\02_System_Discovery\CAPSTONE138_FIVE_PRIORITY_FINDINGS_RISK_REGISTER_20261108.txt
+SHA-256 manifest: 09_Evidence\SHA256_EVIDENCE_MANIFEST_20261108.csv
+Master process/command audit: 00_Governance\MASTER_PROJECT_PROCESS_AND_COMMAND_AUDIT_20261108.md
+
+CONCLUSION
+The lab network is operational and the initial service inventory is complete. Evidence confirms one severe NFS export misconfiguration and several additional access-control, information-disclosure and lifecycle weaknesses; Samba CVE-2007-2447 is a high-confidence but not exploit-confirmed candidate. The next reporting stage should retain these evidence grades, avoid claiming exploit success, and clearly separate lab observations from any future HanTech production assessment.

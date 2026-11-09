@@ -1,0 +1,60 @@
+﻿CAPSTONE PROJECT 138 - TARGETED TCP SERVICE RECHECK RECEIPT
+Date: 9 November 2026
+Execution host: PHAMOUS (Windows) using the running Kali Linux VM local console
+Kali identity: bonaventure on Whisper; uid=1000
+Source: 192.168.138.10
+Authorised target: Metasploitable 2 at 192.168.138.20
+Network: VirtualBox Internal Network CAPSTONE138_ISOLATED; topology unchanged
+Nmap: 7.98
+
+EXECUTION
+Start: 2026-11-09T05:39:49+01:00
+End: 2026-11-09T05:41:02+01:00
+Elapsed: 73.04 seconds
+Command: nmap -sT -sV --version-light -Pn -T2 --reason --max-retries 2 -p 3632,6697,8787,33543,47335,47852,60679 -oA CAPSTONE138_TCP_RECHECK_20261109 192.168.138.20
+Exit status: 0
+Host state: up; reported latency 0.0040 seconds
+
+RESULTS
+3632/tcp open - distccd v1 ((GNU) 4.2.4 (Ubuntu 4.2.4-1ubuntu4))
+6697/tcp open - UnrealIRCd
+8787/tcp open - Ruby DRb RMI (Ruby 1.8; /usr/lib/ruby/1.8/drb)
+33543/tcp open - unknown service
+47335/tcp open - unknown service
+47852/tcp open - unknown service
+60679/tcp open - unknown service
+Result: all seven selected TCP ports responded open. This corroborates the earlier full TCP inventory; the four high ports remain unidentified.
+
+UDP STATUS
+UDP top-100 was NOT RUN. The Kali execution check recorded SUDO_NONINTERACTIVE=UNAVAILABLE. No UDP scan was initiated and no UDP packets were sent by this run. The UDP blocker remains open.
+
+INTEGRITY
+Native Nmap .nmap, .gnmap and .xml files, console receipt and UDP blocker note were transferred from Kali.
+Guest-side final SHA256SUMS_FINAL_20261109.txt was generated after the console log stopped changing.
+Independent guest-to-host hash comparison: 5 of 5 files MATCH; 0 mismatches.
+The earlier SHA256SUMS_20261109.txt is retained as preliminary only; its console-log hash was stale because the log was still being appended when that preliminary list was created.
+
+VERIFICATION LIMITS
+Service identification is scan evidence, not proof of exploitability or CVE applicability.
+No NSE vulnerability scripts, authentication, brute force, exploitation, service mutation or destructive testing was performed.
+The four high TCP services remain unknown and are not classified as vulnerabilities.
+
+EVIDENCE FILES
+capstone138_20261109/CAPSTONE138_TCP_RECHECK_20261109.nmap
+capstone138_20261109/CAPSTONE138_TCP_RECHECK_20261109.gnmap
+capstone138_20261109/CAPSTONE138_TCP_RECHECK_20261109.xml
+capstone138_20261109/EXECUTION_CONSOLE_20261109.txt
+capstone138_20261109/UDP_DISCOVERY_BLOCKED_20261109.txt
+capstone138_20261109/SHA256SUMS_FINAL_20261109.txt
+KALI_SCAN_EXECUTION_LIVE_20261109.png
+KALI_SCAN_PROGRESS_20261109.png
+KALI_HASH_RECALC_20261109.png
+
+Current gate: IN PROGRESS - HOLD / DO NOT SUBMIT.
+
+GUEST/HOST HASH RESULTS
+CAPSTONE138_TCP_RECHECK_20261109.gnmap | MATCH | SHA256 52957ca8765627d905bcb6009eca58f8f6c0bf7a619fe8df2077fabfddc7675e
+CAPSTONE138_TCP_RECHECK_20261109.nmap | MATCH | SHA256 ee3741bea07fd35f83f74163f3e8ef638d6c34f9fd6980d96bf595cec8b45537
+CAPSTONE138_TCP_RECHECK_20261109.xml | MATCH | SHA256 ca684fec4d34bc527b48ecd1b70db3c899dd1f847f7c15ac9db65c43e648f711
+EXECUTION_CONSOLE_20261109.txt | MATCH | SHA256 362526b211aefc4db505e3abc27be9b1f81dcd161e93a2c02592b478475fb995
+UDP_DISCOVERY_BLOCKED_20261109.txt | MATCH | SHA256 dc26d1206f19460982ea00ae56e2c52bca0d1085225e7a75ef64687fa5be0b63

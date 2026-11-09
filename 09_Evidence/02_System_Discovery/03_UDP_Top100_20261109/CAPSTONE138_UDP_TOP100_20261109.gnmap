@@ -1,0 +1,4 @@
+# Nmap 7.98 scan initiated Mon Nov  9 05:46:36 2026 as: /usr/lib/nmap/nmap -sU --top-ports 100 -sV --version-light -Pn -T2 --reason --max-retries 2 --host-timeout 10m -oA /home/bonaventure/capstone138_20261109/CAPSTONE138_UDP_TOP100_20261109 192.168.138.20
+Host: 192.168.138.20 ()	Status: Up
+Host: 192.168.138.20 ()	Ports: 53/open/udp//domain//ISC BIND 9.4.2/, 68/open|filtered/udp//dhcpc///, 69/open|filtered/udp//tftp///, 111/open/udp//rpcbind///, 137/open/udp//netbios-ns//Microsoft Windows netbios-ns (workgroup: WORKGROUP)/, 138/open|filtered/udp//netbios-dgm///, 2049/open/udp//rpcbind///	Ignored State: closed (93)
+# Nmap done at Mon Nov  9 05:49:24 2026 -- 1 IP address (1 host up) scanned in 167.99 seconds

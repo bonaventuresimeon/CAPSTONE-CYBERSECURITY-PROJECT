@@ -1,0 +1,78 @@
+﻿CAPSTONE PROJECT 138 — FULL TCP PORT / SERVICE DISCOVERY RECEIPT
+Date: 8 November 2026 (Africa/Lagos)
+Source: Kali Linux VM, bonaventure@Whisper, 192.168.138.10/24
+Target: Metasploitable 2, 192.168.138.20/24
+Target MAC: 08:00:27:F8:7D:A3
+Network: VirtualBox Internal Network CAPSTONE138_ISOLATED
+
+EXACT COMMAND
+nmap -sT -sV --version-light -T3 --reason -p- -oA /home/bonaventure/CAPSTONE138_METASPLOITABLE_TCP_ALL_20261108 192.168.138.20
+
+RESULT
+Nmap version: 7.98
+Scan type: connect / tcp
+Ports covered: 65535
+Open TCP ports: 30
+Closed TCP ports: 65505
+Host status: up
+Start: Sun Nov  8 13:18:03 2026
+End: Sun Nov 8 13:19:10 2026
+Scan duration: 66.72 seconds
+Open service inventory CSV: CAPSTONE138_METASPLOITABLE_TCP_ALL_SERVICE_INVENTORY_20261108.csv
+Native Nmap outputs: .nmap, .gnmap and .xml files are preserved in this folder.
+
+OPEN TCP PORTS
+21/tcp | ftp | vsftpd 2.3.4 
+22/tcp | ssh | OpenSSH 4.7p1 Debian 8ubuntu1 protocol 2.0
+23/tcp | telnet | Linux telnetd  
+25/tcp | smtp | Postfix smtpd  
+53/tcp | domain | ISC BIND 9.4.2 
+80/tcp | http | Apache httpd 2.2.8 (Ubuntu) DAV/2
+111/tcp | rpcbind |   
+139/tcp | netbios-ssn | Samba smbd 3.X - 4.X workgroup: WORKGROUP
+445/tcp | netbios-ssn | Samba smbd 3.X - 4.X workgroup: WORKGROUP
+512/tcp | exec | netkit-rsh rexecd  
+513/tcp | login | OpenBSD or Solaris rlogind  
+514/tcp | shell | Netkit rshd  
+1099/tcp | java-rmi | GNU Classpath grmiregistry  
+1524/tcp | bindshell | Metasploitable root shell  
+2049/tcp | rpcbind |   
+2121/tcp | ftp | ProFTPD 1.3.1 
+3306/tcp | mysql | MySQL 5.0.51a-3ubuntu5 
+3632/tcp | distccd | distccd v1 (GNU) 4.2.4 (Ubuntu 4.2.4-1ubuntu4)
+5432/tcp | postgresql | PostgreSQL DB 8.3.0 - 8.3.7 
+5900/tcp | vnc | VNC  protocol 3.3
+6000/tcp | X11 |   access denied
+6667/tcp | irc | UnrealIRCd  Admin email admin@Metasploitable.LAN
+6697/tcp | irc | UnrealIRCd  
+8009/tcp | ajp13 | Apache Jserv  Protocol v1.3
+8180/tcp | http | Apache Tomcat/Coyote JSP engine 1.1 
+8787/tcp | drb | Ruby DRb RMI  Ruby 1.8; path /usr/lib/ruby/1.8/drb
+33543/tcp |  |   
+47335/tcp |  |   
+47852/tcp |  |   
+60679/tcp |  |   
+
+METHOD AND LIMITATIONS
+- Full TCP port range 1–65535 was covered using TCP connect scan (-sT), service/version detection (-sV --version-light), timing T3 and --reason.
+- No UDP scan, NSE scripts, vulnerability scripts, brute force, credential submission, exploit, or application authentication was performed.
+- Version strings are Nmap probe identifications, not proof of installed package versions or CVE applicability.
+- The scan was restricted to Metasploitable 2 at 192.168.138.20 on the isolated internal network.
+- 30 open and 65,505 closed TCP ports were reported; this supersedes the earlier top-1,000-port baseline for port coverage, but does not replace service-specific local configuration evidence.
+- This scan establishes host reachability at scan time. Earlier transient Kali neighbour/ping failure was resolved before the scan; current connectivity passed with 4/4 ICMP replies.
+
+SCREENSHOT / OUTPUT SHA-256
+CAPSTONE138_METASPLOITABLE_TCP_ALL_20261108.nmap | 2554 bytes | SHA256 93BF3B34996F6E779E0B14BF6E09C89A28FD65EA3DEF4707E95F6DD1F7510F03
+CAPSTONE138_METASPLOITABLE_TCP_ALL_20261108.gnmap | 1773 bytes | SHA256 FF3EEC01B2E558BF0C70537E5635D44F268A459FED80FA2F2DDBC699920699BB
+CAPSTONE138_METASPLOITABLE_TCP_ALL_20261108.xml | 8327 bytes | SHA256 9508A67DE25974B4B8C5E9F9625B23F15BC298ED8B1D86BFC434D93EB9A56F7F
+LIVE_KALI_CONNECTIVITY_PASS_20261108.png | 442544 bytes | SHA256 7E78CE2E19472DC80FB02107EE1B127F3373458493C2749F230AF44F2FF26EA1
+LIVE_METASPLOITABLE_IFCONFIG_EXECUTED_3_20261108.png | 13314 bytes | SHA256 FEBFB509C8050289A1813A717EF76846DBA99D16335E490BAA57E841C4796DFD
+LIVE_METASPLOITABLE_SYSTEM_ID_20261108.png | 8759 bytes | SHA256 0D8CE1560958984B5D0962A4B2E74890577E4D74EFA9884821611B3A30A6817C
+LIVE_KALI_FULL_TCP_SCAN_PROGRESS_2_20261108.png | 444735 bytes | SHA256 BABCB1785A375FB7697540C06F4DD2D52A151B3F6A99D0D95609EDCF40371DA9
+
+INTEGRITY CORRECTION / RAW OUTPUT BYTE-IDENTITY VERIFICATION
+The native Nmap .nmap, .gnmap and .xml outputs were re-transferred from Kali using base64 and decoded without text re-encoding. Guest-side sha256sum was compared with Windows Get-FileHash. All three source/destination hashes match exactly.
+nmap: 2509 bytes | A0F35A3B1FC8C36EE1F3932C399C4430D50E7CB9554BBF77ECE35D7741D983E7
+gnmap: 1764 bytes | 8B21DB868922693F4D6DC97B7BB57F13924E223689D88DE76812F25C7F72E207
+xml: 8264 bytes | 37C2C269C8144C0D3E4018259FDAD92F9CECFD506B49C1985851AFE278E8BB87
+Supersedes the earlier host-side clipboard text-export hashes in the first version of this receipt. Guest hash verification receipt: 09_Evidence/CAPSTONE138_GUEST_OUTPUT_HASH_VERIFICATION_20261108.txt

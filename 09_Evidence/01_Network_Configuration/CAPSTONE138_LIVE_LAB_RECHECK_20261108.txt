@@ -1,0 +1,45 @@
+﻿CAPSTONE PROJECT 138 — LIVE KALI / METASPLOITABLE LAB RECHECK
+Date: 8 November 2026 (Africa/Lagos)
+Host: PHAMOUS (Windows host)
+Method: VirtualBox VM state/configuration inspection and genuine guest display screenshots. No guest configuration was changed.
+
+VIRTUALBOX STATE
+- Kali Linux VM: RUNNING. UUID 8eefef2e-f9a7-44ed-bfda-cf280a9e0b6a.
+- Metasploitable VM: RUNNING. UUID 396b158d-852c-463f-b179-0cc971418cc7.
+- Both VM NIC 1 adapters are attached to VirtualBox Internal Network CAPSTONE138_ISOLATED.
+- Kali guest properties report eth0 UP with IPv4 192.168.138.10/24.
+- Metasploitable active snapshot: CAPSTONE_DHCP_PRE_CORRECTION_20261108; UUID f975d0d1-b15f-440d-99d3-36b98e3de100.
+- Metasploitable Guest Additions guest-property reporting is unavailable (GuestAdditionsRunLevel 0); current target IP was not independently obtained from VirtualBox guest properties.
+
+CURRENT KALI DISPLAY OBSERVATION
+- Live Kali screenshot shows eth0 configured as 192.168.138.10/24 and connected route 192.168.138.0/24.
+- Visible ping test to 192.168.138.20 reports Destination Host Unreachable for four packets, 100% loss.
+- Visible neighbour lookup for 192.168.138.20 reports FAILED.
+- This is a current connectivity failure and supersedes any assumption that earlier successful reachability remains valid. Earlier Nmap/service receipts remain historical evidence from their recorded timestamps; they are not proof of current reachability.
+
+CURRENT METASPLOITABLE DISPLAY OBSERVATION
+- Live VM display screenshot shows an interactive shell prompt for msfadmin@metasploitable.
+- The screenshot does not establish the target IPv4 address, interface state, or active service state. Those must be reacquired from the guest after console input is reliably available.
+- No commands were successfully evidenced as executed on the target during this recheck; no target changes were made.
+
+DECISION
+- Lab VMs are running and remain configured on the intended isolated internal network.
+- Kali-to-target connectivity: FAIL / RECHECK REQUIRED at capture time.
+- Metasploitable IP/interface state: NOT VERIFIED in this recheck.
+- Do not run further target scans until connectivity is restored and independently verified. Do not alter VM NIC mode or expose the target to bridged/external networks.
+
+SCREENSHOT SHA-256
+LIVE_KALI_SCREEN_20261108_1308.png | 396643 bytes | SHA256 134CB4901923792AFE3A1757C20A47B0D4C902DFEC274E97B88E27CC6EF66257
+LIVE_KALI_CONTROL_TEST_20261108.png | 339463 bytes | SHA256 9CACF95016D566034B6A2F08415BF366BA121854694C9981FE59CFCFB7BB82FD
+LIVE_METASPLOITABLE_SCREEN_20261108_1308.png | 8782 bytes | SHA256 CE503E8A740CF1592941CB4B599992D52AD6BEF3DF9C037BD2D4A075CE491ACB
+LIVE_METASPLOITABLE_HOST_DISCOVERY_20261108.png | 11205 bytes | SHA256 94D8AF38764B138FCA5DAB6D2A4623DDCB9504B9B4CDC7608AC24CBEFF5C3DCE
+
+
+FOLLOW-UP CORRECTION / CONNECTIVITY RECOVERY — 8 November 2026 (13:16–13:17 WAT)
+The earlier transient failure in the initial screenshot was rechecked rather than treated as a permanent outage.
+- Target console read-only `ifconfig` output confirms eth0 UP with IPv4 192.168.138.20, netmask 255.255.255.0, broadcast 192.168.138.255 and MAC 08:00:27:f8:7d:a3.
+- Target identity command confirms hostname metasploitable and legacy Linux kernel 2.6.24-16-server on i686; /etc/issue identifies Metasploitable 2.
+- Kali recheck shows eth0 192.168.138.10/24, neighbour entry for 192.168.138.20 and ping result 4 transmitted / 4 received / 0% packet loss (rtt avg approximately 1.804 ms).
+- Connectivity status is therefore PASS at the 13:16–13:17 WAT recheck. The earlier failure was transient; no DHCP, NIC, route, firewall or guest configuration change was made to restore it.
+- New target IP and system identity screenshots are in 02_System_Discovery: LIVE_METASPLOITABLE_IFCONFIG_EXECUTED_3_20261108.png and LIVE_METASPLOITABLE_SYSTEM_ID_20261108.png. Kali pass screenshot: LIVE_KALI_CONNECTIVITY_PASS_20261108.png.
+- Full TCP discovery subsequently completed from 13:18:03 to 13:19:10 WAT, as documented in CAPSTONE138_FULL_TCP_DISCOVERY_RECEIPT_20261108.txt.

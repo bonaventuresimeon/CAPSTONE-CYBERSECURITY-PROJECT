@@ -1,0 +1,94 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261107164800
+Username: PHAMOUS\CHINEDU
+RunAs User: PHAMOUS\CHINEDU
+Configuration Name: 
+Machine: PHAMOUS (Microsoft Windows NT 10.0.22631.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command $ErrorActionPreference='Stop'
+$vb='C:\Program Files\Oracle\VirtualBox\VBoxManage.exe'
+$root='C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138'
+$ev=Join-Path $root '09_Evidence\01_Network_Configuration'
+New-Item -ItemType Directory -Force -Path $ev | Out-Null
+$ts=Get-Date -Format 'yyyyMMdd_HHmmss'
+$log=Join-Path $ev "INTERNAL_NETWORK_SETUP_$ts.txt"
+$shot=Join-Path $ev "SCREENSHOT_InternalNetwork_Setup_$ts.png"
+Start-Transcript -Path $log -Force | Out-Null
+"CAPSTONE138 isolated network setup — $(Get-Date -Format o)"
+"Preconditions: only configure Kali Linux and Metasploitable; Dev Guru remains untouched."
+"=== Before state ==="
+& $vb showvminfo 'Metasploitable' --machinereadable | Select-String 'VMState=|nic1=|intnet1=|nic2=|CurrentSnapshotName='
+& $vb showvminfo 'Kali Linux' --machinereadable | Select-String 'VMState=|nic1=|intnet1=|nic2=|CurrentSnapshotName='
+"=== Set both adapter 1 to Internal Network ==="
+& $vb modifyvm 'Metasploitable' --nic1 intnet --intnet1 'CAPSTONE138_ISOLATED'
+if($LASTEXITCODE -ne 0){throw 'Metasploitable adapter configuration failed'}
+& $vb modifyvm 'Kali Linux' --nic1 intnet --intnet1 'CAPSTONE138_ISOLATED'
+if($LASTEXITCODE -ne 0){throw 'Kali adapter configuration failed'}
+"=== After state ==="
+& $vb showvminfo 'Metasploitable' --machinereadable | Select-String 'VMState=|nic1=|intnet1=|nic2=|CurrentSnapshotName='
+& $vb showvminfo 'Kali Linux' --machinereadable | Select-String 'VMState=|nic1=|intnet1=|nic2=|CurrentSnapshotName='
+"=== Dev Guru verification (no change requested) ==="
+& $vb showvminfo 'Dev Guru' --machinereadable | Select-String 'VMState=|nic1=|intnet1=|nic2=|CurrentSnapshotName='
+Stop-Transcript | Out-Null
+# Screenshot after configuration
+try {
+ Add-Type -AssemblyName System.Windows.Forms
+ Add-Type -AssemblyName System.Drawing
+ $b=[System.Windows.Forms.Screen]::PrimaryScreen.Bounds
+ $bmp=New-Object System.Drawing.Bitmap $b.Width,$b.Height
+ $g=[System.Drawing.Graphics]::FromImage($bmp)
+ $g.CopyFromScreen($b.Location,[System.Drawing.Point]::Empty,$b.Size)
+ $bmp.Save($shot,[System.Drawing.Imaging.ImageFormat]::Png)
+ $g.Dispose();$bmp.Dispose()
+}catch{"Screenshot error: $_" | Out-File -Append -Encoding utf8 $log}
+"=== SHA256 ==="
+Get-FileHash $log -Algorithm SHA256 | Format-List
+Get-FileHash $shot -Algorithm SHA256 | Format-List
+"LOG=$log"
+"SCREENSHOT=$shot"
+Get-Content $log
+Process ID: 1028
+PSVersion: 5.1.22621.4391
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.4391
+BuildVersion: 10.0.22621.4391
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+CAPSTONE138 isolated network setup — 2026-11-07T16:48:00.7229706+01:00
+Preconditions: only configure Kali Linux and Metasploitable; Dev Guru remains untouched.
+=== Before state ===
+
+VMState="poweroff"
+nic1="nat"
+nic2="none"
+CurrentSnapshotName="CAPSTONE_PRECONFIG_20261107"
+VMState="aborted"
+nic1="nat"
+nic2="none"
+CurrentSnapshotName="CAPSTONE_PRECONFIG_20261107"
+=== Set both adapter 1 to Internal Network ===
+
+
+=== After state ===
+VMState="poweroff"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+nic2="none"
+CurrentSnapshotName="CAPSTONE_PRECONFIG_20261107"
+VMState="aborted"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+nic2="none"
+CurrentSnapshotName="CAPSTONE_PRECONFIG_20261107"
+=== Dev Guru verification (no change requested) ===
+VMState="poweroff"
+nic1="nat"
+nic2="none"
+CurrentSnapshotName="Snapshot 1"
+**********************
+Windows PowerShell transcript end
+End time: 20261107164801
+**********************

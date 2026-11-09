@@ -1,0 +1,28 @@
+CAPSTONE PROJECT 138 — SHA-256 MANIFEST REFRESH METHOD
+Date: 8 November 2026 (Africa/Lagos)
+
+Purpose:
+Preserve the pre-consolidation SHA-256 manifest and regenerate the project manifest after the new discovery, vulnerability, risk, control, GRC, cloud, reporting and governance documents were written.
+
+Procedure:
+1. Copy the current 8 November 2026 manifest to 99_Archive\02_Obsolete_Evidence_Indexes\SHA256_EVIDENCE_MANIFEST_PRE_WORKSTREAM_DOCS_20261108.csv.
+2. Enumerate project files recursively under the project root.
+3. Exclude the active manifest from its own manifest (self-hashing is not possible) and exclude generated .dist folders.
+4. Calculate SHA-256, file length and last-write timestamp for each included file.
+5. Sort by relative path and write the refreshed CSV to 09_Evidence\SHA256_EVIDENCE_MANIFEST_20261108.csv.
+6. Independently re-read the CSV and recompute every listed file hash; check duplicate relative paths and missing paths.
+7. Record the resulting counts and active manifest hash in the documentation handoff.
+
+No target, VM, network, service, package or cloud configuration is changed by this evidence-index procedure.
+
+
+FINAL VERIFICATION RESULT — 8 NOVEMBER 2026
+- The final project-wide verification completed after the task tracker and current-status updates.
+- Included file records: 367.
+- Duplicate relative paths: 0.
+- Missing files: 0.
+- SHA-256 mismatches: 0.
+- The active manifest is 09_Evidence\SHA256_EVIDENCE_MANIFEST_20261108.csv.
+- The pre-consolidation manifest remains preserved in 99_Archive\02_Obsolete_Evidence_Indexes.
+- The active manifest excludes itself and generated .dist directories. It includes the archived pre-consolidation manifest and all other current project files captured by the recursive inventory.
+- The final manifest SHA-256 is captured in the project handoff; it is not embedded in this receipt because modifying a file included in the manifest would change the manifest hash.

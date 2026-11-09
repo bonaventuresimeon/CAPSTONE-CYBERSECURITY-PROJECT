@@ -1,0 +1,51 @@
+﻿CAPSTONE138 ISOLATED NETWORK VALIDATION RECEIPT
+Date: 2026-11-08 (local system time)
+
+VM NETWORK CONFIGURATION
+- Kali Linux: Internal Network CAPSTONE138_ISOLATED; MAC 08:00:27:32:09:84; DHCP fixed mapping 192.168.138.10.
+- Metasploitable: Internal Network CAPSTONE138_ISOLATED; MAC 08:00:27:f8:7d:a3; DHCP fixed mapping 192.168.138.20.
+- Both VMs reported running; cable connected.
+- Dev Guru was not changed; it remains powered off per the existing lab state.
+
+CONNECTIVITY TESTS
+- Kali -> Metasploitable (192.168.138.20): PASS, 4 transmitted / 4 received / 0% loss.
+- Metasploitable -> Kali (192.168.138.10): PASS, 4 transmitted / 4 received / 0% loss.
+- Host-to-guest ping was not used as a pass criterion because both guests are attached to an Internal Network, not a host-accessible Host-Only network.
+
+DHCP STATUS
+- VirtualBox DHCP configuration maps Metasploitable MAC 08:00:27:f8:7d:a3 to 192.168.138.20 and Kali MAC 08:00:27:32:09:84 to 192.168.138.10.
+- DHCP server log records repeated ACK responses for Metasploitable with yiaddr 192.168.138.20.
+- Metasploitable guest screenshot shows eth0 UP/RUNNING at 192.168.138.20/24.
+- UNRESOLVED: CAPSTONE138_ISOLATED-Dhcpd.leases still contains 192.168.138.100 for the Metasploitable MAC; its issued timestamp is 2026-11-08 03:17:41 UTC and it predates the current renewal evidence. The DHCP log and guest state indicate .20, but the lease-file record has not reconciled. No manual lease-file edits or DHCP service restarts were performed.
+
+DECISION
+- Bidirectional guest connectivity: VERIFIED.
+- Guest addressing/configuration: VERIFIED at .10 and .20.
+- DHCP lease-file consistency: HOLD / OPEN.
+- System discovery, vulnerability scanning, and exploitation: NOT STARTED.
+- Do not proceed to system discovery until the stale lease-file record is reconciled or independently explained and evidenced.
+
+EVIDENCE FILES
+- Kali_to_Metasploitable_Ping_20261108.png
+- Metasploitable_to_Kali_Ping_20261108.png
+- Metasploitable_Console_Before_Reverse_Ping_20261108.png
+- CAPSTONE138_ISOLATED-Dhcpd.config
+- CAPSTONE138_ISOLATED-Dhcpd.leases
+- CAPSTONE138_ISOLATED-Dhcpd.log
+
+SHA-256
+- Kali_to_Metasploitable_Ping_20261108.png: A115FEE64F8B4ED49BE2E8C1BD7E9C99A19D208F47682F7574A0D22D9A3EA289
+- Metasploitable_to_Kali_Ping_20261108.png: CE0299C4644625B24BAD17D3FF75545B838049B556F3157A7909706ECF067334
+- Metasploitable_Console_Before_Reverse_Ping_20261108.png: 140D82F5A4C76F4DF8F83A8AFFE5463D8D2EA35AAC6F082AD32F455FC6215CB1
+- CAPSTONE138_ISOLATED-Dhcpd.config: EE1845597D5E3D21FC3B34FF29CFE4C5E465ACA7D5E6D3E4AFDE23C493CB5534
+- CAPSTONE138_ISOLATED-Dhcpd.leases: 5782DCD9E6356225341F21BF4DEAA2AF242605FCE1BD4F4D43D4C4AF04EEAC25
+- CAPSTONE138_ISOLATED-Dhcpd.log: 609DB2DB6C8433D2E01555493FDADE855C2B978F8D0FB530C9EFF2DB635739F3
+
+
+FINAL POST-CORRECTION VERIFICATION ADDENDUM — 2026-11-08 06:02 WAT
+- Following the approved removal of the additional generic DHCP client PID 4893, a fresh process check shows PID 4742 (`dhclient3` via ifupdown) remains and PID 4893 is absent. The generic PID file still contains the now-stale value 4893; it was deliberately left unchanged. The interface-specific PID file contains 4742.
+- Metasploitable eth0 remains UP/RUNNING at 192.168.138.20/24. Kali remains at 192.168.138.10/24.
+- Fresh post-correction ping checks: Metasploitable -> Kali 3/3, 0% loss; Kali -> Metasploitable 4/4, 0% loss.
+- `VBoxManage dhcpserver findlease` identifies the old .100 record as EXPIRED (TTL 0), issued 03:17:41Z and expired 03:27:41Z. The XML source was preserved unchanged. Later server log evidence shows Metasploitable ciaddr .20 and ACK yiaddr .20, consistent with the fixed binding and guest interface.
+- Final decision: guest addressing and bidirectional network reachability PASS; the .100 item is an expired historical lease record, not an active lease. Network gate PASS for scoped discovery of the authorised Metasploitable target only. This does not assert that scanning has already occurred.
+- New evidence: METASPLOITABLE_PS_RECHECK_20261108.png; METASPLOITABLE_PIDFILE_CHECK_20261108.png; METASPLOITABLE_IFCONFIG_POSTCHECK_20261108.png; METASPLOITABLE_PING_POSTCHECK_20261108.png; KALI_POST_CORRECTION_CONSOLE_CHECK_20261108.png; KALI_TO_METASPLOITABLE_POST_CORRECTION_20261108.png; VBOX_DHCP_AND_VM_READONLY_RECHECK_20261108.txt; VBOX_DHCP_POST_CORRECTION_READONLY_20261108.txt; CAPSTONE138_DHCP_AND_BIDIRECTIONAL_NETWORK_FINAL_VERIFICATION_20261108.txt.

@@ -1,0 +1,26 @@
+﻿CAPSTONE PROJECT 138 — APPROVED DHCP CORRECTION EXECUTION RECORD
+Date: 2026-11-08 (Africa/Lagos)
+User approval: Explicit approval received to gracefully terminate only PID 4893, preserving PID 4742, after a fresh snapshot and rollback protection.
+Target VM: Metasploitable 2 / UUID 396b158d-852c-463f-b179-0cc971418cc7
+
+PRE-CORRECTION SNAPSHOT
+- Snapshot created successfully: CAPSTONE_DHCP_PRE_CORRECTION_20261108
+- Snapshot UUID: f975d0d1-b15f-440d-99d3-36b98e3de100
+- VBoxManage snapshot list --details confirmed it as the current snapshot.
+- Snapshot description explicitly records intended single-client correction and no lease/configuration changes.
+
+EXECUTION BLOCKER
+- A fresh live guest-state query was attempted using VBoxManage guestcontrol against the running VM.
+- Guestcontrol returned VBOX_E_GSTCTL_GUEST_ERROR (0x80bb000f): Guest Additions are not installed or not ready.
+- Therefore current live process identity, PID-file values, and current interface/route state could not be independently revalidated after snapshot creation.
+- Earlier evidence captured PID 4742 (`dhclient3 ...`) and PID 4893 (`dhclient eth0`), but the correction must not act on a stale PID without revalidation. PID reuse or process replacement cannot be excluded.
+
+ACTION RESULT
+- PID 4893 was NOT terminated.
+- PID 4742 was NOT touched.
+- No DHCP lease file, VirtualBox lease XML, guest configuration, or network service was modified or restarted.
+- No scanning or vulnerability assessment was started.
+- Status: HOLD / EXECUTION BLOCKED pending a reliable live guest command channel and fresh confirmation that PID 4893 is still the intended `dhclient eth0` process.
+
+SAFE NEXT STEP
+Re-establish live guest access through the VM console or another already-authorized guest management channel; collect current `ps`, PID files, interface address and route; only then gracefully signal the verified PID 4893 process and immediately verify the expected PID 4742 and `.20` connectivity. If process identity differs, stop and reassess. Do not alter the VirtualBox `.100` lease XML in this correction.

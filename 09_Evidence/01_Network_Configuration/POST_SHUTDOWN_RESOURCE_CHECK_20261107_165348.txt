@@ -1,0 +1,43 @@
+﻿Post ACPI shutdown state/resource check — 2026-11-07T16:53:48.6189409+01:00
+[Metasploitable]
+
+memory=2048
+cpus=1
+VMState="running"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+nic2="none"
+
+
+[Kali Linux]
+
+memory=8192
+cpus=3
+VMState="aborted"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+nic2="none"
+
+
+[Dev Guru]
+
+memory=4092
+cpus=2
+VMState="poweroff"
+nic1="nat"
+nic2="none"
+
+
+=== host free memory ===
+
+
+TotalVisibleMemorySize : 16616664
+FreePhysicalMemory     : 3241204
+TotalVirtualMemorySize : 31211540
+FreeVirtualMemory      : 10808264
+
+
+
+
+=== running VMs ===
+"Metasploitable" {396b158d-852c-463f-b179-0cc971418cc7}

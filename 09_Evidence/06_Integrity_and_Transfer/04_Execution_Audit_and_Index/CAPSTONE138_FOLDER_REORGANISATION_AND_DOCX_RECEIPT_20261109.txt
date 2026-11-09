@@ -1,0 +1,9 @@
+﻿CAPSTONE PROJECT 138 — Folder Reorganisation and Document Output Receipt
+Date: 9 November 2026 (Africa/Lagos)
+Project tree: 00_Governance through 12_References, plus 99_Archive.
+Evidence reorganisation totals: 183 file moves; 57 byte-identical duplicate removals after SHA-256 confirmation; seven empty directories removed; one differing console screenshot preserved under a conflict-qualified filename. Four files initially marked for review were manually classified.
+Evidence separation: system discovery native Nmap outputs and scan screenshots are in 02_System_Discovery; vulnerability-specific research and read-only validation are in 03_Vulnerability_Assessment; the risk basis packet has one risk-only item. There is no 05_Security_Controls evidence packet because no controls were implemented or evidenced.
+The prior CURRENT_STATUS.md was inadvertently removed by a same-path duplicate handler. The current file was reconstructed from retained project artefacts; this is not a byte-for-byte recovery. Full incident detail is in FOLDER_REORGANIZATION_FILE_ACTIONS_20261109.csv.
+Word-compatible files created: 10_Final_Report\FINAL_REPORT_20261109.docx and 11_Presentation\FINAL_PRESENTATION_AND_SPEAKER_NOTES_20261109.docx. Microsoft Word GUI was not launched; the host-session lookup did not find WINWORD.EXE. Report DOCX outline had 405 paragraphs, zero native Word tables and zero images. Markdown remains the authoritative structured source pending Word GUI review.
+No native PowerPoint PPTX was created. No new scan, target modification, exploitation, authentication test or cloud-tenant test was performed.
+The active project-wide manifest and sidecar are stored in 09_Evidence\06_Integrity_and_Transfer\01_Manifests. The final manifest is regenerated after this receipt and associated status updates.

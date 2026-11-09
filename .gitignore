@@ -1,0 +1,25 @@
+﻿# Local/generated report-rendering dependencies and browser state
+10_Final_Report/_docgen/node_modules/
+10_Final_Report/_docgen/chrome-shot-profile/
+10_Final_Report/_docgen/edge-profile/
+10_Final_Report/_docgen/**/Cache/
+10_Final_Report/_docgen/**/Code Cache/
+10_Final_Report/_docgen/**/GPUCache/
+10_Final_Report/_docgen/**/Crashpad/
+10_Final_Report/_docgen/**/*.log
+10_Final_Report/_docgen/**/*.log.*
+
+# Local secrets and machine-specific credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Common transient/editor files
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp

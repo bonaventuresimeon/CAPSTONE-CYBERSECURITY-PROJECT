@@ -1,0 +1,67 @@
+﻿Host memory/pagefile inspection — 2026-11-07T16:51:20.9158743+01:00
+=== Physical memory ===
+
+
+TotalVisibleMemorySize  : 16616664
+FreePhysicalMemory      : 980184
+TotalVirtualMemorySize  : 31211540
+FreeVirtualMemory       : 5335796
+SizeStoredInPagingFiles : 14594876
+
+
+
+
+=== Pagefile config ===
+
+
+
+Status                : 
+Name                  : C:\pagefile.sys
+CurrentUsage          : 2043
+Caption               : C:\pagefile.sys
+Description           : C:\pagefile.sys
+InstallDate           : 6/14/2024 4:23:21 AM
+AllocatedBaseSize     : 14252
+PeakUsage             : 3366
+TempPageFile          : False
+PSComputerName        : 
+CimClass              : root/cimv2:Win32_PageFileUsage
+CimInstanceProperties : {Caption, Description, InstallDate, Name...}
+CimSystemProperties   : Microsoft.Management.Infrastructure.CimSystemProperties
+
+
+
+
+=== Pagefile registry values ===
+
+
+PagingFiles       : {?:\pagefile.sys}
+ExistingPageFiles : {\??\C:\pagefile.sys}
+TempPageFile      : 
+
+
+
+
+=== Drive free space ===
+
+Name         Used        Free
+----         ----        ----
+C    123729788928  1087451136
+D    109914169344 20315820032
+
+
+
+=== VM memory settings ===
+
+memory=8192
+cpus=3
+VMState="aborted"
+
+
+
+memory=2048
+cpus=1
+VMState="running"
+
+
+=== Log hash ===

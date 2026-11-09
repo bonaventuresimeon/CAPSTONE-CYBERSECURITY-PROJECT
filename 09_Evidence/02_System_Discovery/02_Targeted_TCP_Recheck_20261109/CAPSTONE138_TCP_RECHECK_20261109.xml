@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.98 scan initiated Mon Nov  9 05:39:49 2026 as: /usr/lib/nmap/nmap -&#45;privileged -sT -sV -&#45;version-light -Pn -T2 -&#45;reason -&#45;max-retries 2 -p 3632,6697,8787,33543,47335,47852,60679 -oA /home/bonaventure/capstone138_20261109/CAPSTONE138_TCP_RECHECK_20261109 192.168.138.20 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -&#45;privileged -sT -sV -&#45;version-light -Pn -T2 -&#45;reason -&#45;max-retries 2 -p 3632,6697,8787,33543,47335,47852,60679 -oA /home/bonaventure/capstone138_20261109/CAPSTONE138_TCP_RECHECK_20261109 192.168.138.20" start="1794199189" startstr="Mon Nov  9 05:39:49 2026" version="7.98" xmloutputversion="1.05">
+<scaninfo type="connect" protocol="tcp" numservices="7" services="3632,6697,8787,33543,47335,47852,60679"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1794199190" endtime="1794199262"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="192.168.138.20" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="3632"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="distccd" product="distccd" version="v1" extrainfo="(GNU) 4.2.4 (Ubuntu 4.2.4-1ubuntu4)" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="6697"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="irc" product="UnrealIRCd" hostname="irc.Metasploitable.LAN" method="probed" conf="10"><cpe>cpe:/a:unrealircd:unrealircd</cpe></service></port>
+<port protocol="tcp" portid="8787"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="drb" product="Ruby DRb RMI" extrainfo="Ruby 1.8; path /usr/lib/ruby/1.8/drb" method="probed" conf="10"><cpe>cpe:/a:ruby-lang:ruby:1.8</cpe></service></port>
+<port protocol="tcp" portid="33543"><state state="open" reason="syn-ack" reason_ttl="0"/></port>
+<port protocol="tcp" portid="47335"><state state="open" reason="syn-ack" reason_ttl="0"/></port>
+<port protocol="tcp" portid="47852"><state state="open" reason="syn-ack" reason_ttl="0"/></port>
+<port protocol="tcp" portid="60679"><state state="open" reason="syn-ack" reason_ttl="0"/></port>
+</ports>
+<times srtt="3974" rttvar="3392" to="400000"/>
+</host>
+<runstats><finished time="1794199262" timestr="Mon Nov  9 05:41:02 2026" summary="Nmap done at Mon Nov  9 05:41:02 2026; 1 IP address (1 host up) scanned in 73.04 seconds" elapsed="73.04" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

@@ -1,0 +1,120 @@
+CAPSTONE PROJECT 138 — FIVE PRIORITY VULNERABILITY / SECURITY FINDINGS REGISTER
+Project: From Vulnerability to Compliance — HanTech
+Assessment date: 8 November 2026 (Africa/Lagos)
+Target: Metasploitable 2 / 192.168.138.20
+Scope: authorised target on VirtualBox Internal Network CAPSTONE138_ISOLATED only
+Status: PRELIMINARY, evidence-led findings. No exploitation was performed.
+
+EXECUTIVE FINDING SUMMARY
+1. NFS root export to wildcard clients with rw and no_root_squash — CONFIRMED CONFIGURATION WEAKNESS; high to critical potential impact, remote impact not tested.
+2. Samba CVE-2007-2447 — HIGH-CONFIDENCE APPLICABILITY CANDIDATE; version and username map script setting match upstream prerequisites; patch state/exploitability not proven and no trigger sent.
+3. Anonymous SMB share enumeration and tmp directory listing — CONFIRMED ANONYMOUS ACCESS / METADATA DISCLOSURE; content access not tested.
+4. Default lab credentials disclosed in public HTTP landing page — CONFIRMED CREDENTIAL DISCLOSURE; credential validity on other services not tested.
+5. Unsupported Apache/PHP web platform — CONFIRMED UNSUPPORTED SOFTWARE EXPOSURE; not mapped to a specific CVE in this register.
+
+RISK RATING METHOD
+Likelihood is rated from observed reachability/configuration and does not assume successful exploitation. Impact describes plausible business consequence if the stated condition is exploitable. Overall risk is qualitative and must be adjusted for the real HanTech network exposure, compensating controls, asset criticality and business impact. CVSS is included only where a source score exists and is not treated as a replacement for local risk assessment.
+
+F-01 — NFS ROOT FILESYSTEM EXPORTED TO WILDCARD CLIENTS
+Status: CONFIRMED CONFIGURATION WEAKNESS
+Technical evidence:
+- `showmount -e 192.168.138.20` returned `/ *`.
+- Guest `/etc/exports` contains `/ *(rw,sync,no_root_squash,no_subtree_check)`.
+- `rpcinfo -p` identified NFS v2/v3/v4 and mountd/nlockmgr services.
+Security meaning: the root filesystem path `/` is exported to any client matching `*`; write is permitted and `no_root_squash` prevents mapping client root to anonymous identity. Linux exports documentation describes root_squash as the default and no_root_squash as disabling it. Red Hat guidance recommends avoiding no_root_squash and treating wildcard exports cautiously.
+Likelihood: HIGH within any network segment that can reach the NFS service; actual lab reachability is established, but only Kali is joined to this isolated test network.
+Impact: CRITICAL POTENTIAL if an untrusted client can mount and write the root export with root identity. Actual NFS mount/access and filesystem effect were deliberately not tested.
+Risk: HIGH in the current isolated lab context; potentially CRITICAL in a broader production network. No CVE is assigned because this is a configuration weakness.
+Evidence confidence: HIGH for configuration; NOT TESTED for remote read/write impact.
+Remediation: remove the root export; export only a dedicated data directory; restrict clients to explicit trusted IPs; use read-only exports unless writes are essential; enable root_squash; firewall rpcbind/NFS/mountd; monitor and audit exports.
+
+F-02 — SAMBA USERNAME-MAP SCRIPT COMMAND INJECTION (CVE-2007-2447)
+Status: HIGH-CONFIDENCE CANDIDATE — PATCH STATE / EXPLOITABILITY NOT PROVEN
+Technical evidence:
+- `dpkg-query` returned Samba `3.0.20-0.1ubuntu1`.
+- `/etc/samba/smb.conf` line 107 is `username map script = /etc/samba/scripts/mapusers.sh`.
+- A read-only `ls -l` confirms the configured script exists, root-owned and executable, but is zero bytes (`-rwxr-xr-x`, size 0).
+- Ubuntu release is 8.04 Hardy. Package changelog search for 2447 returned no matching line; this does not prove a patch is absent.
+Applicability: Samba upstream advisory identifies Samba 3.0.0 through 3.0.25rc3 and states the SamrChangePassword path is affected when `username map script` is enabled. Samba 3.0.20 is inside that range and the option is active. The fact the script is empty does not independently prove the affected code path is neutralised; however, exact package patch status must be verified before classifying this as fully confirmed.
+CVSS reference: CVSS v2 base score 6.0 (AV:N/AC:M/Au:S/C:P/I:P/A:P), as reported in a reference record. This is a historical upstream baseline, not a target-specific score; privileges/attack assumptions must be re-evaluated if using it in the final report.
+Likelihood: MEDIUM (network reachable and prerequisite setting present; package patch state and vulnerable code behaviour not proven).
+Impact: HIGH if the affected command-injection path is present, because remote command execution may compromise the Samba host.
+Risk: HIGH candidate pending patch verification.
+Evidence confidence: HIGH for version/configuration; MEDIUM for CVE applicability; NOT TESTED for code execution.
+Remediation: upgrade Samba to a supported patched release; remove the username map script hook if unnecessary; restrict SMB/RPC to approved hosts; review all shell-invoked external scripts; verify vendor patch status using exact source-package/build records.
+Safety boundary: no crafted username, MS-RPC trigger, exploit code or authentication request was sent.
+
+F-03 — ANONYMOUS SMB SHARE ENUMERATION AND TMP DIRECTORY DISCLOSURE
+Status: CONFIRMED ANONYMOUS ACCESS / METADATA DISCLOSURE
+Technical evidence:
+- `smbclient -L //192.168.138.20 -N` returned `Anonymous login successful` and enumerated print$, tmp, opt, IPC$ and ADMIN$.
+- `smbclient //192.168.138.20/tmp -N -c ls` again returned anonymous success and exposed directory metadata, including 4587.jsvc_up and X/ICE socket directory names.
+- Server identified as Samba 3.0.20-Debian.
+Likelihood: HIGH for unauthenticated discovery; the result was reproduced by two anonymous commands.
+Impact: LOW to MODERATE based on confirmed metadata/share exposure only. File content confidentiality and write permissions have not been tested.
+Risk: MEDIUM pending share access-control review.
+Evidence confidence: HIGH for anonymous enumeration and directory listing; NOT TESTED for file read/write.
+Remediation: disable guest/null-session listing where unnecessary; restrict tmp and other shares; use explicit share ACLs and approved identities; remove unused shares; segment SMB and apply a supported Samba version.
+
+F-04 — DEFAULT CREDENTIALS DISCLOSED IN THE HTTP LANDING PAGE
+Status: CONFIRMED CREDENTIAL DISCLOSURE
+Technical evidence:
+- HTTP root page returned 200 OK and explicitly displayed `Login with msfadmin/msfadmin to get started.`
+- The same page warns never to expose the VM to an untrusted network.
+- No login was attempted; no claim is made that the disclosed credentials authenticate to SSH, Telnet, SMB or any other service.
+Likelihood: HIGH for disclosure because the pair is visible without authentication. Likelihood of successful account compromise is NOT DETERMINED.
+Impact: HIGH POTENTIAL if the credentials remain valid and grant an account with broad permissions; privilege and account scope were not tested here.
+Risk: MEDIUM/HIGH candidate pending credential lifecycle verification.
+Evidence confidence: HIGH for disclosure; NOT TESTED for credential validity or privileges.
+Remediation: remove secrets from public pages; rotate/remove default credentials; disable default accounts; enforce unique strong authentication and least privilege; restrict management endpoints.
+
+F-05 — UNSUPPORTED APACHE / PHP WEB STACK
+Status: CONFIRMED UNSUPPORTED SOFTWARE EXPOSURE
+Technical evidence:
+- Package query returned Apache `2.2.8-1`.
+- HTTP response identified `Apache/2.2.8 (Ubuntu) DAV/2` and `PHP/5.2.4-2ubuntu5.10`.
+- Apache project's current page identifies the 2.2 branch as end-of-life; its final release was 2.2.34 in July 2017, after which no further patches/security updates are provided.
+- PHP 5.2.16 marked the end of support for PHP 5.2; the observed runtime is 5.2.4.
+Likelihood: HIGH for the unsupported component condition because package/runtime evidence is direct. Exploit likelihood varies by application/configuration and is not measured.
+Impact: HIGH POTENTIAL because known bugs in an unsupported Internet-facing web stack may remain unpatched; no specific web CVE or exploitability is established by this inventory.
+Risk: HIGH pending application and vulnerability mapping.
+Evidence confidence: HIGH for versions and lifecycle status; NOT TESTED for a specific vulnerable code path.
+Remediation: migrate to a supported OS/web stack; upgrade Apache and PHP to maintained releases; remove unused modules and demo applications; isolate the legacy VM until migration; perform application-specific code and configuration review.
+
+ADDITIONAL EXPOSURE — LEGACY REMOTE ACCESS PROTOCOLS
+Nmap identified Telnet 23/tcp and rsh/rlogin-family services on 512–514/tcp. These are confirmed open listeners. No credentials were sent and no session was opened. Treat as a separate hardening item: disable if not required; otherwise migrate remote administration to SSH and restrict source IPs.
+
+EXCLUDED / NOT COUNTED
+- CVE-2011-2523: Nmap reports vsftpd 2.3.4, but Ubuntu marks its official Ubuntu 8.04 Hardy vsftpd package NOT AFFECTED. The exact binary provenance on this target is unknown; the CVE applies only to the specially backdoored 2.3.4 download from 2011-06-30 to 2011-07-03. Banner alone is insufficient.
+- No findings are assigned to the links for TWiki, phpMyAdmin, Mutillidae, DVWA or WebDAV; path presence is not proof of vulnerability.
+- No conclusion is made about write methods on WebDAV, access to the port 1524 bindshell, or exploitability of UnrealIRCd, Java RMI or AJP/Tomcat.
+
+VALIDATION LIMITATIONS
+- All network evidence is for the isolated target 192.168.138.20.
+- No vulnerability scripts, brute force, authentication attempts, NFS mount, SMB file read/write, upload, delete or exploit were performed.
+- CVSS is not calculated for findings lacking a defined CVE or full impact validation.
+- Findings and evidence must be adapted to HanTech's actual in-scope systems and business context. Metasploitable is a lab target, not evidence that HanTech production systems share these weaknesses.
+
+OFFICIAL / PRIMARY REFERENCES
+1. Samba CVE-2007-2447 advisory: https://www.samba.org/samba/security/CVE-2007-2447.html
+2. Ubuntu CVE-2007-2447 status: https://ubuntu.com/security/CVE-2007-2447
+3. Ubuntu USN-460-1: https://ubuntu.com/security/notices/USN-460-1
+4. CVE record: https://www.cve.org/CVERecord?id=cve-2007-2447
+5. Linux exports(5): https://man7.org/linux/man-pages/man5/exports.5.html
+6. Red Hat NFS security guidance: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/storage_administration_guide/s1-nfs-security
+7. Apache httpd project EOL information: https://httpd.apache.org/
+8. PHP 5.2.16 release announcement: https://www.php.net/releases/5_2_16.php
+9. Ubuntu CVE-2011-2523 Hardy package status: https://ubuntu.com/security/CVE-2011-2523
+10. NVD CVE-2011-2523: https://nvd.nist.gov/vuln/detail/CVE-2011-2523
+
+FINAL STATUS
+Five priority findings are documented. One is a directly confirmed severe configuration weakness (NFS); one is a high-confidence CVE candidate pending package patch verification (Samba); three are directly observed exposures (anonymous SMB browsing, public credential disclosure, unsupported web stack). Additional legacy remote protocol exposure is separately noted. Do not claim five exploit-confirmed vulnerabilities.
+
+F-02 — SAMBA CVE-2007-2447 — PACKAGE PATCH REVIEW ADDENDUM (8 NOVEMBER 2026, 06:36 WAT)
+New local read-only evidence confirms dpkg package samba 3.0.20-0.1ubuntu1 (i386; maintainer metadata Eloy A. Paris <peloy@debian.org>) and running smbd version 3.0.20-Debian. The active smb.conf line remains: username map script = /etc/samba/scripts/mapusers.sh. The configured script exists, is root:root-owned, executable and zero bytes. The local Debian changelog query returned no "2447" entry; that negative search is not proof that a patch is absent.
+
+Important package-origin observation: apt-cache policy shows Installed 3.0.20-0.1ubuntu1, Candidate 3.0.28a-1ubuntu4.18, with the candidate available from Hardy updates/security repositories. The installed 3.0.20 entry is shown only under /var/lib/dpkg/status and has no current repository origin in the configured APT lists. Thus the installed build is older than the current Hardy repository candidate and its exact source/build patch provenance remains unresolved. Samba upstream lists 3.0.0–3.0.25rc3 as affected; 3.0.20 is within that upstream range. The active username map script setting matches the upstream prerequisite described for the original SamrChangePassword vector.
+
+Decision remains HIGH-CONFIDENCE CVE APPLICABILITY CANDIDATE — NOT EXPLOIT-CONFIRMED. The combination of upstream version range and active option strengthens the candidate; the exact patch state of this installed binary has not been proven. The empty script and absence of a changelog token do not establish safety or vulnerability. No crafted username, MS-RPC request, authentication, exploit, share write, service restart, package update or configuration change was performed. Keep the risk rating provisional pending exact package-source/build verification.
+
+Detailed receipt: 09_Evidence\02_System_Discovery\CAPSTONE138_SAMBA_CVE_2007_2447_APPLICABILITY_REVIEW_20261108.txt

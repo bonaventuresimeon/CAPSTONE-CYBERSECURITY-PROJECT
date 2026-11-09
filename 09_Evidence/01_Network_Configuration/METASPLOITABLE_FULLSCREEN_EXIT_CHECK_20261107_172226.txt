@@ -1,0 +1,1 @@
+Title=Metasploitable (CAPSTONE_PRECONFIG_20261107) [Running] - Oracle VirtualBox; Rect=657,245,1152,602; Size=495x357

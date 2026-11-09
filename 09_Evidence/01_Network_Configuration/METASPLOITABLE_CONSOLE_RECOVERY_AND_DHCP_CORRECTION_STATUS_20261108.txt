@@ -1,0 +1,33 @@
+CAPSTONE PROJECT 138 — METASPLOITABLE CONSOLE RECOVERY / DHCP CORRECTION STATUS
+Date: 2026-11-08 (Africa/Lagos)
+VM: Metasploitable 2 / UUID 396b158d-852c-463f-b179-0cc971418cc7
+Rollback snapshot: CAPSTONE_DHCP_PRE_CORRECTION_20261108 / f975d0d1-b15f-440d-99d3-36b98e3de100 (verified current)
+
+CONSOLE DISPLAY
+- Initial VBoxManage screenshot was completely black (917-byte PNG).
+- VM host process remained running and responsive.
+- A single Enter key sent to the guest console woke the display. The next screenshot showed the existing msfadmin@metasploitable shell. No reboot or power-cycle occurred.
+- The blank display was a console presentation/wake issue in this observation; root cause is not established.
+
+FRESH LIVE STATE (READ-ONLY)
+- Guest date/time: Sat Nov 7 23:20:54 EST 2026.
+- PID 4742, PPID 1: dhclient3 -e IF_METRIC=100 -pf /var/run/dhclient.eth0.pid -lf /var/lib/dhcp3/dhclient.eth0.leases eth0.
+- PID 4893, PPID 1: dhclient eth0.
+- /var/run/dhclient.pid contained 4893; /var/run/dhclient.eth0.pid contained 4742.
+- eth0 UP with 192.168.138.20/24; route 192.168.138.0/24 dev eth0 src 192.168.138.20.
+- Ping from Metasploitable to Kali 192.168.138.10: 3 transmitted, 3 received, 0% packet loss.
+
+APPROVED CORRECTION ATTEMPT
+- Unprivileged kill -TERM 4893 returned Operation not permitted; PID 4893 remained running.
+- An interactive sudo kill -TERM 4893 was initiated. Guest displayed [sudo] password for msfadmin:. The prompt was cancelled with Ctrl+C without entering a password or performing a privileged action.
+- Latest visible process list still showed both PID 4742 and PID 4893. PID 4893 is NOT terminated; PID 4742 remains untouched.
+
+RESULT / NEXT GATE
+- Console is responsive; no reboot was needed.
+- Network currently functions from Metasploitable to Kali, .20/24 retained and 0% loss in the three-packet test.
+- The approved termination is blocked by the guest privilege prompt. User must enter the authorised sudo password locally at the visible console, or arrange an authorised root console. After authentication, re-check the process list, then gracefully terminate only the verified PID 4893 and repeat address/route/ping checks.
+- Do not modify VirtualBox .100 lease XML in this correction. DHCP remains HOLD until process correction and server-side lease discrepancy are separately reconciled. No system discovery or vulnerability scanning has started.
+
+
+FINAL STATUS UPDATE — 2026-11-08 06:02 WAT
+Subsequent live-console verification supersedes the earlier blocked status in this receipt. The visible sudo action successfully removed only PID 4893. Fresh `ps` output shows PID 4742 only; the generic PID file still contains stale value 4893 and was not edited. Metasploitable remains at .20/24 and its ping to Kali is 3/3 with 0% loss. A separate Kali-console test to Metasploitable is 4/4 with 0% loss. The initial black console was awakened with Enter; no reboot or power-cycle occurred. The `.100` VirtualBox lease record is expired (TTL 0) and retained unchanged. See `CAPSTONE138_DHCP_AND_BIDIRECTIONAL_NETWORK_FINAL_VERIFICATION_20261108.txt` for the final evidence set. Network readiness PASS for scoped discovery.

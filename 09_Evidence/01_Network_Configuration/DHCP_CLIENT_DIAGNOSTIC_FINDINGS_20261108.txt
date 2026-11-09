@@ -1,0 +1,87 @@
+﻿HANTECH CAPSTONE — DHCP CLIENT DIAGNOSTIC FINDINGS
+Date: 2026-11-08 04:37 local host time
+Method: Read-only commands entered in the running Metasploitable 2 guest console; live screenshots saved.
+
+OBSERVATIONS
+- Metasploitable guest interface eth0 is UP and has 192.168.138.20/24, MAC 08:00:27:f8:7d:a3.
+- Guest process listing shows TWO DHCP client processes:
+  PID 4742: dhclient3 -e IF_METRIC=100 -pf /var/run/dhclient.eth0.pid -lf /var/lib/dhcp3/dhclient.eth0.leases eth0
+  PID 4893: dhclient eth0
+- The referenced /var/lib/dhcp3/dhclient.eth0.leases file does not exist (ls and cat both returned No such file or directory).
+- The two DHCP client processes are a plausible contributor to the inconsistent DHCP state, but causation is NOT established. Do not terminate either process or alter DHCP configuration until process ownership, parentage, and startup mechanism are inspected and the user approves a corrective action.
+
+SCREENSHOTS
+- LIVE_SCREENSHOT_Metasploitable_DHCP_Client_ReadOnly_20261108_043711.png
+  SHA-256: 47AC21A9E2348D80B720D3AD22EC23506745F628F99BF5F803FEB4604D6A39D2
+  Shows live interface address and two DHCP client processes.
+- LIVE_SCREENSHOT_Metasploitable_DHCP_Lease_Process_Inspection_20261108_043730.png
+  SHA-256: 02F60D5244FF1ADBF7FF22ADC8C0007946F6AF5C7E852DD5431FB96570283EDA
+  Shows PID/PPID/process command lines and missing lease file errors.
+
+COMMANDS SENT TO METASPLOITABLE
+- echo 'HANTECH DHCP CLIENT READ-ONLY CHECK'; date -u; hostname; ifconfig eth0; ps aux | grep '[d]hclient'; ls -la /var/lib/dhcp 2>/dev/null; grep -R -n '192.168.138.100\|192.168.138.20' /var/lib/dhcp /var/lib/dhcpcd 2>/dev/null; echo 'END DHCP CLIENT CHECK'
+- echo 'HANTECH DHCP CLIENT PROCESS AND LEASE INSPECTION'; ps -ww -p 4742,4893 -o pid,ppid,stat,args; ls -l /var/lib/dhcp3/dhclient.eth0.leases; cat /var/lib/dhcp3/dhclient.eth0.leases; echo 'END DHCP PROCESS AND LEASE INSPECTION'
+
+STATUS
+- DHCP discrepancy remains OPEN / HOLD.
+- No processes killed, no guest lease files edited, no DHCP service restarted, no network configuration changed.
+- Next safe step: read-only inspection of parent processes, service startup configuration and all DHCP-related processes in Metasploitable, then determine a controlled, approved correction. Do not begin system discovery or vulnerability scanning yet.
+
+ADDITIONAL READ-ONLY STARTUP CONFIGURATION OBSERVATION — 2026-11-08 05:14 WAT
+- Live screenshot: LIVE_SCREENSHOT_Metasploitable_DHCP_Startup_ReadOnly_20261108_0514.png
+- SHA-256: 324C712580E3A7ECFF33F82A6926D3C03069DD86B0CF5165D631F73BA1D179A7
+- Visible /etc/network/interfaces: auto eth0; iface eth0 inet dhcp.
+- /etc/dhcp3 listing shows dhclient.conf and dhclient.conf.dpkg-dist.
+- No DHCP init script or NetworkManager entry appeared in the captured listing. This is not proof that no alternate startup mechanism exists.
+- /var/run/dhclient.pid was listed; PID file contents were not captured.
+- No process/service/configuration changes were made. Startup ownership remains unresolved.
+
+ADDITIONAL LIVE PROCESS / PID-FILE ATTRIBUTION — 2026-11-08 05:19–05:20 WAT
+Method: read-only commands entered in the live Metasploitable 2 console; screenshots captured directly from the running VM display. No process or configuration changes.
+
+CONFIRMED OBSERVATIONS
+- A clean process listing reports PID 4742, PPID 1, command beginning: dhclient3 -e IF_METRIC=100 -pf /var/run/dhclient.eth0.pid -lf /var/lib/dhcp3/dhclient.eth0.leases ...
+- The same listing reports PID 4893, PPID 1, command: dhclient eth0.
+- cat /var/run/dhclient.pid returns 4893. This links the generic dhclient PID file to PID 4893.
+- ls -l shows /var/run/dhclient.eth0.pid exists (root-owned, 5 bytes) and /var/lib/dhcp3/dhclient.leases exists (dhcp-owned); the custom lease path specified by PID 4742, /var/lib/dhcp3/dhclient.eth0.leases, was absent in the earlier direct ls/cat inspection.
+- The live lease-file view shows interface eth0 and fixed-address 192.168.138.20 entries with DHCP server identifier 192.168.138.1 and lease timers. The captured screenshot is partially scrolled; it is not treated as a complete lease-file transcription.
+- /etc/rcS.d/S40networking is a symlink to ../init.d/networking. The targeted read-only grep of /etc/init.d/networking and /etc/network/if-up.d/* produced no visible dhclient invocation. The attempted /etc/rc*.d/*dhcp* glob returned “No such file or directory”; this only means no matching path was found by that glob.
+- Both DHCP clients have PPID 1. The PID file identifies PID 4893; the custom PID file for PID 4742 was listed but its contents were not read in this capture. The startup origin of PID 4742 remains unproven.
+
+INTERPRETATION / LIMITS
+- The evidence establishes two concurrent DHCP client processes and a PID-file association for PID 4893. PID 4742 was launched with a different, interface-specific PID/lease-file pair.
+- This is a stronger explanation candidate for the DHCP state inconsistency, but it does NOT yet prove which process generated the earlier .100 DHCPREQUEST, why the second client was launched, or whether one process is stale/orphaned. PPID 1 alone does not identify the original launcher.
+- Do not terminate either process or edit/restart DHCP. The proposed correction remains unapproved and must be presented with rollback steps after the remaining attribution is completed.
+
+NEW LIVE SCREENSHOTS
+- LIVE_SCREENSHOT_Metasploitable_DHCP_Process_Attribution_Clean_20261108_0523.png — 14,712 bytes; SHA-256 E3401DBCE50174484A466BDDC53E6749F9B3BC653C52F5C65EE4761F843F0069.
+- LIVE_SCREENSHOT_Metasploitable_DHCP_PID_Startup_20261108_0525.png — 14,692 bytes; SHA-256 F23DCBA1D064A4EBEDC2A487BE24E1D28BEA0DDFFB2E937BB7085EC22316D1FC.
+- LIVE_SCREENSHOT_Metasploitable_DHCP_LeaseAndStartup_20261108_0528.png — 10,668 bytes; SHA-256 6F59D901FFEB4188B71F2F97BE29925F2E6554086EF356B9E5A1C5E84D7014E2.
+
+COMMANDS CAPTURED IN THE LIVE CONSOLE
+- date
+- ps -o pid,ppid,stat,args -p 4742,4893
+- echo PIDFILE; cat /var/run/dhclient.pid 2>&1; echo FILES; ls -l /var/run/dhclient* /var/lib/dhcp3/* 2>&1; echo STARTUP; grep -R -n dhclient /etc/init.d /etc/rc*.d /etc/network 2>/dev/null
+- echo LEASE; cat /var/lib/dhcp3/dhclient.leases; echo NETWORK_STARTUP; ls -l /etc/rc*.d/*network* /etc/rc*.d/*dhcp* 2>&1; echo INIT_SCRIPT; grep -n dhclient /etc/init.d/networking /etc/network/if-up.d/* 2>/dev/null
+
+STATUS
+- DHCP HOLD remains. Startup attribution for PID 4742 and the .100 request origin remain unresolved.
+- No DHCP client stopped; no guest file edited; no service restarted; no network configuration changed; no discovery/scanning started.
+ADDITIONAL READ-ONLY GUEST AND SERVER ATTRIBUTION — 2026-11-08 05:22–05:24 WAT
+New live guest screenshot: LIVE_SCREENSHOT_Metasploitable_DHCP_ClientSpecific_PID_Lease_Clean_20261108_0524.png — 14,583 bytes; SHA-256 F5AD3037D256F126D874BDB449D1C1CF11A8B6DE35457E8DAFC4480FE53C5FF3.
+Screenshot output confirms `cat /var/run/dhclient.eth0.pid` returns 4742. This associates the interface-specific PID file with dhclient3 PID 4742. The same console command reports `/var/lib/dhcp3/dhclient.eth0.leases` does not exist. `ps -p 4742 -o pid,ppid,args` confirms PID 4742, PPID 1, command beginning `dhclient3 -e IF_METRIC=100 -pf /var/run/dhclient.eth0.pid -lf /var/lib/dhcp3/dhclient.eth0.leases ...`.
+Together with the earlier capture showing `/var/run/dhclient.pid` contains 4893, both live DHCP clients now have distinct PID-file associations. Both still have PPID 1; PPID 1 does not reveal original launcher. The missing custom lease file is a notable anomaly, but does not by itself prove PID 4742 is stale or responsible for any specific DHCP packet.
+
+HOST-SIDE DHCP STATE — 2026-11-08T05:22:55.1797003+01:00
+Read-only PowerShell inspection confirms Metasploitable VM is running on CAPSTONE138_ISOLATED with MAC 08:00:27:f8:7d:a3. VirtualBox DHCP configuration has server 192.168.138.1, pool .10–.150, and fixed reservations .20 for Metasploitable and .10 for Kali.
+Server log excerpt: ACK for Metasploitable MAC; `ciaddr 192.168.138.100 yiaddr 192.168.138.20`. Important correction: .100 is the ciaddr field (client current/previous address) in this ACK; .20 is yiaddr, the assigned address in this ACK. Do not describe this line as the server assigning .100.
+The VirtualBox lease file nevertheless contains one acked record for Metasploitable MAC with address .100, issued epoch 1794107861 and expiration 600. This record is inconsistent with the fixed reservation and the observed ACK yiaddr .20. Preserve the raw file; do not edit/delete it during diagnosis.
+Full read-only host snapshot preserved as `09_Evidence\01_Network_Configuration\VIRTUALBOX_DHCP_SERVER_STATE_READONLY_20261108_052255.txt`.
+
+REVISED ASSESSMENT
+- The server's current fixed binding and observed ACK yiaddr both support .20. The earlier log's .100 value is ciaddr, not yiaddr.
+- The lease file still lists .100; this is the remaining server-side state inconsistency.
+- Guest PID 4742 has its own PID file, and PID 4893 has the generic PID file. The custom lease path for PID 4742 is missing. Two clients coexist, but their original launchers and packet ownership are not established.
+- These observations narrow the issue; they do not establish a safe client to terminate. DHCP remains HOLD pending startup-path and lease-state reconciliation.
+
+No process terminated, no guest or host DHCP file edited, no DHCP service restarted, no network configuration changed, and no discovery/scanning started.

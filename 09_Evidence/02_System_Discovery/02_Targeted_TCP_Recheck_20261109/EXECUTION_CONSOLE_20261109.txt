@@ -1,0 +1,44 @@
+CAPSTONE PROJECT 138 - controlled Kali local-console scan execution
+START=2026-11-09T05:39:49+01:00
+HOST=Whisper
+IDENTITY=uid=1000(bonaventure) gid=1000(bonaventure) groups=1000(bonaventure),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),100(users),101(netdev),102(scanner),112(bluetooth),115(lpadmin),119(wireshark),124(vboxsf),125(kaboxer)
+SOURCE=192.168.138.10
+TARGET=192.168.138.20
+SUDO_NONINTERACTIVE=UNAVAILABLE
+
+=== TARGETED TCP SERVICE RECHECK START ===
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-11-09 05:39 +0100
+Nmap scan report for 192.168.138.20
+Host is up, received user-set (0.0040s latency).
+
+PORT      STATE SERVICE REASON  VERSION
+3632/tcp  open  distccd syn-ack distccd v1 ((GNU) 4.2.4 (Ubuntu 4.2.4-1ubuntu4))
+6697/tcp  open  irc     syn-ack UnrealIRCd
+8787/tcp  open  drb     syn-ack Ruby DRb RMI (Ruby 1.8; path /usr/lib/ruby/1.8/drb)
+33543/tcp open  unknown syn-ack
+47335/tcp open  unknown syn-ack
+47852/tcp open  unknown syn-ack
+60679/tcp open  unknown syn-ack
+Service Info: Host: irc.Metasploitable.LAN
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 73.04 seconds
+TCP_EXIT=0
+
+UDP_STATUS=NOT_RUN - sudo non-interactive authorization unavailable; no UDP scan initiated.
+
+COMPLETION=2026-11-09T05:41:02+01:00
+=== SHA256 OF NATIVE OUTPUT AND RECEIPTS ===
+52957ca8765627d905bcb6009eca58f8f6c0bf7a619fe8df2077fabfddc7675e  /home/bonaventure/capstone138_20261109/CAPSTONE138_TCP_RECHECK_20261109.gnmap
+ee3741bea07fd35f83f74163f3e8ef638d6c34f9fd6980d96bf595cec8b45537  /home/bonaventure/capstone138_20261109/CAPSTONE138_TCP_RECHECK_20261109.nmap
+ca684fec4d34bc527b48ecd1b70db3c899dd1f847f7c15ac9db65c43e648f711  /home/bonaventure/capstone138_20261109/CAPSTONE138_TCP_RECHECK_20261109.xml
+c20be9d54046b0e91ed39dadabd5ec3951dd44223b7a97ec246614188916e4bc  /home/bonaventure/capstone138_20261109/EXECUTION_CONSOLE_20261109.txt
+dc26d1206f19460982ea00ae56e2c52bca0d1085225e7a75ef64687fa5be0b63  /home/bonaventure/capstone138_20261109/UDP_DISCOVERY_BLOCKED_20261109.txt
+=== FILE INVENTORY ===
+CAPSTONE138_TCP_RECHECK_20261109.gnmap 702 bytes
+CAPSTONE138_TCP_RECHECK_20261109.nmap 972 bytes
+CAPSTONE138_TCP_RECHECK_20261109.xml 2580 bytes
+EXECUTION_CONSOLE_20261109.txt 2147 bytes
+SHA256SUMS_20261109.txt 705 bytes
+UDP_DISCOVERY_BLOCKED_20261109.txt 92 bytes
+EXECUTION_FINISHED

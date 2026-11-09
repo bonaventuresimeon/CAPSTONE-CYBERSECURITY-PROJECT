@@ -1,0 +1,12 @@
+﻿CAPSTONE PROJECT 138 — INDEPENDENT EVIDENCE INTEGRITY VERIFICATION
+Timestamp: 2026-11-08T13:13:50.1767473+01:00
+Evidence copies rehashed independently: 47
+Evidence copies hash-matched: 47
+Evidence copy failures: 0
+Active project manifest records: 432
+Missing manifest paths: 0
+SHA-256 mismatches: 0
+Duplicate SHA-256 groups: 41
+Manifest: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\SHA256_EVIDENCE_MANIFEST_CURRENT_20261108.csv
+Method: source and destination files were rehashed; active manifest was regenerated from project files (excluding .dist and the manifest itself), then every manifest entry was rehashed independently.
+Decision: PASS — integrity checks completed

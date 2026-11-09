@@ -1,0 +1,17 @@
+﻿Start Kali after controlled RAM adjustment — 2026-11-07T16:54:17.7328973+01:00
+Waiting for VM "Kali Linux" to power on...
+VM "Kali Linux" has been successfully started.
+Start command exit=0
+VM state:
+
+memory=3072
+cpus=2
+VMState="running"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+nic2="none"
+
+
+Running VMs:
+"Kali Linux" {8eefef2e-f9a7-44ed-bfda-cf280a9e0b6a}
+"Metasploitable" {396b158d-852c-463f-b179-0cc971418cc7}

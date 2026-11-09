@@ -1,0 +1,35 @@
+CAPSTONE PROJECT 138 — DHCP SINGLE-CLIENT CORRECTION RESULT
+Date: 2026-11-08
+Target: Metasploitable 2 / 396b158d-852c-463f-b179-0cc971418cc7
+Pre-correction snapshot: CAPSTONE_DHCP_PRE_CORRECTION_20261108
+Snapshot UUID: f975d0d1-b15f-440d-99d3-36b98e3de100
+
+APPROVED ACTION
+- Fresh live console confirmed PID 4893 was the additional generic dhclient eth0 process and PID 4742 was the ifupdown dhclient3 process.
+- The first unprivileged signal attempt was denied.
+- A later sudo kill -TERM 4893 command was entered at the guest console. It returned to the shell prompt without an error.
+- Independent follow-up `ps -p 4742,4893 -o pid,ppid,args` displayed PID 4742 only; PID 4893 was absent. This verifies the additional process is no longer running.
+- PID 4742 remained present with the expected dhclient3 command line.
+
+POST-CORRECTION VERIFICATION
+- eth0 remained UP with 192.168.138.20/24.
+- Route remained 192.168.138.0/24 dev eth0 src 192.168.138.20.
+- Ping to Kali 192.168.138.10: 3 transmitted, 3 received, 0% packet loss.
+- /var/run/dhclient.pid still contains 4893, while /var/run/dhclient.eth0.pid contains 4742. The generic PID file is stale after process termination. It has NOT been deleted or edited.
+- No DHCP lease file, interface configuration, or VirtualBox DHCP server lease XML was edited. No network service was restarted.
+
+LIMITS / REMAINING HOLD
+- The VirtualBox DHCP XML .100 record remains unresolved and was deliberately left untouched. Earlier server log evidence identifies ciaddr .100 and ACK yiaddr .20; the XML record still records .100.
+- The successful ping confirms Metasploitable-to-Kali reachability only; it does not independently prove Kali-to-Metasploitable reachability after this change.
+- DHCP correction of the extra process: PASS for process removal and guest-side connectivity retention.
+- Overall DHCP gate: HOLD pending separate investigation/reconciliation of the stale .100 VirtualBox lease record and a clean independent reverse-direction connectivity check.
+- No system discovery, vulnerability scanning, or exploitation has started.
+
+
+FINAL VERIFICATION UPDATE — 2026-11-08 06:02 WAT
+The earlier HOLD in this receipt was pending a reverse-direction ping and fresh lease-state interpretation. Both gates are now closed by independent post-correction evidence:
+- PID 4893 remains absent from a fresh process listing; PID 4742 remains the single active ifupdown DHCP client.
+- Metasploitable -> Kali: 3/3 replies, 0% loss. Kali -> Metasploitable: 4/4 replies, 0% loss.
+- The VirtualBox `.100` record is classified by `VBoxManage dhcpserver findlease` as EXPIRED, TTL 0; the old XML is retained unchanged. Later server log renewal records ciaddr .20 / ACK yiaddr .20.
+- Correction status: PASS. Network readiness: PASS for scoped Metasploitable system/service discovery. Historical `.100` record preserved; no manual lease XML edit, deletion or DHCP server restart.
+- Full new receipt: `CAPSTONE138_DHCP_AND_BIDIRECTIONAL_NETWORK_FINAL_VERIFICATION_20261108.txt`.

@@ -1,0 +1,11 @@
+﻿CAPSTONE PROJECT 138 — Screenshot Classification and Readability Receipt
+Date: 9 November 2026 (Africa/Lagos)
+Image files inventoried: 302
+Category counts: INTEGRITY_AND_TRANSFER=2; LAB_TOPOLOGY=3; PREFLIGHT_AND_NETWORK_CONFIGURATION=186; SYSTEM_DISCOVERY=24; VULNERABILITY_ASSESSMENT=87
+Unreadable/corrupt image files: 0
+Unclassified/review-required image files: 0
+Method: recursively enumerated PNG/JPG/JPEG/BMP/GIF/WEBP files; classified by canonical project evidence path; verified image decodability and dimensions with System.Drawing; calculated SHA-256 for each image.
+Important limitation: image decodability and folder/filename classification do not establish the semantic correctness of every screenshot. Screenshots remain in the canonical evidence repository and are referenced from their workstream indexes.
+Discovery screenshots are under 09_Evidence\02_System_Discovery; vulnerability validation screenshots are under 09_Evidence\03_Vulnerability_Assessment; risk assessment has no screenshot packet because the risk work is documented by scoring/register artefacts, not live target screenshots.
+Lab readiness/network screenshots are under 09_Evidence\00_Preflight and 01_Network_Configuration; integrity/transfer screenshots are under 09_Evidence\06_Integrity_and_Transfer; three lab topology screenshots remain under 02_Lab_Environment\02_Network_Topology.
+Per-image paths, sizes, dimensions, readability and SHA-256 values are recorded in SCREENSHOT_CLASSIFICATION_AND_VALIDATION_20261109.csv.

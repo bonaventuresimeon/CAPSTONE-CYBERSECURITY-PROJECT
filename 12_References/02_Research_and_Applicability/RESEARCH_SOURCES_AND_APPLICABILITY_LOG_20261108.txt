@@ -1,0 +1,65 @@
+CAPSTONE PROJECT 138 — RESEARCH SOURCE AND APPLICABILITY LOG
+Date: 8 November 2026 (Africa/Lagos)
+Purpose: Record authoritative public sources used to prepare the vulnerability, risk, controls, GRC and cloud workstream drafts.
+Nature of evidence: Public-source desk research and project-lab evidence synthesis. This file is not a live control test, legal opinion, cloud tenant review or production assessment.
+
+1. VULNERABILITY / CVE RESEARCH
+- Samba upstream CVE-2007-2447 advisory: https://www.samba.org/samba/security/CVE-2007-2447.html
+  Use: upstream affected version range and username-map-script prerequisite. Target-specific Ubuntu package patch provenance remains unresolved; the target is not called exploit-confirmed.
+- Ubuntu Samba USN-460-1: https://ubuntu.com/security/notices/USN-460-1
+  Use: vendor patch/advisory context for Samba; do not rely on upstream version alone.
+- Ubuntu CVE-2007-2447 tracker: https://ubuntu.com/security/CVE-2007-2447
+  Use: release-specific affected/fixed context; current maintained-release status does not settle the historical unmaintained Hardy binary.
+- Ubuntu vsftpd CVE-2011-2523: https://ubuntu.com/security/CVE-2011-2523
+  NVD CVE-2011-2523: https://nvd.nist.gov/vuln/detail/CVE-2011-2523
+  Use: the backdoor was tied to a special historical download; a 2.3.4 banner does not prove provenance. Ubuntu 8.04 official package is listed not affected.
+- NFS exports(5): https://man7.org/linux/man-pages/man5/exports.5.html
+  Red Hat NFS security guidance: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/storage_administration_guide/s1-nfs-security
+  Use: root_squash/no_root_squash and export access-control context.
+- Apache HTTP Server project: https://httpd.apache.org/
+  PHP 5.2.16 release: https://www.php.net/releases/5_2_16.php
+  Use: lifecycle context only; Ubuntu security backports and issue-specific prerequisites are separately reviewed in the retained Apache/PHP receipts.
+
+2. RISK FRAMEWORK SOURCES
+- NIST SP 800-30 Rev. 1: https://csrc.nist.gov/pubs/sp/800/30/r1/final
+  Use: risk assessment method context; the project's likelihood x impact scale is a transparent qualitative rubric, not an official NIST formula.
+- NIST CSF 2.0: https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20
+  Use: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER structure for governance and control mapping.
+- CIS Critical Security Controls v8.1: https://www.cisecurity.org/controls/v8-1
+  Use: prioritised safeguard reference for asset, configuration, access, vulnerability, log, recovery and service-provider management.
+
+3. APPLICATION SECURITY / DIGITAL IDENTITY
+- OWASP ASVS: https://asvs.owasp.org/
+  Use: application security verification reference. ASVS version selected in the workstream draft is 5.0.0.
+- NIST SP 800-63B: https://pages.nist.gov/800-63-4/sp800-63b.html
+  Use: digital identity and authenticator/MFA guidance; phishing-resistant methods are preferred for privileged access where supported.
+
+4. CLOUD SHARED RESPONSIBILITY / IAM
+- AWS shared responsibility model: https://aws.amazon.com/compliance/shared-responsibility-model/
+- Microsoft Azure shared responsibility: https://learn.microsoft.com/en-ca/azure/security/fundamentals/shared-responsibility
+- Google Cloud shared responsibility: https://docs.cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate
+  Use: IaaS/PaaS/SaaS responsibility differences; exact responsibility must be checked per provider and service.
+- Google Cloud IAM secure-use guidance: https://docs.cloud.google.com/iam/docs/using-iam-securely
+- Google Cloud Zero Trust guidance: https://docs.cloud.google.com/architecture/framework/security/implement-zero-trust
+  Use: narrow permissions, least privilege, explicit validation, privileged MFA, JIT access and logging principles.
+
+5. LEGAL / COMPLIANCE APPLICABILITY
+- Nigeria Data Protection Act 2023: https://ndpc.gov.ng/wp-content/uploads/2024/03/Nigeria_Data_Protection_Act_2023.pdf
+  Use: Nigerian personal-data protection baseline. Applicability and specific obligations depend on HanTech's actual processing roles, purposes and facts; legal review required.
+- NDPC Annual Report 2025: https://ndpc.gov.ng/wp-content/uploads/2026/02/Print_NDPC-Annual-Report-2025-1.pdf
+  Use: regulator-reported GAID 2025 issuance and commencement information; verify current legal instrument and organisational applicability with counsel/DPO.
+- GDPR Article 3: https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1496048922207&uri=CELEX%3A32016R0679
+  Use: territorial scope (EU establishment; or non-EU offering goods/services to people in the EU or monitoring behaviour there).
+- HHS HIPAA covered entities: https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html
+  HHS HIPAA Security Rule: https://www.hhs.gov/hipaa/for-professionals/security/laws-regulations/index.html
+  Use: conditional applicability to covered entities/business associates handling ePHI, not all organisations.
+- PCI SSC document library: https://www.pcisecuritystandards.org/document_library/
+  PCI DSS v4.0.1 publication note: https://blog.pcisecuritystandards.org/just-published-pci-dss-v4-0-1
+  Use: payment-card data and cardholder data environment applicability only.
+
+6. USE LIMITS / VALIDATION
+- Sources were used to frame research and draft control recommendations. No certification, legal opinion, penetration test or guarantee of compliance is made.
+- Public vendor advisory pages can change; final report should retain access date and confirm source publication/version before submission.
+- A legal or contractual standard applies only when the relevant organisational role, location, data type or contract is established.
+- No cloud provider account, project, subscription, tenant, region or workload was supplied. Cloud analysis remains desk-based.
+- No target or cloud tenant configuration was changed or accessed in order to create this source log.

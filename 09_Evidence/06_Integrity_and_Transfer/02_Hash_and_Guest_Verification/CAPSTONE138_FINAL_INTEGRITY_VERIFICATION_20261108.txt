@@ -1,0 +1,13 @@
+﻿CAPSTONE PROJECT 138 — FINAL INTEGRITY VERIFICATION
+Timestamp: 2026-11-08T13:32:22.5679209+01:00
+Evidence copy records: 57
+Evidence copies hash-matched: 57
+Evidence copy failures: 0
+Project manifest records: 470
+Missing manifest paths: 0
+SHA-256 mismatches: 0
+Duplicate relative paths: 0
+Duplicate content-hash groups: 52 (intentional identical evidence copies)
+Manifest excludes itself, its .sha256 sidecar and generated .dist output.
+Final independent rehash completed after all evidence and governance updates.
+Decision: PASS

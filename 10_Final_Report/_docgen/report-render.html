@@ -1,0 +1,651 @@
+<!doctype html><html><head><meta charset="utf-8"><title>HanTech Capstone Project 138 — Final Report</title><style>@page{size:A4;margin:19mm 18mm 20mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#1f2937;font-size:10pt;line-height:1.48}h1{font-size:23pt;color:#12304a;border-bottom:2px solid #16a6a1;padding-bottom:8px}h2{font-size:15pt;color:#12304a;margin:24px 0 9px;page-break-after:avoid}h3{font-size:11.5pt;color:#1c5367;margin:18px 0 7px;page-break-after:avoid}p{margin:5px 0 9px}ul,ol{margin:5px 0 11px;padding-left:22px}li{margin:3px 0}table{width:100%;border-collapse:collapse;margin:10px 0 15px;font-size:8.6pt;page-break-inside:avoid}thead{display:table-header-group}th{background:#17365d;color:white;text-align:left}th,td{border:1px solid #b9c5d1;padding:6px 7px;vertical-align:top;overflow-wrap:anywhere}tr:nth-child(even) td{background:#f3f6fa}code{font-family:Consolas,monospace;font-size:8.5pt;overflow-wrap:anywhere}a{color:#145b85;text-decoration:none}hr{border:0;border-top:1px solid #cbd5e1;margin:18px 0}header,footer{font-size:8pt;color:#64748b;padding:6px 0;border-bottom:1px solid #d9e1e8;margin-bottom:16px}footer{border-top:1px solid #d9e1e8;border-bottom:0;margin-top:18px}</style></head><body><header>HANTECH | CAPSTONE PROJECT 138 — CONFIDENTIAL ASSESSMENT REPORT</header><h1>HANTECH CAPSTONE PROJECT 138</h1>
+<h2>From Vulnerability to Compliance: Securing Legacy and Cloud Systems</h2>
+<p><strong>Integrated final report — 9 November 2026</strong><br><strong>HanTech-designated capstone assessment environment:</strong> Metasploitable 2 — 192.168.138.20<br><strong>Assessment source:</strong> Kali Linux — 192.168.138.10<br><strong>Network:</strong> CAPSTONE138_ISOLATED (VirtualBox Internal Network)<br><strong>Status:</strong> Integrated final draft; limitations are explicit</p>
+<h2>Team allocation</h2>
+<p>The following names are reproduced from the project task-allocation record. They are allocation labels; this report does not fabricate signatures, independent reviews or personal attestations.</p>
+<table>
+<thead>
+<tr>
+<th>Assigned name</th>
+<th>Allocated task</th>
+<th>Workstream represented</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Jeffrey</td>
+<td>Tasks 1 &amp; 2</td>
+<td>Lab environment, scope, discovery and service inventory</td>
+</tr>
+<tr>
+<td>Bonaventure</td>
+<td>Tasks 3 &amp; 8</td>
+<td>Vulnerability research, executive summary, final report and presentation</td>
+</tr>
+<tr>
+<td>Abundance</td>
+<td>Task 4</td>
+<td>Risk assessment</td>
+</tr>
+<tr>
+<td>Adeayo</td>
+<td>Task 5</td>
+<td>Security controls and recommendations</td>
+</tr>
+<tr>
+<td>Amos Talks</td>
+<td>Task 6</td>
+<td>GRC policies</td>
+</tr>
+<tr>
+<td>No named assignee in recorded allocation</td>
+<td>Task 7</td>
+<td>Desk-based cloud baseline completed; live tenant assessment not possible without scope</td>
+</tr>
+</tbody></table>
+<p>No instructor role or instructor approval is assumed. The assignment theme refers to a second system, but the available authorised scope identifies only Metasploitable 2. No substitute target was invented or scanned.</p>
+<h2>1. Executive summary</h2>
+<p>This project examines the security implications of legacy network services and application configurations, then translates the observed weaknesses into risk, technical safeguards, governance requirements and a cloud-security baseline for the HanTech case study.</p>
+<p>The assessment was conducted in an isolated VirtualBox environment. Kali Linux (192.168.138.10) was used as the assessment source and Metasploitable 2 (192.168.138.20) as the only expressly authorised target. The guests communicated over the VirtualBox Internal Network CAPSTONE138_ISOLATED. The host was not attached to that isolated network.</p>
+<p>A full TCP connect/version-light discovery scan covered ports 1–65535 and identified 30 open and 65,505 closed TCP ports. A targeted TCP recheck independently reconfirmed seven selected additional ports. A separate UDP top-100 scan identified four confirmed open responses, three open|filtered/no-response results and 93 closed ports. The UDP scan was limited to the top 100 ports and is not a full UDP-port scan.</p>
+<p>Five priority findings were selected because their configuration or exposure conditions were directly supported by saved evidence:</p>
+<ol>
+<li>NFS exports the root filesystem to wildcard clients with read/write access and root squashing disabled.</li>
+<li>SMB permits anonymous share enumeration and directory metadata listing.</li>
+<li>A Mutillidae database-configuration resource is reachable over HTTP and returned HTTP 200 with a text/plain content type.</li>
+<li>The public HTTP landing page displays a default lab credential pair.</li>
+<li>Telnet and Berkeley r-services listeners are bound to all IPv4 interfaces.</li>
+</ol>
+<p>The provisional contextual risk scores are 20 (Critical), 8 (Moderate), 16 (High), 16 (High) and 12 (High). These are qualitative likelihood-times-impact estimates for the observed lab conditions. They are not CVSS scores or a risk acceptance for HanTech production.</p>
+<p>The assessment did not exploit the target, submit credentials, mount NFS, read SMB file contents, retrieve the Mutillidae configuration response body, query a database or change target configuration. Accordingly, the report distinguishes observed exposure from potential impact. Samba CVE-2007-2447 remains a separate high-confidence applicability candidate, but exact installed-binary patch provenance is unresolved; it is not represented as a confirmed exploited vulnerability. Other service/version leads are not promoted to CVEs without build, patch and prerequisite evidence.</p>
+<p>The report includes technical remediation recommendations, a preventive/detective/corrective control matrix, five draft GRC policies, conditional legal/framework applicability, and a cloud shared-responsibility baseline. No cloud provider, tenant, account, subscription, region or authorised cloud identity was supplied. Task 7 is therefore completed as a desk-based baseline only; no live cloud assessment is claimed.</p>
+<p><strong>Conclusion:</strong> The designated HanTech capstone assessment environment contains serious legacy configuration and exposure weaknesses. These findings are attributed to the isolated Metasploitable 2 virtual environment assessed for this project. They do not independently establish the condition of a separate HanTech production network; production applicability requires separate asset, configuration, data-flow and compensating-control evidence.</p>
+<h2>2. Objectives</h2>
+<ul>
+<li>Establish and document an isolated lab environment.</li>
+<li>Identify the authorised target&#39;s reachable TCP and UDP services within the defined scan scope.</li>
+<li>Review selected services and configurations using non-invasive methods.</li>
+<li>Select five priority, evidence-backed security findings.</li>
+<li>Assess risk using a consistent qualitative model.</li>
+<li>Recommend preventive, detective and corrective controls.</li>
+<li>Develop a GRC policy register with conditional legal and standards mapping.</li>
+<li>Produce a cloud-security baseline and identify evidence needed for a future live assessment.</li>
+<li>Preserve native outputs, screenshots, execution receipts and integrity hashes.</li>
+</ul>
+<h2>3. Scope, authorisation and rules of engagement</h2>
+<h3>3.1 Authorised technical scope</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Assessment source</td>
+<td>Kali Linux, 192.168.138.10/24</td>
+</tr>
+<tr>
+<td>Target</td>
+<td>Metasploitable 2, 192.168.138.20/24</td>
+</tr>
+<tr>
+<td>Virtual network</td>
+<td>VirtualBox Internal Network, CAPSTONE138_ISOLATED</td>
+</tr>
+<tr>
+<td>Target MAC</td>
+<td>08:00:27:f8:7d:a3</td>
+</tr>
+<tr>
+<td>Kali MAC</td>
+<td>08:00:27:32:09:84</td>
+</tr>
+<tr>
+<td>Host access</td>
+<td>Local VM console management; host not attached to lab network</td>
+</tr>
+</tbody></table>
+<p>The lab uses an isolated internal network, not a VirtualBox host-only network. The second system mentioned in the broad assignment theme was not identified as an authorised target in the available scope record. No scan was run against Dev Guru or another unapproved system.</p>
+<h3>3.2 Permitted and excluded activity</h3>
+<p>Permitted activity included host/service discovery, read-only configuration review, benign HTTP HEAD requests, non-invasive service enumeration, public vendor-advisory research and evidence capture.</p>
+<p>Not performed: exploitation, brute force, password spraying, credential submission, NFS mounting, remote file writes/deletes, upload operations, state-changing HTTP methods, database access, destructive tests, external-system testing or cloud-tenant probing.</p>
+<h3>3.3 Reporting boundary</h3>
+<p>Metasploitable 2 is the designated HanTech assessment environment for this capstone, implemented as an isolated, deliberately vulnerable virtual appliance. Findings establish conditions observed in that assessment environment. They do not independently establish the state of any separate HanTech production system. Production applicability requires separate written authorisation and actual asset/configuration evidence.</p>
+<h2>4. Methodology and evidence handling</h2>
+<p>The workflow was: verify topology and reachability; conduct full TCP discovery; perform targeted TCP corroboration; conduct UDP top-100 discovery; review selected local configurations and limited remote read-only responses; map observations to findings; reconcile findings and risks; develop control/GRC/cloud recommendations; refresh the evidence manifest.</p>
+<p>Evidence records include timestamps, source/target details, command context, outputs, screenshots, receipts and SHA-256 hashes. The manifest demonstrates file integrity relative to recorded hashes; it does not independently prove every technical interpretation or remediation.</p>
+<h2>5. Lab environment</h2>
+<p>Kali and Metasploitable 2 were configured on VirtualBox Internal Network CAPSTONE138_ISOLATED. Guest addresses were 192.168.138.10/24 and 192.168.138.20/24. The host was not attached to the isolated network. Network readiness and bidirectional guest reachability are recorded in the lab evidence packet. No routing or forwarding was enabled to expose the target.</p>
+<h2>6. System and service discovery</h2>
+<h3>6.1 Full TCP scan</h3>
+<p>Nmap 7.98 completed a TCP connect/version-light scan of ports 1–65535 on 8 November 2026.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th align="right">Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TCP ports scanned</td>
+<td align="right">65,535</td>
+</tr>
+<tr>
+<td>Open</td>
+<td align="right">30</td>
+</tr>
+<tr>
+<td>Closed</td>
+<td align="right">65,505</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td align="right">66.72 seconds</td>
+</tr>
+<tr>
+<td>Native outputs</td>
+<td align="right">.nmap, .gnmap and .xml preserved</td>
+</tr>
+</tbody></table>
+<h3>6.2 Targeted TCP corroboration</h3>
+<p>On 9 November 2026, a selected-port recheck reconfirmed seven additional ports absent from the earlier top-1,000 baseline.</p>
+<table>
+<thead>
+<tr>
+<th align="right">Port</th>
+<th>Observed identification</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">3632/TCP</td>
+<td>distccd v1 / GNU 4.2.4</td>
+<td>Service identified; no protocol interaction or exploit test</td>
+</tr>
+<tr>
+<td align="right">6697/TCP</td>
+<td>UnrealIRCd</td>
+<td>Listener confirmed; exact version and binary provenance unresolved</td>
+</tr>
+<tr>
+<td align="right">8787/TCP</td>
+<td>Ruby DRb RMI / Ruby 1.8</td>
+<td>Service identified; no RMI interaction</td>
+</tr>
+<tr>
+<td align="right">33543/TCP</td>
+<td>Unknown</td>
+<td>Open; service not identified</td>
+</tr>
+<tr>
+<td align="right">47335/TCP</td>
+<td>Unknown</td>
+<td>Open; service not identified</td>
+</tr>
+<tr>
+<td align="right">47852/TCP</td>
+<td>Unknown</td>
+<td>Open; service not identified</td>
+</tr>
+<tr>
+<td align="right">60679/TCP</td>
+<td>Unknown</td>
+<td>Open; service not identified</td>
+</tr>
+</tbody></table>
+<p>All seven selected ports were confirmed open in the targeted recheck. Discovery does not itself prove vulnerability.</p>
+<h3>6.3 UDP top-100 scan</h3>
+<table>
+<thead>
+<tr>
+<th align="right">Port</th>
+<th>State</th>
+<th>Identification</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">53/UDP</td>
+<td>Open</td>
+<td>ISC BIND 9.4.2</td>
+<td>Confirmed response</td>
+</tr>
+<tr>
+<td align="right">111/UDP</td>
+<td>Open</td>
+<td>rpcbind</td>
+<td>Confirmed response</td>
+</tr>
+<tr>
+<td align="right">137/UDP</td>
+<td>Open</td>
+<td>NetBIOS Name Service</td>
+<td>Confirmed response; no OS inference</td>
+</tr>
+<tr>
+<td align="right">2049/UDP</td>
+<td>Open</td>
+<td>Nmap label rpcbind</td>
+<td>Confirmed response; NFS application/version not established by this probe</td>
+</tr>
+<tr>
+<td align="right">68/UDP</td>
+<td>open</td>
+<td>filtered</td>
+<td>DHCP client label</td>
+</tr>
+<tr>
+<td align="right">69/UDP</td>
+<td>open</td>
+<td>filtered</td>
+<td>TFTP label</td>
+</tr>
+<tr>
+<td align="right">138/UDP</td>
+<td>open</td>
+<td>filtered</td>
+<td>NetBIOS Datagram label</td>
+</tr>
+</tbody></table>
+<p>The scan reported 93 closed ports and a retransmission-cap warning. The three open|filtered results are not counted as confirmed open. This was not a full UDP-port scan.</p>
+<h3>6.4 Service inventory</h3>
+<p>The machine-readable service inventory contains 30 TCP records and seven UDP observations, with zero duplicate protocol/port keys. It is retained at 03_System_Discovery\SERVICE_INVENTORY.csv.</p>
+<h2>7. Vulnerability assessment — five priority findings</h2>
+<h3>F-01 — Wildcard writable NFS root export with root squashing disabled</h3>
+<p><strong>Severity:</strong> Critical (provisional contextual risk)<br><strong>Classification:</strong> Confirmed configuration weakness<br><strong>Affected service:</strong> NFS/RPC, TCP 111 and 2049; related UDP responses on 111 and 2049.</p>
+<p><strong>Evidence:</strong> Read-only review recorded the export / *(rw,sync,no_root_squash,no_subtree_check). showmount, rpcinfo and local exports configuration were used as supporting evidence.</p>
+<p><strong>Security significance:</strong> A root filesystem export to wildcard clients with read/write access and root squashing disabled can expose the host filesystem to a client accepted by the export rule.</p>
+<p><strong>Potential impact:</strong> Depending on reachability and client acceptance, an untrusted client could potentially obtain excessive filesystem access or alter data. This impact was not demonstrated.</p>
+<p><strong>Limitations:</strong> No remote NFS mount, file read/write, privilege change or filesystem modification was attempted.</p>
+<p><strong>Recommendation:</strong> Remove the root filesystem export. Export only necessary data paths, restrict access to explicit trusted clients, use read-only exports where possible, enforce root squashing and restrict RPC/NFS at the network boundary. Validate through approved configuration review and a safe post-change export check.</p>
+<h3>F-02 — Anonymous SMB share enumeration and directory metadata disclosure</h3>
+<p><strong>Severity:</strong> Moderate (provisional contextual risk)<br><strong>Classification:</strong> Confirmed anonymous-access exposure<br><strong>Affected service:</strong> SMB over TCP 139 and 445.</p>
+<p><strong>Evidence:</strong> Anonymous SMB share enumeration succeeded and an anonymous listing of the tmp directory returned metadata.</p>
+<p><strong>Security significance:</strong> Anonymous enumeration reveals share names and directory metadata to unauthenticated users and may disclose internal naming or operational information.</p>
+<p><strong>Potential impact:</strong> Further access depends on share ACLs and file permissions. File-content access and write access were not tested.</p>
+<p><strong>Recommendation:</strong> Disable guest/null-session enumeration unless documented as required. Apply per-share least-privilege ACLs, remove unused shares, segment SMB and monitor anonymous access attempts. Verify denial using an authorised non-destructive retest.</p>
+<h3>F-03 — Mutillidae configuration resource reachable over HTTP</h3>
+<p><strong>Severity:</strong> High (provisional contextual risk)<br><strong>Classification:</strong> Confirmed remote resource exposure<br><strong>Affected service:</strong> HTTP over TCP 80.</p>
+<p><strong>Evidence:</strong> An independent Kali HTTP HEAD request returned HTTP 200, content type text/plain and response length 177 bytes for the configuration resource. The genuine screenshot and review receipt are retained.</p>
+<p><strong>Security significance:</strong> A configuration resource within a web-accessible path may expose database settings or other sensitive configuration information. The remote response confirms resource reachability, not secret disclosure.</p>
+<p><strong>Potential impact:</strong> If a GET response contains usable secrets, the exposure could support unauthorised application or database access. The body and secret values were deliberately not retrieved.</p>
+<p><strong>Limitations:</strong> No GET body, secret value, credential validity, database privilege or database access was obtained or tested.</p>
+<p><strong>Recommendation:</strong> Remove configuration resources from the document root, deny direct web access to sensitive paths/extensions, store secrets in a managed secret store or protected configuration location, apply restrictive filesystem permissions, review access logs and rotate credentials if a secret is later confirmed exposed through an authorised process.</p>
+<h3>F-04 — Default lab credential pair displayed on public HTTP landing page</h3>
+<p><strong>Severity:</strong> High (provisional contextual risk)<br><strong>Classification:</strong> Confirmed public information disclosure<br><strong>Affected service:</strong> HTTP over TCP 80.</p>
+<p><strong>Evidence:</strong> The unauthenticated HTTP landing page visibly displayed a default lab credential pair. The report intentionally does not reproduce the credential string.</p>
+<p><strong>Security significance:</strong> Publishing default credentials discloses an authentication path to any party able to reach the page. Risk is heightened if the account remains enabled or is reused.</p>
+<p><strong>Potential impact:</strong> Account access is possible only if the credentials remain valid for an accessible service. Validity, privileges and cross-service reuse were not tested.</p>
+<p><strong>Recommendation:</strong> Remove credential material from public content, disable or rotate default accounts through approved change control, use unique managed secrets, enforce MFA for privileged access where supported and scan public web content/repositories for credential disclosures.</p>
+<h3>F-05 — Telnet and Berkeley r-services listening on all IPv4 interfaces</h3>
+<p><strong>Severity:</strong> High (provisional contextual risk)<br><strong>Classification:</strong> Confirmed insecure remote-service exposure<br><strong>Affected services:</strong> TCP 23, 512, 513 and 514.</p>
+<p><strong>Evidence:</strong> Telnet and Berkeley r-services listeners were identified on 0.0.0.0, and corresponding inetd service definitions were reviewed.</p>
+<p><strong>Security significance:</strong> Telnet and legacy r-services provide outdated remote administration mechanisms and may expose credentials or trust-based access paths.</p>
+<p><strong>Potential impact:</strong> Authentication, trust relationships and command-access consequences remain untested.</p>
+<p><strong>Limitations:</strong> No login, trust evaluation, network interception or remote command execution was attempted. Root trust-file contents were not retrieved.</p>
+<p><strong>Recommendation:</strong> Disable Telnet, rexec, rlogin and rsh where not explicitly required. Replace necessary administration with supported SSH, strong authentication, MFA for privileged access, source restrictions and centralised session logging. Confirm closure through an approved listener inventory and configuration evidence.</p>
+<h2>8. Additional vulnerability and service leads</h2>
+<p>These items are not counted as additional confirmed CVEs:</p>
+<ul>
+<li><strong>Samba CVE-2007-2447:</strong> Samba 3.0.20 and an active username-map script setting indicate that upstream prerequisites may be present. Exact installed-binary patch provenance is unresolved. No trigger or exploit was sent. Report only as a high-confidence applicability candidate, not confirmed exploitation.</li>
+<li><strong>Unsupported Apache/PHP:</strong> Legacy package versions are confirmed, but Ubuntu package backports and exact advisory prerequisites must be considered. No specific Apache or PHP CVE is asserted from version strings alone.</li>
+<li><strong>UnrealIRCd:</strong> Listener/process evidence exists, but exact version and binary provenance for CVE-2010-2075 are unresolved. No trigger was sent.</li>
+<li><strong>vsftpd:</strong> Banner alone is insufficient to establish the specially backdoored build associated with CVE-2011-2523; Ubuntu package evidence was marked not affected.</li>
+<li><strong>ProFTPD:</strong> Potential CVE conditions depend on module/configuration prerequisites not established.</li>
+<li><strong>Tomcat/AJP:</strong> Legacy connector exposure is confirmed; the reviewed Ghostcat claim was not applicable on available evidence.</li>
+<li><strong>WebDAV:</strong> DAV configuration and a writable backing-directory observation are retained as a configuration-risk lead. No state-changing DAV request was made.</li>
+<li><strong>distccd, Ruby DRb and unknown high TCP ports:</strong> Service-discovery leads only. No exploitability claim is made from port state or banner alone.</li>
+</ul>
+<h2>9. Risk assessment and prioritisation</h2>
+<p>Likelihood and impact are scored from 1 to 5. Risk score equals likelihood multiplied by impact.</p>
+<table>
+<thead>
+<tr>
+<th align="right">Score band</th>
+<th>Rating</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1–4</td>
+<td>Low</td>
+</tr>
+<tr>
+<td align="right">5–9</td>
+<td>Moderate</td>
+</tr>
+<tr>
+<td align="right">10–16</td>
+<td>High</td>
+</tr>
+<tr>
+<td align="right">17–25</td>
+<td>Critical</td>
+</tr>
+</tbody></table>
+<p>This is a qualitative model, not CVSS. Ratings are contextual to the observed lab configuration and provisional for HanTech because production asset criticality, data classification, exposure, business dependencies and compensating controls have not been supplied.</p>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th align="right">Likelihood</th>
+<th align="right">Impact</th>
+<th align="right">Score</th>
+<th>Rating</th>
+<th>Treatment priority</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F-01 NFS wildcard root export</td>
+<td align="right">4</td>
+<td align="right">5</td>
+<td align="right">20</td>
+<td>Critical</td>
+<td>Immediate</td>
+</tr>
+<tr>
+<td>F-02 Anonymous SMB enumeration</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">8</td>
+<td>Moderate</td>
+<td>Planned</td>
+</tr>
+<tr>
+<td>F-03 HTTP configuration resource</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">16</td>
+<td>High</td>
+<td>Urgent</td>
+</tr>
+<tr>
+<td>F-04 Public credential disclosure</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">16</td>
+<td>High</td>
+<td>Urgent</td>
+</tr>
+<tr>
+<td>F-05 Telnet/r-services</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">12</td>
+<td>High</td>
+<td>Urgent</td>
+</tr>
+</tbody></table>
+<p>Risk order: F-01, F-03/F-04, F-05, then F-02. A score does not mean potential impact was observed. Actual HanTech residual risk must be recalculated using business context and verified controls. No risk acceptance is claimed.</p>
+<h2>10. Security controls and recommendations</h2>
+<p>Controls are proposed designs, not proof of implementation.</p>
+<table>
+<thead>
+<tr>
+<th>Finding / area</th>
+<th>Preventive</th>
+<th>Detective</th>
+<th>Corrective / recovery</th>
+<th>Closure evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F-01 NFS</td>
+<td>Remove root export; explicit client allowlist; root_squash; read-only data exports; firewall RPC/NFS</td>
+<td>Export review; NFS logs; alert on wildcard exports</td>
+<td>Revoke unsafe export; restore trusted files if required</td>
+<td>Approved exports config; ACL/firewall evidence; post-change export output</td>
+</tr>
+<tr>
+<td>F-02 SMB</td>
+<td>Disable guest/null-session enumeration; per-share ACLs; segment SMB</td>
+<td>Guest-logon and share-enumeration monitoring</td>
+<td>Revoke anonymous permissions; restore ACLs</td>
+<td>Sanitised config/ACLs; authorised denial retest; logs</td>
+</tr>
+<tr>
+<td>F-03 Web configuration</td>
+<td>Move config outside web root; deny sensitive paths; secret manager; filesystem ACLs</td>
+<td>Web access log monitoring; secret scanning</td>
+<td>Remove exposure; rotate confirmed exposed secrets; review logs</td>
+<td>Deny response; document-root/permission evidence; scan report</td>
+</tr>
+<tr>
+<td>F-04 Credentials</td>
+<td>Remove public credential strings; disable defaults; unique secrets; MFA</td>
+<td>Content scanning; default-account review; authentication alerts</td>
+<td>Rotate/revoke secrets; investigate suspicious access</td>
+<td>Updated page; account policy and rotation evidence; alert sample</td>
+</tr>
+<tr>
+<td>F-05 Remote services</td>
+<td>Disable Telnet/r-services; hardened SSH; MFA; management allowlist</td>
+<td>Listener inventory; drift detection; authentication logs</td>
+<td>Terminate obsolete listeners; revoke trust files/accounts</td>
+<td>Listener scan; service config; SSH/MFA evidence</td>
+</tr>
+<tr>
+<td>Legacy stack</td>
+<td>Migrate to supported OS/runtime; remove demo apps/modules</td>
+<td>Asset inventory; patch-age and vulnerability monitoring</td>
+<td>Patch/migrate; isolate until replacement</td>
+<td>Supported version inventory; change record; retest</td>
+</tr>
+<tr>
+<td>WebDAV/AJP leads</td>
+<td>Disable if unused; restrict methods/connectors</td>
+<td>Configuration and listener reviews</td>
+<td>Close unnecessary services and restore hardened settings</td>
+<td>Effective config and authorised post-change checks</td>
+</tr>
+</tbody></table>
+<p>Cross-cutting programme: asset ownership; secure configuration baselines and change control; risk-based vulnerability/patch management; least privilege and MFA; data classification and encryption; central logging and incident response; protected backups and restore tests; supplier/cloud governance; security awareness; evidence-backed remediation closure.</p>
+<p>A control is closed only after an approved change, configuration evidence, safe validation, monitoring evidence where relevant, a timestamped record and accountable residual-risk disposition.</p>
+<h2>11. GRC policy framework</h2>
+<p>The GRC workstream contains five policy drafts for the fictional HanTech organisation. They are proposed policy requirements, not adopted corporate policies.</p>
+<table>
+<thead>
+<tr>
+<th>Policy ID</th>
+<th>Policy</th>
+<th>Proposed accountable role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>POL-01</td>
+<td>Vulnerability, Patch and Secure Configuration Management</td>
+<td>Head of IT / Security Lead</td>
+<td>Asset inventory, supported software, patch SLAs, exceptions and secure baselines</td>
+</tr>
+<tr>
+<td>POL-02</td>
+<td>Identity, Authentication and Credential Management</td>
+<td>Head of IT / IAM Owner</td>
+<td>Unique identities, MFA, least privilege, secret lifecycle and privileged access</td>
+</tr>
+<tr>
+<td>POL-03</td>
+<td>Network Security and Remote Access</td>
+<td>Network Security Lead</td>
+<td>Segmentation, firewall rules, approved remote access and service exposure</td>
+</tr>
+<tr>
+<td>POL-04</td>
+<td>Data Classification, Secure Application Configuration and Secrets</td>
+<td>Data Owner / Application Owner</td>
+<td>Classification, secure configuration, web-root protection, encryption and secrets</td>
+</tr>
+<tr>
+<td>POL-05</td>
+<td>Security Logging, Incident Response and Recovery</td>
+<td>Security Lead / Incident Response Owner</td>
+<td>Logging, detection, evidence preservation, response, backups and recovery</td>
+</tr>
+</tbody></table>
+<p>Governance requirements: name policy owners and approval authority; review at least annually and after material incidents/regulatory changes; document exceptions with justification, compensating controls, expiry and approval; communicate policies to staff/suppliers; retain implementation, training, exception and review evidence.</p>
+<h3>Conditional legal and standards applicability</h3>
+<ul>
+<li><strong>Nigeria Data Protection Act 2023:</strong> assess where HanTech processes personal data as a controller or processor within the Act&#39;s scope. Confirm roles, data categories, purposes, contracts, transfers and applicable NDPC instruments.</li>
+<li><strong>GDPR:</strong> applies only where territorial-scope conditions are met, such as EU establishment or offering services to/monitoring people in the EU.</li>
+<li><strong>HIPAA:</strong> applies only if HanTech is a covered entity or business associate handling electronic protected health information.</li>
+<li><strong>PCI DSS v4.0.1:</strong> applies where payment-card data is stored, processed or transmitted, or systems can affect the cardholder data environment.</li>
+<li><strong>NIST CSF 2.0 and CIS Controls v8.1:</strong> risk-management and safeguard-alignment references; not laws merely because they are cited.</li>
+<li><strong>NIST SP 800-53 Rev. 5 and ISO/IEC 27001:2022:</strong> use where selected by management, contract or assignment requirements; do not claim certification or formal conformity without assessed scope and evidence.</li>
+</ul>
+<p>The project does not assert that HanTech processes health/payment-card data, has an EU establishment or operates a particular cloud provider.</p>
+<h2>12. Cloud security assessment</h2>
+<h3>12.1 Status</h3>
+<p>Task 7 is completed as a desk-based cloud-security baseline and evidence plan. No cloud provider, tenant, subscription/account, project, region, architecture, workload or authorised read-only identity was supplied. No live cloud configuration assessment or penetration test was performed.</p>
+<h3>12.2 Shared responsibility</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Provider generally manages</th>
+<th>Customer generally manages</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IaaS</td>
+<td>Facilities, hardware, network fabric and hypervisor</td>
+<td>Guest OS, patching, workloads, virtual network rules, IAM, data, encryption configuration and backups</td>
+</tr>
+<tr>
+<td>PaaS</td>
+<td>Infrastructure, host OS, platform/runtime and managed-service operation</td>
+<td>Application code, data, identities, permissions, secrets, service configuration and logging</td>
+</tr>
+<tr>
+<td>SaaS</td>
+<td>Infrastructure and application operation</td>
+<td>Data governance, user identities, MFA, roles, sharing, endpoint security, integrations and retention</td>
+</tr>
+</tbody></table>
+<p>Exact responsibility boundaries must be checked against the selected provider and service.</p>
+<h3>12.3 Cloud control baseline</h3>
+<ul>
+<li>Central identity, MFA and least-privilege roles; time-bound privileged elevation.</li>
+<li>Private network paths for sensitive workloads; deny inbound by default and restrict management access.</li>
+<li>Data inventory/classification, encryption at rest/in transit, managed keys and secret stores.</li>
+<li>Protected audit logs for identity, control-plane, network, storage, database and application activity.</li>
+<li>Encrypted and access-separated backups with tested restoration.</li>
+<li>Secure CI/CD, dependency and secret scanning, signed artefacts and software-bill-of-materials provenance.</li>
+<li>Supplier assurance, data residency, processor terms and exit planning.</li>
+<li>Incident playbooks covering account compromise, key revocation, evidence preservation, isolation and recovery.</li>
+</ul>
+<h3>12.4 Evidence required before live review</h3>
+<p>Obtain written authorisation and identify provider, tenant/account/project, region, assets, service models, authorised role and rules of engagement. Collect redacted IAM/MFA exports, network rules, encryption/key settings, audit logs, backup evidence, vulnerability reports, data flows and provider responsibility documents. Start with read-only inspection. Do not probe a tenant without explicit scope.</p>
+<p><strong>Cloud conclusion:</strong> No cloud misconfiguration can be confirmed from the supplied information. The desk-based baseline is complete; live assessment remains not started because no authorised environment was supplied.</p>
+<h2>13. Prioritised implementation roadmap</h2>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Action</th>
+<th>Proposed accountable role</th>
+<th>Completion evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Immediate</td>
+<td>Remove wildcard writable NFS root export and restrict NFS</td>
+<td>Infrastructure/Linux owner</td>
+<td>Approved config, export review and safe retest</td>
+</tr>
+<tr>
+<td>Immediate</td>
+<td>Remove web-accessible configuration resource and review exposure</td>
+<td>Application/Web owner</td>
+<td>Deny response, permissions, log review and secret scan</td>
+</tr>
+<tr>
+<td>Immediate</td>
+<td>Remove public credential disclosure; rotate/disable default account through change control</td>
+<td>IAM/Application owner</td>
+<td>Updated page, account record and rotation evidence</td>
+</tr>
+<tr>
+<td>High</td>
+<td>Disable Telnet and Berkeley r-services; migrate to hardened SSH</td>
+<td>Infrastructure/Network owner</td>
+<td>Closed listener inventory and SSH configuration</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>Disable anonymous SMB enumeration and apply share ACLs</td>
+<td>File services owner</td>
+<td>Share ACLs and authorised denial retest</td>
+</tr>
+<tr>
+<td>Strategic</td>
+<td>Upgrade unsupported OS, Apache, PHP, Tomcat and other legacy services</td>
+<td>IT/Application owners</td>
+<td>Supported asset inventory, patch records and retest</td>
+</tr>
+<tr>
+<td>Strategic</td>
+<td>Implement central logging, access reviews, backup testing and policy governance</td>
+<td>Security/IT management</td>
+<td>Logs, review records, restore test and approved policies</td>
+</tr>
+<tr>
+<td>Before cloud deployment</td>
+<td>Establish provider, tenant, service ownership and shared-responsibility controls</td>
+<td>Cloud service owner</td>
+<td>Written scope, architecture, IAM and baseline evidence</td>
+</tr>
+</tbody></table>
+<p>The project task allocations are Jeffrey (Tasks 1–2), Bonaventure (Tasks 3 and 8), Abundance (Task 4), Adeayo (Task 5) and Amos Talks (Task 6). Operational HanTech remediation owners are proposed roles because no real HanTech staff directory or accountable production owners were supplied.</p>
+<h2>14. Limitations and residual uncertainties</h2>
+<ol>
+<li>Only Metasploitable 2 at 192.168.138.20 was assessed as an authorised target.</li>
+<li>The second system mentioned in the project theme was not identified in the available scope record; no substitute target was invented.</li>
+<li>UDP coverage was top-100 only, not a full UDP-port scan.</li>
+<li>Three UDP ports were open|filtered/no-response and are not confirmed open.</li>
+<li>Four high TCP ports were open but not identified.</li>
+<li>No exploitation, brute force, credential submission, NFS mount, SMB file-content access, application login, database query or target mutation occurred.</li>
+<li>Samba CVE-2007-2447 remains a candidate pending installed-binary patch provenance.</li>
+<li>Other legacy service/package observations do not establish CVE applicability by banner alone.</li>
+<li>Risk ratings are lab-context estimates; HanTech business context and residual-risk acceptance are unknown.</li>
+<li>No live HanTech production or cloud environment was supplied.</li>
+<li>GRC policies and security controls are proposed designs; adoption and implementation evidence do not exist in the supplied project material.</li>
+<li>Assigned names are reproduced from the task-allocation record; no signatures or independent personal approvals are fabricated.</li>
+</ol>
+<h2>15. Conclusion</h2>
+<p>The project has completed authorised lab discovery, evidence-backed technical review, five-finding selection, risk prioritisation, control design, GRC policy drafting and the desk-based cloud-security baseline. The evidence shows unsafe NFS configuration, anonymous SMB enumeration, a web-accessible configuration resource, public credential disclosure and legacy remote services.</p>
+<p>The highest priority is the wildcard writable NFS root export, followed by the web configuration exposure and public credential disclosure. Legacy remote administration should be removed, and anonymous SMB access should be restricted. These recommendations must be implemented and retested in a separately authorised environment before remediation can be described as complete.</p>
+<p>The work demonstrates a traceable path from discovery to risk and governance. It does not claim that HanTech production has been tested, vulnerabilities exploited, policies adopted or controls implemented. Production risk decisions require actual HanTech asset, data, architecture and control evidence.</p>
+<h2>16. References</h2>
+<ol>
+<li>NIST, Cybersecurity Framework (CSF) 2.0: <a href="https://www.nist.gov/cyberframework">https://www.nist.gov/cyberframework</a></li>
+<li>NIST SP 800-30 Rev. 1, Guide for Conducting Risk Assessments: <a href="https://csrc.nist.gov/pubs/sp/800/30/r1/final">https://csrc.nist.gov/pubs/sp/800/30/r1/final</a></li>
+<li>NIST SP 800-53 Rev. 5, Security and Privacy Controls: <a href="https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final">https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final</a></li>
+<li>CIS Critical Security Controls v8.1: <a href="https://www.cisecurity.org/controls/v8-1">https://www.cisecurity.org/controls/v8-1</a></li>
+<li>OWASP Application Security Verification Standard: <a href="https://asvs.owasp.org/">https://asvs.owasp.org/</a></li>
+<li>Linux exports(5) manual: <a href="https://man7.org/linux/man-pages/man5/exports.5.html">https://man7.org/linux/man-pages/man5/exports.5.html</a></li>
+<li>Samba CVE-2007-2447 advisory: <a href="https://www.samba.org/samba/security/CVE-2007-2447.html">https://www.samba.org/samba/security/CVE-2007-2447.html</a></li>
+<li>Ubuntu CVE-2007-2447 status: <a href="https://ubuntu.com/security/CVE-2007-2447">https://ubuntu.com/security/CVE-2007-2447</a></li>
+<li>Nigeria Data Protection Act 2023: <a href="https://ndpc.gov.ng/wp-content/uploads/2024/03/Nigeria_Data_Protection_Act_2023.pdf">https://ndpc.gov.ng/wp-content/uploads/2024/03/Nigeria_Data_Protection_Act_2023.pdf</a></li>
+<li>GDPR Article 3 — Territorial Scope: <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a></li>
+<li>HHS, HIPAA Covered Entities: <a href="https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html">https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html</a></li>
+<li>PCI Security Standards Council, Document Library: <a href="https://www.pcisecuritystandards.org/document_library/">https://www.pcisecuritystandards.org/document_library/</a></li>
+<li>AWS Shared Responsibility Model: <a href="https://aws.amazon.com/compliance/shared-responsibility-model/">https://aws.amazon.com/compliance/shared-responsibility-model/</a></li>
+<li>Microsoft Azure Shared Responsibility: <a href="https://learn.microsoft.com/en-ca/azure/security/fundamentals/shared-responsibility">https://learn.microsoft.com/en-ca/azure/security/fundamentals/shared-responsibility</a></li>
+<li>Google Cloud Shared Responsibility: <a href="https://docs.cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate">https://docs.cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate</a></li>
+</ol>
+<h2>Appendix A — Primary evidence locations</h2>
+<ul>
+<li>Full TCP discovery and receipt: <code>09_Evidence\02_System_Discovery\01_Full_TCP_Discovery_20261108</code></li>
+<li>Targeted TCP recheck and 9 November screenshots: <code>09_Evidence\02_System_Discovery\02_Targeted_TCP_Recheck_20261109</code></li>
+<li>UDP top-100 native outputs, receipt and screenshots: <code>09_Evidence\02_System_Discovery\03_UDP_Top100_20261109</code></li>
+<li>Network configuration and target reachability: <code>09_Evidence\01_Network_Configuration</code></li>
+<li>Service configuration validation: <code>09_Evidence\03_Vulnerability_Assessment\01_Raw_Research_and_Validation\CAPSTONE138_SERVICE_CONFIGURATION_VALIDATION_20261108.txt</code></li>
+<li>Mutillidae HTTP validation: <code>09_Evidence\03_Vulnerability_Assessment\01_Raw_Research_and_Validation\CAPSTONE138_WEB_APPLICATION_CONFIGURATION_AND_SENSITIVE_FILE_REVIEW_20261108.txt</code></li>
+<li>Telnet/r-services review: <code>09_Evidence\03_Vulnerability_Assessment\01_Raw_Research_and_Validation\CAPSTONE138_TELNET_RSH_SERVICE_EXPOSURE_REVIEW_20261108.txt</code></li>
+<li>Finding reconciliation and crosswalk: <code>04_Vulnerability_Assessment\CAPSTONE138_FINDING_AND_RISK_RECONCILIATION_20261109.md</code> and <code>FINDING_EVIDENCE_RISK_CROSSWALK_20261109.csv</code></li>
+<li>Evidence distribution provenance: <code>09_Evidence\06_Integrity_and_Transfer\03_Transfer_and_Provenance</code></li>
+<li>Active SHA-256 manifest and sidecar: <code>09_Evidence\06_Integrity_and_Transfer\01_Manifests</code></li>
+</ul>
+<h2>Appendix B — Evidence integrity note</h2>
+<p>The pre-reorganisation manifest is a historical checkpoint and is superseded for the current folder structure. A new manifest is refreshed after the final folder and document updates. The active manifest and checksum sidecar are retained in <code>09_Evidence\06_Integrity_and_Transfer\01_Manifests</code>. An independent rehash must return zero missing files and zero mismatches. A hash match proves byte-level integrity relative to the manifest, not the correctness of a finding or completion of remediation.</p>
+<footer>CAPSTONE PROJECT 138 | Evidence-led assessment | 9 November 2026</footer></body></html>

@@ -1,0 +1,42 @@
+﻿CAPSTONE138 ISOLATED NETWORK VALIDATION RECEIPT
+Date: 2026-11-08 (local system time)
+
+VM NETWORK CONFIGURATION
+- Kali Linux: Internal Network CAPSTONE138_ISOLATED; MAC 08:00:27:32:09:84; DHCP fixed mapping 192.168.138.10.
+- Metasploitable: Internal Network CAPSTONE138_ISOLATED; MAC 08:00:27:f8:7d:a3; DHCP fixed mapping 192.168.138.20.
+- Both VMs reported running; cable connected.
+- Dev Guru was not changed; it remains powered off per the existing lab state.
+
+CONNECTIVITY TESTS
+- Kali -> Metasploitable (192.168.138.20): PASS, 4 transmitted / 4 received / 0% loss.
+- Metasploitable -> Kali (192.168.138.10): PASS, 4 transmitted / 4 received / 0% loss.
+- Host-to-guest ping was not used as a pass criterion because both guests are attached to an Internal Network, not a host-accessible Host-Only network.
+
+DHCP STATUS
+- VirtualBox DHCP configuration maps Metasploitable MAC 08:00:27:f8:7d:a3 to 192.168.138.20 and Kali MAC 08:00:27:32:09:84 to 192.168.138.10.
+- DHCP server log records repeated ACK responses for Metasploitable with yiaddr 192.168.138.20.
+- Metasploitable guest screenshot shows eth0 UP/RUNNING at 192.168.138.20/24.
+- UNRESOLVED: CAPSTONE138_ISOLATED-Dhcpd.leases still contains 192.168.138.100 for the Metasploitable MAC; its issued timestamp is 2026-11-08 03:17:41 UTC and it predates the current renewal evidence. The DHCP log and guest state indicate .20, but the lease-file record has not reconciled. No manual lease-file edits or DHCP service restarts were performed.
+
+DECISION
+- Bidirectional guest connectivity: VERIFIED.
+- Guest addressing/configuration: VERIFIED at .10 and .20.
+- DHCP lease-file consistency: HOLD / OPEN.
+- System discovery, vulnerability scanning, and exploitation: NOT STARTED.
+- Do not proceed to system discovery until the stale lease-file record is reconciled or independently explained and evidenced.
+
+EVIDENCE FILES
+- Kali_to_Metasploitable_Ping_20261108.png
+- Metasploitable_to_Kali_Ping_20261108.png
+- Metasploitable_Console_Before_Reverse_Ping_20261108.png
+- CAPSTONE138_ISOLATED-Dhcpd.config
+- CAPSTONE138_ISOLATED-Dhcpd.leases
+- CAPSTONE138_ISOLATED-Dhcpd.log
+
+SHA-256
+- Kali_to_Metasploitable_Ping_20261108.png: A115FEE64F8B4ED49BE2E8C1BD7E9C99A19D208F47682F7574A0D22D9A3EA289
+- Metasploitable_to_Kali_Ping_20261108.png: CE0299C4644625B24BAD17D3FF75545B838049B556F3157A7909706ECF067334
+- Metasploitable_Console_Before_Reverse_Ping_20261108.png: 140D82F5A4C76F4DF8F83A8AFFE5463D8D2EA35AAC6F082AD32F455FC6215CB1
+- CAPSTONE138_ISOLATED-Dhcpd.config: EE1845597D5E3D21FC3B34FF29CFE4C5E465ACA7D5E6D3E4AFDE23C493CB5534
+- CAPSTONE138_ISOLATED-Dhcpd.leases: 5782DCD9E6356225341F21BF4DEAA2AF242605FCE1BD4F4D43D4C4AF04EEAC25
+- CAPSTONE138_ISOLATED-Dhcpd.log: 609DB2DB6C8433D2E01555493FDADE855C2B978F8D0FB530C9EFF2DB635739F3

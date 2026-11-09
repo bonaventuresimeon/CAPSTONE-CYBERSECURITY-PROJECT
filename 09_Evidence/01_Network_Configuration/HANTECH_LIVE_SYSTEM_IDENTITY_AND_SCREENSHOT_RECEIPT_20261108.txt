@@ -1,0 +1,61 @@
+﻿HANTECH CAPSTONE — LIVE VM IDENTITY AND VISUAL EVIDENCE RECEIPT
+Date/time: 2026-11-08 04:36 local host time (Windows file timestamps)
+Host/operator environment: PHAMOUS / Windows account CHINEDU
+Project/client context: HanTech Capstone Project 138
+
+IDENTITY CORRECTION
+- Primary Kali system is the user's own Kali environment, displayed in the live VM screenshot as bonaventure@Whisper.
+- Guest hostname command output: Whisper.
+- Guest user command output: bonaventure.
+- Do not label this system kali@kali. Use bonaventure@Whisper (hostname Whisper, user bonaventure) in all project records and screenshot names.
+- Metasploitable 2 is a separate deliberately vulnerable lab target, displayed as msfadmin@metasploitable.
+- Project documentation, configurations, evidence and reports must be framed for HanTech and the user's own lab environment. Never substitute a generic Kali identity or a different client environment.
+
+LIVE VM STATE (read from VirtualBox on host)
+- Kali Linux VM UUID 8eefef2e-f9a7-44ed-bfda-cf280a9e0b6a: running; NIC1 Internal Network CAPSTONE138_ISOLATED; MAC 08:00:27:32:09:84; cable connected.
+- Metasploitable VM UUID 396b158d-852c-463f-b179-0cc971418cc7: running; NIC1 Internal Network CAPSTONE138_ISOLATED; MAC 08:00:27:f8:7d:a3; cable connected.
+- Dev Guru remains powered off and unchanged; no other tool/VM is presumed in scope without confirmation.
+
+LIVE SCREENSHOTS CAPTURED FROM THE RUNNING VM DISPLAYS
+1. LIVE_SCREENSHOT_Kali_bonaventure_Whisper_Validation_20261108_043604.png
+   SHA-256: FBAA4078A2550081ED8249333C67B974ED1FD4D9949F72D188B5FFA27BB839E1
+   Visible: Kali desktop; terminal title bonaventure@Whisper; hostname Whisper; user bonaventure; eth0 192.168.138.10/24; connected route 192.168.138.0/24.
+   Caution: multiple translucent terminal windows overlap. The ping output is not cleanly attributable in this screenshot. Do not use this image alone as definitive Kali-to-Metasploitable ping evidence. Existing dedicated ping screenshot and prior receipt remain separate evidence and should be independently rechecked if relied upon.
+2. LIVE_SCREENSHOT_Metasploitable2_Validation_20261108_043604.png
+   SHA-256: 4705544E170DBA3CAD7F82EA06B1567C2884E43F6B84E2303C6C55DAC9BDBDFE
+   Visible: hostname metasploitable; user msfadmin; eth0 MAC 08:00:27:f8:7d:a3; address 192.168.138.20/24; interface UP; route 192.168.138.0/24; ping to 192.168.138.10 with 4 transmitted, 4 received, 0% loss.
+
+DHCP RECONCILIATION — STILL OPEN / HOLD
+- Current DHCP config: fixed mapping for MAC 08:00:27:f8:7d:a3 to 192.168.138.20 and Kali MAC 08:00:27:32:09:84 to 192.168.138.10.
+- Current lease file still records Metasploitable MAC at 192.168.138.100, issued timestamp 1794107861, expiration 600.
+- DHCP server log repeatedly records REQUEST ciaddr 192.168.138.100, fixed binding 192.168.138.20, and ACK yiaddr 192.168.138.20.
+- This proves the server is offering/ACKing .20 while the guest's request still carries .100 and the lease file still stores .100. The discrepancy is not resolved. Preserve the raw lease and log; do not edit or restart DHCP without approval.
+
+COMMANDS EXECUTED FOR THIS LIVE CHECK (host PowerShell)
+- VBoxManage list runningvms
+- VBoxManage showvminfo 'Kali Linux' --machinereadable
+- VBoxManage showvminfo 'Metasploitable' --machinereadable
+- VBoxManage controlvm 'Kali Linux' screenshotpng <Kali screenshot path>
+- VBoxManage controlvm 'Metasploitable' screenshotpng <Metasploitable screenshot path>
+- VBoxManage controlvm 'Kali Linux' keyboardputstring <read-only identity/interface/route/ping command string>
+- VBoxManage controlvm 'Kali Linux' keyboardputscancode 1c 9c
+- VBoxManage controlvm 'Metasploitable' keyboardputstring <read-only identity/interface/route/ping command string>
+- VBoxManage controlvm 'Metasploitable' keyboardputscancode 1c 9c
+- Get-Content <DHCP lease file> -Tail 100
+- Select-String <DHCP log> -Pattern '08:00:27:f8:7d:a3|192.168.138.20|192.168.138.100'
+- Get-Content <DHCP config> -Raw
+- Get-FileHash <screenshot paths> -Algorithm SHA256
+
+GUEST COMMAND STRINGS SENT TO THE CONSOLES
+Kali:
+clear; echo 'HANTECH CAPSTONE - KALI LIVE VALIDATION'; hostname; whoami; ip -br addr show eth0; ip route; ping -c 4 192.168.138.20
+Metasploitable:
+clear; echo 'HANTECH CAPSTONE - METASPLOITABLE LIVE VALIDATION'; hostname; whoami; ifconfig eth0; route -n; ping -c 4 192.168.138.10
+
+DECISION
+- Correct user/system identity: VERIFIED.
+- Both VMs running on the intended isolated network: VERIFIED.
+- Metasploitable .20 and reverse ping to Kali .10: visible in live screenshot.
+- Kali ping: this live capture is visually cluttered and not accepted as fresh clean proof.
+- DHCP lease consistency: HOLD.
+- System discovery and vulnerability scanning: NOT STARTED; do not begin until DHCP discrepancy is reconciled and the user authorizes the next stage.

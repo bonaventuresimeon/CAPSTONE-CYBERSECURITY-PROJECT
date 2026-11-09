@@ -1,0 +1,9 @@
+﻿CAPSTONE PROJECT 138 — GUEST OUTPUT HASH VERIFICATION
+Source command executed in Kali: sha256sum /home/bonaventure/CAPSTONE138_METASPLOITABLE_TCP_ALL_20261108.nmap /home/bonaventure/CAPSTONE138_METASPLOITABLE_TCP_ALL_20261108.gnmap /home/bonaventure/CAPSTONE138_METASPLOITABLE_TCP_ALL_20261108.xml
+Transfer method: base64 export through VirtualBox shared clipboard, whitespace-stripped decode, exact byte write on Windows.
+Verification: guest SHA-256 values were compared with independently computed Windows SHA-256 values; all three match.
+nmap | 2509 bytes | A0F35A3B1FC8C36EE1F3932C399C4430D50E7CB9554BBF77ECE35D7741D983E7
+gnmap | 1764 bytes | 8B21DB868922693F4D6DC97B7BB57F13924E223689D88DE76812F25C7F72E207
+xml | 8264 bytes | 37C2C269C8144C0D3E4018259FDAD92F9CECFD506B49C1985851AFE278E8BB87
+Result: PASS — byte-identical transfer independently verified.
+Note: earlier clipboard text exports were replaced by these byte-identical originals; the current evidence files and copies are the verified versions.

@@ -1,0 +1,38 @@
+﻿Connectivity precheck — 2026-11-07T16:50:03.0819665+01:00
+RUNNING VMS:
+"Metasploitable" {396b158d-852c-463f-b179-0cc971418cc7}
+=== Metasploitable ===
+
+VMState="running"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+nic2="none"
+
+
+=== Kali Linux ===
+
+VMState="poweroff"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+nic2="none"
+
+
+=== Dev Guru ===
+
+VMState="poweroff"
+nic1="nat"
+nic2="none"
+
+
+FILES:
+
+Name                                                 Length LastWriteTime       
+----                                                 ------ -------------       
+CONNECTIVITY_PRECHECK_20261107_165003.txt               427 11/7/2026 4:50:03 PM
+GUEST_START_20261107_164834.txt                        1137 11/7/2026 4:48:58 PM
+INTERNAL_NETWORK_SETUP_20261107_164800.txt             3915 11/7/2026 4:48:01 PM
+SCREENSHOT_InternalNetwork_Setup_20261107_164800.png  80476 11/7/2026 4:48:02 PM
+SCREENSHOT_VerifiedNetwork_20261107_164818.png       100944 11/7/2026 4:48:18 PM
+
+
+

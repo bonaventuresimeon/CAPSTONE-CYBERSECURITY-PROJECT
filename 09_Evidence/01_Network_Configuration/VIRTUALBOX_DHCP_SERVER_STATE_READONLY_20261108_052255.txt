@@ -1,0 +1,34 @@
+HANTECH CAPSTONE 138 — DHCP SERVER STATE READ-ONLY RECEIPT
+Capture time (Windows host): 2026-11-08T05:22:55.1797003+01:00
+Host: PHAMOUS / phamous\chinedu
+Method: PowerShell read-only inspection of VirtualBox VM metadata and existing DHCP configuration, log, and lease files. No file modified by the inspection.
+
+METASPLOITABLE VM
+VM UUID: 396b158d-852c-463f-b179-0cc971418cc7
+VMState=running
+nic1=intnet
+intnet1=CAPSTONE138_ISOLATED
+macaddress1=080027F87DA3
+
+VIRTUALBOX DHCP CONFIGURATION
+Network: CAPSTONE138_ISOLATED
+Server: 192.168.138.1
+Pool: 192.168.138.10–192.168.138.150
+Mask: 255.255.255.0
+Metasploitable MAC 08:00:27:f8:7d:a3 fixedAddress=192.168.138.20
+Kali MAC 08:00:27:32:09:84 fixedAddress=192.168.138.10
+
+DHCP SERVER LOG EXCERPT
+00:07:15.644866 params { 1 28 2 3 15 6 12 42 }
+00:07:15.644933 allocateAddress to client 08:00:27:f8:7d:a3
+00:07:15.644944 found existing binding 192.168.138.20 fixed
+00:07:15.645090 ACK xid 0x7458c36a chaddr 08:00:27:f8:7d:a3
+00:07:15.645110 ciaddr 192.168.138.100 yiaddr 192.168.138.20
+Interpretation: .100 is the ciaddr (client's current/previous address field) in this ACK; yiaddr is the address offered/assigned in this ACK, .20. This log excerpt is not evidence that the server assigned .100 in this transaction.
+
+VIRTUALBOX DHCP LEASE FILE
+One record for MAC 08:00:27:f8:7d:a3 has state=acked and Address value=192.168.138.100, issued=1794107861, expiration=600.
+That lease-file record is inconsistent with the fixed binding and ACK yiaddr .20 observed in the configuration/log excerpt. The server-side lease-file state needs reconciliation; do not delete or edit it during diagnosis.
+
+INTEGRITY / SCOPE
+Source config/log/lease files were read, not edited. No VM restart, DHCP restart, client termination, guest file edit, or network change occurred. DHCP remains HOLD. Discovery/scanning remains NOT STARTED.

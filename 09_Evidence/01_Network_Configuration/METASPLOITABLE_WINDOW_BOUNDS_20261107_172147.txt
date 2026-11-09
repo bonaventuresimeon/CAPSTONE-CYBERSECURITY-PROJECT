@@ -1,0 +1,14 @@
+TIME 2026-11-07T17:21:47.3592990+01:00
+
+
+Title  : Metasploitable (CAPSTONE_PRECONFIG_20261107) [Running] - Oracle VirtualBox
+Left   : 0
+Top    : 0
+Right  : 1280
+Bottom : 720
+Width  : 1280
+Height : 720
+
+
+
+

@@ -1,0 +1,4 @@
+# Nmap 7.98 scan initiated Mon Nov  9 05:39:49 2026 as: /usr/lib/nmap/nmap --privileged -sT -sV --version-light -Pn -T2 --reason --max-retries 2 -p 3632,6697,8787,33543,47335,47852,60679 -oA /home/bonaventure/capstone138_20261109/CAPSTONE138_TCP_RECHECK_20261109 192.168.138.20
+Host: 192.168.138.20 ()	Status: Up
+Host: 192.168.138.20 ()	Ports: 3632/open/tcp//distccd//distccd v1 ((GNU) 4.2.4 (Ubuntu 4.2.4-1ubuntu4))/, 6697/open/tcp//irc//UnrealIRCd/, 8787/open/tcp//drb//Ruby DRb RMI (Ruby 1.8; path |usr|lib|ruby|1.8|drb)/, 33543/open/tcp/////, 47335/open/tcp/////, 47852/open/tcp/////, 60679/open/tcp/////
+# Nmap done at Mon Nov  9 05:41:02 2026 -- 1 IP address (1 host up) scanned in 73.04 seconds

@@ -1,0 +1,12 @@
+﻿CAPSTONE PROJECT 138 — EVIDENCE DISTRIBUTION RECEIPT
+Timestamp: 2026-11-08T13:29:08.3407835+01:00
+Method: canonical source files retained; byte-preserving copies independently rehashed with SHA-256.
+
+05_Security_Controls\01_Control_Basis: 10 files
+03_Vulnerability_Assessment\01_Raw_Research_and_Validation: 36 files
+04_Risk_Assessment\01_Risk_Basis: 11 files
+Total copy records: 57
+Source/destination SHA-256 matches: 57
+Missing or mismatched copies: 0
+Copies are review packets only; canonical originals remain in their source folders.
+No copied item is presented as a new test.

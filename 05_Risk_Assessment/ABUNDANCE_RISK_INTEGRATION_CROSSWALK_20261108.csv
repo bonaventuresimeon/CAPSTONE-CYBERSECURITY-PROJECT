@@ -1,0 +1,6 @@
+﻿FinalID,SourceWorkingID,Finding,Likelihood,Impact,Score,Band,Treatment,Qualification,OwnerStatus
+FR-01,F-01,"NFS root wildcard rw no_root_squash",4,5,20,Critical,"Remove root export; allowlist clients; root_squash; dedicated read-only export; firewall","Remote mount/write not tested","Abundance approval pending"
+FR-02,F-03,"Anonymous SMB enumeration and tmp metadata",4,2,8,Moderate,"Disable anonymous enumeration; ACL shares; segment SMB","File body and write permissions not tested","Abundance approval pending"
+FR-03,F-10,"Mutillidae config HTTP 200 text/plain",4,4,16,High,"Deny web access; move secrets outside web root; restrict permissions; review logs","Impact conditional; body and values not retrieved","Abundance approval pending"
+FR-04,F-04,"Public landing page credential disclosure",4,4,16,High,"Remove disclosure; disable/rotate defaults; MFA and least privilege","Validity and privileges unknown","Abundance approval pending"
+FR-05,F-06,"Telnet and Berkeley r-services listeners",3,4,12,High,"Disable legacy listeners; hardened SSHv2; MFA; management allowlist; logging","Login and trust behavior not tested","Abundance approval pending"

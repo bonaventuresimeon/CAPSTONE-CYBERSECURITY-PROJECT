@@ -1,0 +1,34 @@
+CAPSTONE PROJECT 138 - UDP top-100 discovery
+START=2026-11-09T05:46:35+01:00
+HOST=Whisper
+IDENTITY=uid=1000(bonaventure) gid=1000(bonaventure) groups=1000(bonaventure),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),100(users),101(netdev),102(scanner),112(bluetooth),115(lpadmin),119(wireshark),124(vboxsf),125(kaboxer)
+TARGET=192.168.138.20
+NMAP=Nmap version 7.98 ( https://nmap.org )
+SUDO_STATUS=AVAILABLE
+=== UDP TOP-100 START ===
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-11-09 05:46 +0100
+Warning: 192.168.138.20 giving up on port because retransmission cap hit (2).
+Nmap scan report for 192.168.138.20
+Host is up, received arp-response (0.0046s latency).
+Not shown: 93 closed udp ports (port-unreach)
+PORT     STATE         SERVICE     REASON              VERSION
+53/udp   open          domain      udp-response ttl 64 ISC BIND 9.4.2
+68/udp   open|filtered dhcpc       no-response
+69/udp   open|filtered tftp        no-response
+111/udp  open          rpcbind     udp-response ttl 64
+137/udp  open          netbios-ns  udp-response ttl 64 Microsoft Windows netbios-ns (workgroup: WORKGROUP)
+138/udp  open|filtered netbios-dgm no-response
+2049/udp open          rpcbind     udp-response ttl 64
+MAC Address: 08:00:27:F8:7D:A3 (Oracle VirtualBox virtual NIC)
+Service Info: Host: METASPLOITABLE; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 167.99 seconds
+UDP_EXIT=0
+COMPLETION=2026-11-09T05:49:24+01:00
+=== FINAL GUEST SHA256 ===
+0a9aa077ca521c1a9329b365abeb6856c7a6152902ef98458d98b93a8eccd98b  /home/bonaventure/capstone138_20261109/CAPSTONE138_UDP_TOP100_20261109.nmap
+939a1ddd957c8810801a4a2b932385d648644c26fc66e754aac1bc3c5ce2ba74  /home/bonaventure/capstone138_20261109/CAPSTONE138_UDP_TOP100_20261109.gnmap
+7a47d4c9fbffe39277f0c50c06fb0819b5f8aaa85c6d390dfa438f4075912f22  /home/bonaventure/capstone138_20261109/CAPSTONE138_UDP_TOP100_20261109.xml
+d06f6c4bb836228d3011975d4dc1d454641d99b173b54a09825ff853fc8db8ec  /home/bonaventure/capstone138_20261109/UDP_EXECUTION_CONSOLE_20261109.txt
+UDP_SCAN_SCRIPT_FINISHED

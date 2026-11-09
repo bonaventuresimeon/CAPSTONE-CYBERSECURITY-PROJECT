@@ -1,0 +1,50 @@
+﻿CAPSTONE PROJECT 138 — DHCP OFFLINE FILESYSTEM ATTRIBUTION RECEIPT
+Record date: 2026-11-08 (Africa/Lagos)
+Host: PHAMOUS / Windows account CHINEDU
+Target VM: Metasploitable 2 (396b158d-852c-463f-b179-0cc971418cc7)
+Forensic source: standalone VDI clone created from read-locked checkpoint medium.
+Source VDI: D:\VirtualBox VMs\CAPSTONE138_FORENSIC\Metasploitable_DHCP_Checkpoint_20261108.vdi
+Source VDI SHA-256: 76AD451FE4A342D0501FFE1B99A613D67A6FE8FDD1D9FB03D3B7C1E15790EB6B
+Working derivative: D:\VirtualBox VMs\CAPSTONE138_FORENSIC\Metasploitable_DHCP_Checkpoint_20261108.raw (8 GiB raw conversion; not attached to a VM)
+
+READ-ONLY ACCESS METHOD
+- qemu-img 10.2.1 converted the standalone VDI clone to a raw working image with sparse zero-block handling.
+- Sleuth Kit 4.12.1 identified DOS partition table: Linux ext3 partition starts at sector 63; LVM2 member partition starts at sector 482013 (byte offset 246790656).
+- PV UUID: vhgYfHDLoq7Ib2Em2BW6NwIoRjgdX8k3; volume group: metasploitable.
+- LVM root LV: 7.00 GiB; swap LV: 784 MiB.
+- A read-only loop device was created at the LVM PV offset. `blockdev --getro /dev/loop0` returned 1.
+- Read-only device-mapper mapping `cap138-root-ro` was created for the root LV. `blockdev --getro /dev/mapper/cap138-root-ro` returned 1.
+- Root filesystem identified as ext3 and mounted with `ro,noload`; `findmnt` reported `/dev/mapper/cap138-root-ro ext3 ro,relatime,norecovery`.
+- No filesystem repair, journal replay, file write, or guest boot was performed.
+
+GUEST CONFIGURATION FINDINGS
+1. `/etc/network/interfaces` contains `auto eth0` and `iface eth0 inet dhcp`.
+2. `/etc/rcS.d/S40networking` links to `/etc/init.d/networking`.
+3. `/etc/init.d/networking` start path invokes `ifup -a`.
+4. Installed ifupdown package: version 0.6.8ubuntu8, architecture i386.
+5. The actual `/sbin/ifup` ELF binary contains the built-in DHCP method command template:
+   `dhclient3 [[-e IF_METRIC=%metric%]] -pf /var/run/dhclient.%iface%.pid -lf /var/lib/dhcp3/dhclient.%iface%.leases %iface%`
+6. The live PID 4742 command line previously captured was:
+   `dhclient3 -e IF_METRIC=100 -pf /var/run/dhclient.eth0.pid -lf /var/lib/dhcp3/dhclient.eth0.leases eth0`
+   This is an exact parameter-pattern match for the installed ifupdown DHCP method and is strongly attributable to the configured `ifup -a` startup path. The live process PPID was 1; no process accounting/audit record was available to prove its original parent process directly.
+7. The second live PID 4893 command line was `dhclient eth0`, with `/var/run/dhclient.pid` containing 4893. This does not match the `dhclient3` ifupdown method template above. Its original launcher remains UNRESOLVED; do not label it manual or attribute it to a particular service without further evidence.
+8. The offline image's `/var/lib/dhcp3/dhclient.leases` contains repeated DHCP ACK lease entries for `192.168.138.20`, interface eth0, DHCP server `192.168.138.1`, subnet mask `255.255.255.0`, lease time 600 seconds. It contains no `.100` address.
+9. The offline image's `/var/lib/dhcp3/dhclient.eth0.leases` file is absent. The generic lease file is present. This is consistent with the two different lease-file paths in the live command lines, but does not alone prove which process wrote every lease entry.
+10. `/var/run` was empty in the offline filesystem image. The live PID-file values therefore remain supported by the prior live-console screenshots, not by this disk image; the volatile runtime directory is not preserved as ordinary root-filesystem data in this checkpoint.
+
+VIRTUALBOX DHCP SERVER RECONCILIATION
+- VirtualBox DHCP config: server 192.168.138.1; pool 192.168.138.10–192.168.138.150; subnet mask 255.255.255.0.
+- Fixed reservation: Metasploitable MAC 08:00:27:f8:7d:a3 -> 192.168.138.20; Kali MAC 08:00:27:32:09:84 -> 192.168.138.10.
+- Raw VirtualBox server lease XML contains state `acked`, address `192.168.138.100`, MAC `08:00:27:f8:7d:a3`, issued epoch 1794107861, expiration 600.
+- The corresponding VirtualBox DHCP server log request shows xid 0x7458c36a, client `ciaddr 192.168.138.100`; server log then reports `found existing binding 192.168.138.20 fixed`; ACK packet reports `ciaddr 192.168.138.100 yiaddr 192.168.138.20`.
+- Therefore `.100` is the client's current/previous address field (`ciaddr`) in this transaction; `.20` is the assigned address (`yiaddr`). The lease XML's `.100` address conflicts with the fixed reservation, the ACK `yiaddr`, and the guest lease history. This establishes a server lease-file/log inconsistency, but not its cause. Possible stale bookkeeping is a hypothesis only.
+
+DECISION / LIMITATIONS
+- Strong attribution: PID 4742 matches the configured ifupdown DHCP method. PID 4893 remains unattributed and is a second concurrent client instance.
+- VirtualBox `.100` lease record remains unreconciled; do not delete or edit it yet.
+- No DHCP client was terminated. No guest or VirtualBox DHCP configuration or lease file was edited. No network service was restarted. No system discovery or vulnerability scanning was performed.
+- The VDI clone remains the preserved source of truth. The raw image was a derived working copy only; the guest filesystem was accessed read-only and without journal replay.
+- DHCP gate remains HOLD pending approval of a controlled single-client correction and separate reconciliation of the VirtualBox lease XML record.
+
+WORKING-DERIVATIVE CLEANUP / FINAL INTEGRITY CHECK
+The temporary raw derivative was detached from `/dev/loop0` after the read-only examination and deleted to reclaim host disk space. The read-only mapper was no longer present in the WSL device-mapper list at cleanup verification. The original standalone VDI clone was preserved. A fresh host-side SHA-256 calculation after cleanup returned the same clone hash: 76AD451FE4A342D0501FFE1B99A613D67A6FE8FDD1D9FB03D3B7C1E15790EB6B. The original Metasploitable VM was verified still running and attached to CAPSTONE138_ISOLATED. No guest disk or DHCP state was edited.

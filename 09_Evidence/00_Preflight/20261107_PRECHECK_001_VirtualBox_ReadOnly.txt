@@ -1,0 +1,41 @@
+CAPSTONE PROJECT 138 — INITIAL READ-ONLY LAB PRE-CHECK
+Date: 2026-11-07 (local Windows host)
+Device: PHAMOUS
+Windows user: CHINEDU
+Desktop Commander device ID: b7daa5e9-3435-4c82-bcf2-b9addb71535b
+Desktop Commander version: 0.3.1
+Windows PowerShell: 5.1.22621.4391
+
+1. VirtualBox installation
+- Expected executable exists: C:\Program Files\Oracle\VirtualBox\VirtualBox.exe
+- VirtualBox process count at check: 1
+- VBoxManage is available at C:\Program Files\Oracle\VirtualBox\VBoxManage.exe
+
+2. Registered VMs
+- Kali Linux — UUID 8eefef2e-f9a7-44ed-bfda-cf280a9e0b6a
+- Dev Guru — UUID a4e64a93-6c94-4342-a17a-56728cf15445
+- Metasploitable — UUID 396b158d-852c-463f-b179-0cc971418cc7
+
+3. VM states and network observations
+- Metasploitable: RUNNING.
+- Metasploitable adapter 1: NAT; cable connected.
+- Metasploitable adapter 2-8: none.
+- Metasploitable current snapshot: "Snapshot 1" (UUID 66f53e6f-418c-4ccc-9c38-aa7e9cb9ec2f).
+- Kali Linux: POWERED OFF.
+- Kali adapter 1: NAT; cable connected.
+- Kali adapter 2-8: none.
+- VirtualBox host-only interface listing: no host-only interfaces returned (count 0).
+
+4. Security decision
+HOLD — NO DISCOVERY OR SCANNING.
+The target is currently configured with a NAT adapter, and no host-only interface is listed. This does not satisfy the intended isolated host-only lab design. No network settings were changed. No scan, exploit, guest login, or target modification was performed.
+
+5. Required next steps
+- Obtain approval before changing any VM network configuration.
+- Establish and verify a host-only lab network for the assessment workstation and target.
+- Confirm target IP and reachability only after isolation is verified.
+- Record a fresh rollback snapshot/restore point before assessment.
+- Confirm whether "Dev Guru" is in scope; do not treat it as the brief's unnamed second system without instructor confirmation.
+
+Evidence limitations
+This record captures read-only host-side VirtualBox configuration output. It does not establish guest OS health, target IP, actual guest connectivity, absence of NAT port forwarding beyond the captured details, or vulnerability status.

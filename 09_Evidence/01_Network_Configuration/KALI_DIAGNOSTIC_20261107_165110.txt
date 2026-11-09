@@ -1,0 +1,222 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261107165110
+Username: PHAMOUS\CHINEDU
+RunAs User: PHAMOUS\CHINEDU
+Configuration Name: 
+Machine: PHAMOUS (Microsoft Windows NT 10.0.22631.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command $vb='C:\Program Files\Oracle\VirtualBox\VBoxManage.exe'
+$vm='Kali Linux'
+$ev='C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\01_Network_Configuration'
+$ts=Get-Date -Format 'yyyyMMdd_HHmmss'
+$log=Join-Path $ev "KALI_DIAGNOSTIC_$ts.txt"
+Start-Transcript -Path $log -Force | Out-Null
+"DIAGNOSTIC ONLY — no VM settings changed — $(Get-Date -Format o)"
+"=== Kali VM state/config ==="
+& $vb showvminfo $vm --machinereadable
+"=== Snapshot tree ==="
+& $vb snapshot $vm list --details
+"=== VM log directory and newest logs ==="
+$cfg=(& $vb showvminfo $vm --machinereadable | Select-String '^CfgFile=').ToString().Split('=',2)[1].Trim('"')
+$dir=Split-Path $cfg
+"Config=$cfg"
+Get-ChildItem (Join-Path $dir 'Logs') -File | Sort-Object LastWriteTime -Descending | Select-Object -First 3 Name,Length,LastWriteTime
+$latest=Get-ChildItem (Join-Path $dir 'Logs') -Filter 'VBox.log*' -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+if($latest){ "=== Latest log tail: $($latest.FullName) ==="; Get-Content $latest.FullName -Tail 160 }
+"=== Host virtualization/security drivers ==="
+Get-CimInstance Win32_ComputerSystem | Select-Object Manufacturer,Model,HypervisorPresent
+Get-Service VBox* -ErrorAction SilentlyContinue | Select-Object Name,Status,StartType
+Stop-Transcript | Out-Null
+"LOG=$log"
+Get-FileHash $log -Algorithm SHA256 | Format-List
+Process ID: 97092
+PSVersion: 5.1.22621.4391
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.4391
+BuildVersion: 10.0.22621.4391
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+DIAGNOSTIC ONLY — no VM settings changed — 2026-11-07T16:51:10.4679211+01:00
+=== Kali VM state/config ===
+
+=== Snapshot tree ===
+
+=== VM log directory and newest logs ===
+Config=D:\\VirtualBox VMs\\Kali Linux\\Kali Linux.vbox
+
+Name              Length LastWriteTime
+----              ------ -------------
+VBoxHardening.log 437695 11/7/2026 4:50:37 PM
+VBox.log           62256 11/7/2026 4:50:36 PM
+VBox.log.1         61785 11/7/2026 4:48:57 PM
+=== Latest log tail: D:\VirtualBox VMs\Kali Linux\Logs\VBox.log ===
+00:00:15.926169 NEM:                  TscDeadlineTmrSupport: 1
+00:00:15.926178 NEM:                       TscAdjustSupport: 1
+00:00:15.926184 NEM:                            FZLRepMovsb: 0
+00:00:15.926189 NEM:                             FSRepStosb: 0
+00:00:15.926195 NEM:                             FSRepCmpsb: 0
+00:00:15.926200 NEM:                Unknown bank 1 features: 0x1000000000000
+00:00:15.926208 NEM: WHvCapabilityCodeProcessorFrequencyCap= 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00:00:15.926216 NEM:                            IsSupported: 0
+00:00:15.926221 NEM:                               Reserved: 0
+00:00:15.926227 NEM:                    HighestFrequencyMhz: 0
+00:00:15.926233 NEM:                    NominalFrequencyMhz: 0
+00:00:15.926238 NEM:                     LowestFrequencyMhz: 0
+00:00:15.926244 NEM:                       FrequencyStepMhz: 0
+00:00:15.926264 NEM: WHvCapabilityCodeSyntheticProcessorFeaturesBanks= 1 bank(s)
+00:00:15.926271 NEM: WHvCapabilityCodeSyntheticProcessorFeaturesBanks[0]= 0x000000007f448fff
+00:00:15.926277 NEM:                      HypervisorPresent: 1
+00:00:15.926286 NEM:                                    Hv1: 1
+00:00:15.926294 NEM:                     AccessVpRunTimeReg: 1
+00:00:15.926301 NEM:        AccessPartitionReferenceCounter: 1
+00:00:15.926307 NEM:                        AccessSynicRegs: 1
+00:00:15.926315 NEM:               AccessSyntheticTimerRegs: 1
+00:00:15.926323 NEM:                     AccessIntrCtrlRegs: 1
+00:00:15.926336 NEM:                    AccessHypercallRegs: 1
+00:00:15.926350 NEM:                          AccessVpIndex: 1
+00:00:15.926361 NEM:            AccessPartitionReferenceTsc: 1
+00:00:15.926367 NEM:                     AccessGuestIdleReg: 1
+00:00:15.926372 NEM:                    AccessFrequencyRegs: 1
+00:00:15.926378 NEM:                            ReservedZ12: 0
+00:00:15.926386 NEM:                            ReservedZ13: 0
+00:00:15.926394 NEM:                            ReservedZ14: 0
+00:00:15.926408 NEM:   EnableExtendedGvaRangesForFlushVirtualAddressList: 1
+00:00:15.926416 NEM:                            ReservedZ16: 0
+00:00:15.926428 NEM:                            ReservedZ17: 0
+00:00:15.926439 NEM:                    FastHypercallOutput: 1
+00:00:15.926451 NEM:                            ReservedZ19: 0
+00:00:15.926463 NEM:                            ReservedZ20: 0
+00:00:15.926471 NEM:                            ReservedZ21: 0
+00:00:15.926476 NEM:                  DirectSyntheticTimers: 1
+00:00:15.926481 NEM:                            ReservedZ23: 0
+00:00:15.926487 NEM:                 ExtendedProcessorMasks: 1
+00:00:15.926492 NEM:                      TbFlushHypercalls: 1
+00:00:15.926497 NEM:                    SyntheticClusterIpi: 1
+00:00:15.926502 NEM:                     NotifyLongSpinWait: 1
+00:00:15.926508 NEM:                      QueryNumaDistance: 1
+00:00:15.926513 NEM:                           SignalEvents: 1
+00:00:15.926518 NEM:                RetargetDeviceInterrupt: 1
+00:00:15.926529 NEM: WHvCapabilityCodeProcessorPerfmonFeatures= 0x0000000000000003
+00:00:15.926536 NEM:                             PmuSupport: 1
+00:00:15.926546 NEM:                             LbrSupport: 1
+00:00:15.926872 NEM: Warning! WHvGetCapability/WHvCapabilityCodePhysicalAddressWidth failed: WHV_E_UNKNOWN_CAPABILITY (Last=0xc0000034/0)NEM: Created partition 0000021a18d96640. APIC emulation mode: VirtualBox
+00:00:15.930711 NEM: Adjusting APIC configuration from X2APIC to APIC max mode.  X2APIC is not supported by the WinHvPlatform API!
+00:00:15.930723 NEM: Disable Hyper-V if you need X2APIC for your guests!
+00:00:15.930771 PGM: Enabling NEM mode
+00:00:15.931398 NEM:
+00:00:15.931399 NEM: NEMR3Init: Snail execution mode is active!
+00:00:15.931400 NEM: Note! VirtualBox is not able to run at its full potential in this execution mode.
+00:00:15.931400 NEM:       To see VirtualBox run at max speed you need to disable all Windows features
+00:00:15.931401 NEM:       making use of Hyper-V.  That is a moving target, so google how and carefully
+00:00:15.931402 NEM:       consider the consequences of disabling these features.
+00:00:15.931402 NEM:
+00:00:15.931456 CPUM: No hardware-virtualization capability detected
+00:00:15.931465 CPUM: fXStateHostMask=0x7; host XCR0=0x1f
+00:00:15.935406 CPUM: Matched host CPU INTEL 0x6/0x8e/0xa Intel_Core7_CoffeeLake with CPU DB entry 'Intel Core i7-6700K' (INTEL 0x6/0x5e/0x3 Intel_Core7_Skylake)
+00:00:15.935642 CPUM: MXCSR_MASK=0xffff (host: 0xffff)
+00:00:15.935702 CPUM: Microcode revision 0x000000F6
+00:00:15.935728 CPUM: Changing leaf 13[0]: EBX=0x440 -> 0x340, ECX=0x440 -> 0x340
+00:00:15.935781 CPUM: MSR/CPUID reconciliation insert: 0x0000010b IA32_FLUSH_CMD
+00:00:15.935795 CPUM: MSR/CPUID reconciliation insert: 0x0000010a IA32_ARCH_CAPABILITIES
+00:00:15.935811 CPUM: MSR fudge: 0x00000122 IA32_TSX_CTRL
+00:00:15.935823 CPUM: MSR fudge: 0x00000123 IA32_MCU_OPT_CTRL
+00:00:15.935847 CPUM: SetGuestCpuIdFeature: Enabled SYSENTER/EXIT
+00:00:15.935857 CPUM: SetGuestCpuIdFeature: Enabled SYSCALL/RET
+00:00:15.935865 CPUM: SetGuestCpuIdFeature: Enabled PAE
+00:00:15.935878 CPUM: SetGuestCpuIdFeature: Enabled LAHF/SAHF
+00:00:15.935893 CPUM: SetGuestCpuIdFeature: Enabled NX
+00:00:15.935905 CPUM: SetGuestCpuIdFeature: Enabled LONG MODE
+00:00:15.935914 CPUM: Enabled MTRR read-write support
+00:00:15.935923 CPUM: Enabled fixed-range MTRRs and 16 (virtualized) variable-range MTRRs
+00:00:15.970042 NEM: HvPartitionPropertyProcessorVendor=0x1 (1)
+00:00:15.970924 NEM: cbXSaveArea=960
+00:00:15.971008 NEM: Default XSAVE area returned by Hyper-V
+00:00:15.971013 000000f63fdfdbb0/0000: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971023 000000f63fdfdbc0/0010: 00 00 00 00 00 00 00 00-80 1f 00 00 ff ff 00 00 ................
+00:00:15.971032 000000f63fdfdbd0/0020: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971041 000000f63fdfdbe0/0030: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971049 000000f63fdfdbf0/0040: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971057 000000f63fdfdc00/0050: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971066 000000f63fdfdc10/0060: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971075 000000f63fdfdc20/0070: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971083 000000f63fdfdc30/0080: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971092 000000f63fdfdc40/0090: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971101 000000f63fdfdc50/00a0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971109 000000f63fdfdc60/00b0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971117 000000f63fdfdc70/00c0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971126 000000f63fdfdc80/00d0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971133 000000f63fdfdc90/00e0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971140 000000f63fdfdca0/00f0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971148 000000f63fdfdcb0/0100: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971156 000000f63fdfdcc0/0110: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971164 000000f63fdfdcd0/0120: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971172 000000f63fdfdce0/0130: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971180 000000f63fdfdcf0/0140: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971188 000000f63fdfdd00/0150: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971197 000000f63fdfdd10/0160: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971205 000000f63fdfdd20/0170: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971214 000000f63fdfdd30/0180: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971222 000000f63fdfdd40/0190: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971230 000000f63fdfdd50/01a0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971238 000000f63fdfdd60/01b0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971246 000000f63fdfdd70/01c0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971254 000000f63fdfdd80/01d0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971262 000000f63fdfdd90/01e0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971270 000000f63fdfdda0/01f0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971279 000000f63fdfddb0/0200: 02 00 00 00 00 00 00 00-1f 00 00 00 00 00 00 80 ................
+00:00:15.971287 000000f63fdfddc0/0210: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971295 000000f63fdfddd0/0220: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971301 000000f63fdfdde0/0230: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971308 000000f63fdfddf0/0240: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971315 000000f63fdfde00/0250: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971323 000000f63fdfde10/0260: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971330 000000f63fdfde20/0270: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971337 000000f63fdfde30/0280: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971345 000000f63fdfde40/0290: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971353 000000f63fdfde50/02a0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971361 000000f63fdfde60/02b0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971370 000000f63fdfde70/02c0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971379 000000f63fdfde80/02d0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971387 000000f63fdfde90/02e0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971396 000000f63fdfdea0/02f0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971405 000000f63fdfdeb0/0300: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971413 000000f63fdfdec0/0310: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971422 000000f63fdfded0/0320: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971431 000000f63fdfdee0/0330: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971439 000000f63fdfdef0/0340: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971448 000000f63fdfdf00/0350: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971456 000000f63fdfdf10/0360: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971464 000000f63fdfdf20/0370: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971472 000000f63fdfdf30/0380: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971481 000000f63fdfdf40/0390: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971489 000000f63fdfdf50/03a0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971497 000000f63fdfdf60/03b0: 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+00:00:15.971532 NEM: Successfully set up partition (device handle 0000000000001105, partition ID 0x0)
+00:00:15.971942 PGM: Host paging mode: AMD64+NX
+00:00:15.971972 PGM: PGMPool: cMaxPages=4352 (u64MaxPages=4136)
+00:00:15.971985 PGM: pgmR3PoolInit: cMaxPages=0x1100 cMaxUsers=0x2200 cMaxPhysExts=0x2000 fCacheEnable=true
+00:00:15.981105 SUPLib: MEM_LARGE_PAGES privilege not held.
+00:00:16.284082 AssertLogRel D:\tinderboxa\win-7.2\src\VBox\Runtime\win\RTErrConvertFromWin32.cpp(467) int __cdecl RTErrConvertFromWin32(unsigned int): <NULL>
+00:00:16.284147 Unhandled error 1455
+00:00:16.284162 AssertLogRel D:\tinderboxa\win-7.2\src\VBox\VMM\VMMR3\PGMR3Phys.cpp(2049) int __cdecl pgmR3PhysRegisterRamWorker(struct VM *,struct VMCPU *,unsigned __int64,unsigned __int64,const char *,const unsigned int,const unsigned __int64): RT_SUCCESS(rc)
+00:00:16.284257 pgmR3PhysInitAndLinkRamRange failed: GCPhysChunk=0000000100000000 cPagesInChunk=0x120000 (Above 4GB Base RAM): VERR_UNRESOLVED_ERROR
+00:00:16.302837 NEM: Destroying partition 0000021a18d96640 with its 3 VCpus...
+00:00:16.655503 VMSetError: D:\tinderboxa\win-7.2\src\VBox\VMM\VMMR3\VMR3.cpp(341) int __cdecl VMR3Create(unsigned int,const struct VMM2USERMETHODS *,unsigned __int64,void (__cdecl *)(struct UVM *,void *,int,const char *,unsigned int,const char *,const char *,char *) noexcept,void *,int (__cdecl *)(struct UVM *,struct VM *,const struct VMMR3VTABLE *,void *) noexcept,void *,struct VM **,struct UVM **); rc=VERR_UNRESOLVED_ERROR
+00:00:16.655527 VMSetError: Unresolved (unknown) host platform error.
+00:00:16.682480 ERROR [COM]: aRC=E_FAIL (0x80004005) aIID={6ac83d89-6ee7-4e33-8ae6-b257b2e81be8} aComponent={ConsoleWrap} aText={Unresolved (unknown) host platform error. (VERR_UNRESOLVED_ERROR)}, preserve=false aResultDetail=-35
+00:00:16.683332 Console: Machine state changed to 'PoweredOff'
+00:00:16.703567 Power up failed (vrc=VERR_UNRESOLVED_ERROR, hrc=E_FAIL (0X80004005))
+00:00:17.010471 GUI: Cannot notify guest about VM window in-focus event
+00:00:17.011150 GUI: Aborting startup due to power up progress issue detected...
+00:00:17.113193 GUI: UICommon: Handling aboutToQuit request..
+00:00:17.727919 GUI: UICommon: aboutToQuit request handled!
+=== Host virtualization/security drivers ===
+
+VBoxSDS
+**********************
+Windows PowerShell transcript end
+End time: 20261107165111
+**********************

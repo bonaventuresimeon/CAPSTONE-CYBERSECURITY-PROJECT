@@ -1,0 +1,47 @@
+﻿Baseline snapshot operation — only Kali Linux and Metasploitable; Dev Guru untouched. Timestamp: 2026-11-07T16:46:32.9823566+01:00
+=== BEFORE: Metasploitable ===
+
+VMState="poweroff"
+nic1="nat"
+nic2="none"
+CurrentSnapshotName="Snapshot 1"
+CurrentSnapshotUUID="66f53e6f-418c-4ccc-9c38-aa7e9cb9ec2f"
+
+
+=== SNAPSHOT CREATE: Metasploitable ===
+VBoxManage.exe : 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+At line:10 char:3
++   & $vb snapshot $vm take "CAPSTONE_PRECONFIG_20261107" --description ...
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (0%...10%...20%....0%...90%...100%:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Snapshot taken. UUID: 67f55010-6848-44c0-9d7c-05217c277f74
+=== SNAPSHOT LIST: Metasploitable ===
+   Name: Snapshot 1 (UUID: 66f53e6f-418c-4ccc-9c38-aa7e9cb9ec2f)
+      Name: CAPSTONE_PRECONFIG_20261107 (UUID: 67f55010-6848-44c0-9d7c-05217c277f74) *
+      Description: Pre-configuration rollback point for CAPSTONE PROJECT 138. Network settings unchanged at snapshot time.
+=== BEFORE: Kali Linux ===
+
+VMState="aborted"
+nic1="nat"
+nic2="none"
+CurrentSnapshotName="Snapshot 1"
+CurrentSnapshotUUID="77543c4f-0439-40dd-9a81-64d334935be1"
+
+
+=== SNAPSHOT CREATE: Kali Linux ===
+VBoxManage.exe : 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+At line:10 char:3
++   & $vb snapshot $vm take "CAPSTONE_PRECONFIG_20261107" --description ...
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (0%...10%...20%....0%...90%...100%:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Snapshot taken. UUID: 91269b44-8f5c-41f5-9636-ef700acdb7b0
+=== SNAPSHOT LIST: Kali Linux ===
+   Name: Snapshot 1 (UUID: 7a8edf54-2307-45b3-ab0f-b5f36e9376b6)
+      Name: Snapshot 1 (UUID: 77543c4f-0439-40dd-9a81-64d334935be1)
+         Name: CAPSTONE_PRECONFIG_20261107 (UUID: 91269b44-8f5c-41f5-9636-ef700acdb7b0) *
+         Description: Pre-configuration rollback point for CAPSTONE PROJECT 138. Network settings unchanged at snapshot time.
+Log: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\00_Preflight\SNAPSHOT_BASELINE_20261107_164632.txt

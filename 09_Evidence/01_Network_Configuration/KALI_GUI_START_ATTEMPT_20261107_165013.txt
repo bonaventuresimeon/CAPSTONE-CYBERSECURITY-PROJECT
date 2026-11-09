@@ -1,0 +1,21 @@
+﻿Attempt GUI startup after headless VERR_UNRESOLVED_ERROR — 2026-11-07T16:50:14.0603165+01:00
+VBoxManage.exe : VBoxManage.exe: error: Unresolved (unknown) host platform error. (VERR_UNRESOLVED_ERROR)
+At line:6 char:1
++ & $vb startvm 'Kali Linux' --type gui 2>&1 | Out-File -Append -Encodi ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (VBoxManage.exe:...RESOLVED_ERROR):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+VBoxManage.exe: error: Details: code E_FAIL (0x80004005), component ConsoleWrap, interface IConsole
+Waiting for VM "Kali Linux" to power on...
+ExitCode=1
+Running VMs:
+"Metasploitable" {396b158d-852c-463f-b179-0cc971418cc7}
+VM state:
+
+VMState="poweroff"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+nic2="none"
+
+

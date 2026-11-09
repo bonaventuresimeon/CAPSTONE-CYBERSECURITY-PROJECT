@@ -1,0 +1,75 @@
+CAPSTONE PROJECT 138 — WORKSTREAM DOCUMENTATION RECEIPT
+Date: 8 November 2026 (Africa/Lagos)
+Computer: PHAMOUS / CHINEDU
+Project root: C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138
+Documentation operator: ChatGPT through authorised Desktop Commander session
+Purpose: Record the creation of consolidated workstream documents and governance updates.
+
+1. DOCUMENTS CREATED
+System discovery (Jeffrey — Tasks 1 & 2):
+- 03_System_Discovery\SYSTEM_DISCOVERY_AND_SERVICE_INVENTORY.md
+- 03_System_Discovery\SERVICE_INVENTORY.csv
+- 03_System_Discovery\DISCOVERY_EVIDENCE_INDEX.csv
+
+Vulnerability identification/research (Bonaventure — Task 3):
+- 04_Vulnerability_Assessment\VULNERABILITY_FINDINGS_REGISTER.md
+- 04_Vulnerability_Assessment\CVE_APPLICABILITY_MATRIX.csv
+
+Risk assessment (Abundance — Task 4):
+- 05_Risk_Assessment\RISK_ASSESSMENT_AND_RISK_REGISTER.md
+
+Security controls (Adeayo — Task 5):
+- 06_Security_Controls\SECURITY_CONTROL_MATRIX.md
+
+GRC policies (Amos Talks — Task 6):
+- 07_GRC_Policies\GRC_POLICY_REGISTER_AND_DRAFTS.md
+
+Cloud security (Task 7 — owner not assigned):
+- 08_Cloud_Security\CLOUD_SECURITY_ASSESSMENT.md
+
+Executive reporting and presentation (Bonaventure — Task 8):
+- 10_Final_Report\EXECUTIVE_SUMMARY_DRAFT_20261108.md
+- 10_Final_Report\FINAL_REPORT_STRUCTURE_AND_QA.md
+- 11_Presentation\PRESENTATION_OUTLINE_AND_SPEAKER_NOTES.md
+
+Research-source log:
+- 09_Evidence\03_Workstream_Research\RESEARCH_SOURCES_AND_APPLICABILITY_LOG_20261108.txt
+
+Governance:
+- 00_Governance\TASK_ALLOCATION_20261108.md
+- 00_Governance\task_selection.csv
+- 00_Governance\PROJECT_CHARTER.md
+- 00_Governance\action_tracker.csv
+- 00_Governance\CURRENT_STATUS.md (section 21 appended)
+- 00_Governance\MASTER_PROJECT_PROCESS_AND_COMMAND_AUDIT_20261108.md (documentation consolidation entry appended)
+- README.md updated
+
+2. CLASSIFICATION OF OUTPUTS
+- System discovery is a consolidated baseline based on previously captured scan and service-specific evidence.
+- Vulnerability register selects five observed security weaknesses/exposures. It does not claim five exploit-confirmed CVEs.
+- Samba CVE-2007-2447 remains a high-confidence applicability candidate pending exact installed-binary patch provenance.
+- Risk scores are provisional context-based likelihood x impact ratings; they are not CVSS.
+- Security controls and GRC policies are proposals/drafts, not implemented or formally adopted controls/policies.
+- Cloud security is desk-based only. No live cloud tenant was identified or assessed.
+- Executive summary and presentation are working drafts awaiting allocated-owner review and group QA.
+
+3. TECHNICAL / SAFETY LIMITS
+- Authorised target remains Metasploitable 2 at 192.168.138.20 only; Kali at 192.168.138.10 is the assessment source.
+- Network remains VirtualBox Internal Network CAPSTONE138_ISOLATED.
+- Dev Guru/second-system scope remains open pending instructor clarification.
+- No exploitation, brute force, credential submission, NFS mount, SMB file-content read/write, FTP authentication, WebDAV mutation, database access or destructive test was performed during this documentation update.
+- No target configuration, package, service, VM state, snapshot or network setting was modified during document preparation.
+- The Mutillidae config resource was validated by HTTP HEAD only. No body or credential value was retrieved.
+
+4. TASK ALLOCATION STATE
+Jeffrey: Tasks 1 & 2.
+Bonaventure: Tasks 3 & 8.
+Abundance: Task 4.
+Adeayo: Task 5.
+Amos Talks: Task 6.
+Task 7: OPEN for a remaining unnamed member to volunteer.
+
+5. ACCEPTANCE STATE
+Prepared documents are working drafts. Allocated owners must review and approve their workstream sections. Instructor clarification remains required for the second-system reference and the meaning of "five vulnerabilities" if the rubric expects five CVE-specific issues. A live cloud assessment requires a named provider/tenant, role and written authorisation. The SHA-256 manifest must be refreshed and verified after the new files are added.
+
+RESULT: DOCUMENTATION CONSOLIDATION RECORDED. NO NEW SECURITY TEST WAS EXECUTED BY THIS RECEIPT.

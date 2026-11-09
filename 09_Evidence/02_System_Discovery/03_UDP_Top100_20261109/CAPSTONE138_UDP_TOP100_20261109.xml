@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.98 scan initiated Mon Nov  9 05:46:36 2026 as: /usr/lib/nmap/nmap -sU -&#45;top-ports 100 -sV -&#45;version-light -Pn -T2 -&#45;reason -&#45;max-retries 2 -&#45;host-timeout 10m -oA /home/bonaventure/capstone138_20261109/CAPSTONE138_UDP_TOP100_20261109 192.168.138.20 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -sU -&#45;top-ports 100 -sV -&#45;version-light -Pn -T2 -&#45;reason -&#45;max-retries 2 -&#45;host-timeout 10m -oA /home/bonaventure/capstone138_20261109/CAPSTONE138_UDP_TOP100_20261109 192.168.138.20" start="1794199596" startstr="Mon Nov  9 05:46:36 2026" version="7.98" xmloutputversion="1.05">
+<scaninfo type="udp" protocol="udp" numservices="100" services="7,9,17,19,49,53,67-69,80,88,111,120,123,135-139,158,161-162,177,427,443,445,497,500,514-515,518,520,593,623,626,631,996-999,1022-1023,1025-1030,1433-1434,1645-1646,1701,1718-1719,1812-1813,1900,2000,2048-2049,2222-2223,3283,3456,3703,4444,4500,5000,5060,5353,5632,9200,10000,17185,20031,30718,31337,32768-32769,32771,32815,33281,49152-49154,49156,49181-49182,49185-49186,49188,49190-49194,49200-49201,65024"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.138.20" addrtype="ipv4"/>
+<address addr="08:00:27:F8:7D:A3" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1794199597" endtime="1794199764"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.138.20" addrtype="ipv4"/>
+<address addr="08:00:27:F8:7D:A3" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+<ports><extraports state="closed" count="93">
+<extrareasons reason="port-unreach" count="93" proto="udp" ports="7,9,17,19,49,67,80,88,120,123,135-136,139,158,161-162,177,427,443,445,497,500,514-515,518,520,593,623,626,631,996-999,1022-1023,1025-1030,1433-1434,1645-1646,1701,1718-1719,1812-1813,1900,2000,2048,2222-2223,3283,3456,3703,4444,4500,5000,5060,5353,5632,9200,10000,17185,20031,30718,31337,32768-32769,32771,32815,33281,49152-49154,49156,49181-49182,49185-49186,49188,49190-49194,49200-49201,65024"/>
+</extraports>
+<port protocol="udp" portid="53"><state state="open" reason="udp-response" reason_ttl="64"/><service name="domain" product="ISC BIND" version="9.4.2" method="probed" conf="10"><cpe>cpe:/a:isc:bind:9.4.2</cpe></service></port>
+<port protocol="udp" portid="68"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="dhcpc" method="table" conf="3"/></port>
+<port protocol="udp" portid="69"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="tftp" method="table" conf="3"/></port>
+<port protocol="udp" portid="111"><state state="open" reason="udp-response" reason_ttl="64"/><service name="rpcbind" method="probed" conf="10"/></port>
+<port protocol="udp" portid="137"><state state="open" reason="udp-response" reason_ttl="64"/><service name="netbios-ns" product="Microsoft Windows netbios-ns" extrainfo="workgroup: WORKGROUP" hostname="METASPLOITABLE" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="udp" portid="138"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="netbios-dgm" method="table" conf="3"/></port>
+<port protocol="udp" portid="2049"><state state="open" reason="udp-response" reason_ttl="64"/><service name="rpcbind" method="probed" conf="10"/></port>
+</ports>
+<times srtt="4571" rttvar="2061" to="400000"/>
+</host>
+<runstats><finished time="1794199764" timestr="Mon Nov  9 05:49:24 2026" summary="Nmap done at Mon Nov  9 05:49:24 2026; 1 IP address (1 host up) scanned in 167.99 seconds" elapsed="167.99" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

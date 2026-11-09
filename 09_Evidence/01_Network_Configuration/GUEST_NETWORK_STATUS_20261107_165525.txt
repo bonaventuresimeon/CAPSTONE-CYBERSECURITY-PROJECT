@@ -1,0 +1,37 @@
+﻿Guest network status — 2026-11-07T16:55:25.2535184+01:00
+[Kali Linux]
+
+memory=3072
+cpus=2
+VMState="running"
+intnet1="CAPSTONE138_ISOLATED"
+macaddress1="080027320984"
+nic1="intnet"
+nic2="none"
+
+
+[Metasploitable]
+
+memory=2048
+cpus=1
+VMState="running"
+intnet1="CAPSTONE138_ISOLATED"
+macaddress1="080027F87DA3"
+nic1="intnet"
+nic2="none"
+
+
+Running VMs:
+"Kali Linux" {8eefef2e-f9a7-44ed-bfda-cf280a9e0b6a}
+"Metasploitable" {396b158d-852c-463f-b179-0cc971418cc7}
+Evidence hashes:
+
+
+Algorithm : SHA256
+Hash      : EFFAF8A50059E212714B1BB890A91865EE2249598E336C5FCE2163B0A2683EF3
+Path      : C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 
+            138\09_Evidence\01_Network_Configuration\SCREENSHOT_KaliBooted_20261107_165525.png
+
+
+
+

@@ -1,0 +1,73 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261107165400
+Username: PHAMOUS\CHINEDU
+RunAs User: PHAMOUS\CHINEDU
+Configuration Name: 
+Machine: PHAMOUS (Microsoft Windows NT 10.0.22631.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command $ErrorActionPreference='Stop'
+$vb='C:\Program Files\Oracle\VirtualBox\VBoxManage.exe'
+$ev='C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\01_Network_Configuration'
+$ts=Get-Date -Format 'yyyyMMdd_HHmmss'
+$log=Join-Path $ev "KALI_RESOURCE_ADJUSTMENT_$ts.txt"
+Start-Transcript -Path $log -Force | Out-Null
+"Controlled Kali resource adjustment — $(Get-Date -Format o)"
+"Precondition: Kali powered off; rollback snapshot CAPSTONE_PRECONFIG_20261107 exists."
+& $vb showvminfo 'Kali Linux' --machinereadable | Select-String '^VMState=|^memory=|^cpus=|^nic1=|^intnet1=|^CurrentSnapshotName='
+if($LASTEXITCODE -ne 0){throw 'Unable to read Kali config'}
+"Setting Kali RAM to 3072 MB and vCPUs to 2; no disk or snapshot changes."
+& $vb modifyvm 'Kali Linux' --memory 3072 --cpus 2
+if($LASTEXITCODE -ne 0){throw 'Kali resource adjustment failed'}
+"Post-change configuration:"
+& $vb showvminfo 'Kali Linux' --machinereadable | Select-String '^VMState=|^memory=|^cpus=|^nic1=|^intnet1=|^nic2=|^CurrentSnapshotName='
+"Host resource check:"
+Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize,FreePhysicalMemory,TotalVirtualMemorySize,FreeVirtualMemory | Format-List
+Stop-Transcript | Out-Null
+Get-FileHash $log -Algorithm SHA256 | Format-List
+"LOG=$log"
+Get-Content $log
+Process ID: 17140
+PSVersion: 5.1.22621.4391
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.4391
+BuildVersion: 10.0.22621.4391
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Controlled Kali resource adjustment — 2026-11-07T16:54:00.6772624+01:00
+Precondition: Kali powered off; rollback snapshot CAPSTONE_PRECONFIG_20261107 exists.
+
+memory=8192
+cpus=3
+VMState="aborted"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+CurrentSnapshotName="CAPSTONE_PRECONFIG_20261107"
+Setting Kali RAM to 3072 MB and vCPUs to 2; no disk or snapshot changes.
+
+Post-change configuration:
+memory=3072
+cpus=2
+VMState="aborted"
+intnet1="CAPSTONE138_ISOLATED"
+nic1="intnet"
+nic2="none"
+CurrentSnapshotName="CAPSTONE_PRECONFIG_20261107"
+Host resource check:
+
+
+
+
+TotalVisibleMemorySize : 16616664
+FreePhysicalMemory     : 3163728
+TotalVirtualMemorySize : 31211540
+FreeVirtualMemory      : 10873180
+
+
+
+**********************
+Windows PowerShell transcript end
+End time: 20261107165405
+**********************

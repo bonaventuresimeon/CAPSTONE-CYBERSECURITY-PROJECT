@@ -1,0 +1,9 @@
+﻿Input,RequiredEvidence,CurrentStatus,NextAction,CompletionGate
+Task 7 owner,"Named member and explicit acceptance",OPEN,"Remaining team member to volunteer",Owner assigned
+Provider and service scope,"Provider, tenant/subscription/project, region, written authorisation",NOT PROVIDED,"Obtain approved scope; do not probe cloud",Scope approved
+Architecture,"Architecture diagram, data flows, asset/service inventory",NOT PROVIDED,"Classify workloads IaaS/PaaS/SaaS",Evidence inspected
+IAM and MFA,"Redacted role exports, MFA policy, access review",NOT PROVIDED,"Read-only collection after permission",Evidence inspected
+Network,"Security group/firewall exports, public endpoint/storage settings",NOT PROVIDED,"Read-only inspection after permission",Evidence inspected
+Data protection,"Classification, encryption, key policies, secret store, retention",NOT PROVIDED,"Collect redacted config evidence",Evidence inspected
+Logging and resilience,"Audit settings, SIEM, alert tests, backup and restore evidence",NOT PROVIDED,"Review logs and recovery records",Evidence inspected
+Legal applicability,"Processing purpose, roles, data subjects, payment/health data, cross-border flows",NOT PROVIDED,"Privacy/legal owner to determine",Owner/legal approval

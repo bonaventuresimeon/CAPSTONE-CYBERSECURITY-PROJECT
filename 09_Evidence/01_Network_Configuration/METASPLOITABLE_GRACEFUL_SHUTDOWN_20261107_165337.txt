@@ -1,0 +1,7 @@
+﻿Request graceful ACPI shutdown to release host memory for Kali recovery — 2026-11-07T16:53:37.5765755+01:00
+ExitCode=0
+Current VM state:
+
+VMState="running"
+
+

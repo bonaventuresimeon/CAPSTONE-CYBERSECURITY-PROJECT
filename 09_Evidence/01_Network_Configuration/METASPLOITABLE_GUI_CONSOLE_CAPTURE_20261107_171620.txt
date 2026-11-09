@@ -1,0 +1,1 @@
+Timestamp 2026-11-07T17:16:21.3029479+01:00; VMState GUI/Qt; guest previously verified at msfadmin shell; Adapter 1 internal CAPSTONE138_ISOLATED; Adapter 2 none.

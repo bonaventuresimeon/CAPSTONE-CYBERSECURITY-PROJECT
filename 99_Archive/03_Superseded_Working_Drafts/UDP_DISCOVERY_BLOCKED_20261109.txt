@@ -1,0 +1,1 @@
+UDP_STATUS=NOT_RUN - sudo non-interactive authorization unavailable; no UDP scan initiated.

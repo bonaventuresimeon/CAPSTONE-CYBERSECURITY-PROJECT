@@ -1,0 +1,140 @@
+﻿CAPSTONE PROJECT 138 — AUDIT GENERATION RECEIPT
+Generated: 2026-11-08
+Host: PHAMOUS / CHINEDU
+
+Screenshots preserved: 107
+Raw text execution records preserved: 36
+Extracted command-line register rows: 61
+Manifest entries: 147
+
+MASTER AUDIT: 
+C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\00_Governance\MASTER_PROJECT_PROCESS_AND_COMMAND_AUDIT_20261108.md
+COMMAND REGISTER: 
+C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\COMMAND_LINE_REGISTER_EXTRACTED_20261108.csv
+SHA-256 MANIFEST: 
+C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\SHA256_EVIDENCE_MANIFEST_20261108.csv
+
+SHA-256:
+DA7EABAE261C4758F294C7032C9806033BA64641DDA4631D23909B8F2EEE0326  C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\00_Governance\MASTER_PROJECT_PROCESS_AND_COMMAND_AUDIT_20261108.md
+8A7D2881FC9E732DBDD8EBC37F6E363CC1A8BD8259CDBD5D441B5C7DACF6B0C3  C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\COMMAND_LINE_REGISTER_EXTRACTED_20261108.csv
+BCA8FB5EF05343FA0728D1E155DAFF2F13674AE3BA02376708C0FA4AD4EF64D7  C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138\09_Evidence\SHA256_EVIDENCE_MANIFEST_20261108.csv
+
+CONTINUATION UPDATE — 8 NOVEMBER 2026 05:14 WAT
+- Reviewed the uploaded TS Academy source brief and the 17-page HanTech professional project playbook.
+- Captured one additional live Metasploitable startup-configuration screenshot: LIVE_SCREENSHOT_Metasploitable_DHCP_Startup_ReadOnly_20261108_0514.png
+- Screenshot SHA-256: 324C712580E3A7ECFF33F82A6926D3C03069DD86B0CF5165D631F73BA1D179A7
+- Command register rows: 75
+- SHA-256 evidence manifest rows: 159
+- PNG screenshot count: 116
+- Master audit SHA-256: 7E73419A8692C7884E4B93A958A0B48BB90C46D254840685640279453872750A
+- DHCP diagnostic receipt SHA-256: A665B58B3CEFE6589FF3CAC7D89BDC8B45CDE33981307B3BD202CCABFE47AE64
+- Command register SHA-256: 308D171369AF8BE00043F4A8CC30A9E1B6B747468B4A354FB69B63BFC7D8C8E8
+- Manifest SHA-256 at generation: 0C66966CE2725277DC9B6FA115C93E2FBC69181ED1F0F1F04C67981B6088DB9C
+- DHCP startup attribution remains unresolved. No scan or exploit has been run; no guest DHCP process or configuration was changed.
+
+CONTINUATION UPDATE — 8 NOVEMBER 2026 05:20 WAT
+- Read-only guest console capture now confirms DHCP PIDs 4742 and 4893 both have PPID 1.
+- /var/run/dhclient.pid contains 4893, linking the generic PID file to dhclient PID 4893.
+- PID 4742 uses separate interface-specific PID/lease paths; its startup origin remains unresolved.
+- Targeted startup inspection found /etc/rcS.d/S40networking -> ../init.d/networking; the inspected networking and if-up script paths showed no dhclient invocation. This is not an exhaustive startup-source search.
+- New live screenshots: LIVE_SCREENSHOT_Metasploitable_DHCP_Process_Attribution_Clean_20261108_0523.png; LIVE_SCREENSHOT_Metasploitable_DHCP_PID_Startup_20261108_0525.png; LIVE_SCREENSHOT_Metasploitable_DHCP_LeaseAndStartup_20261108_0528.png.
+- New screenshot SHA-256 values are recorded in SHA256_EVIDENCE_MANIFEST_20261108.csv and DHCP_CLIENT_DIAGNOSTIC_FINDINGS_20261108.txt.
+- Current extracted command register rows: 79; SHA-256 manifest entries: 163; PNG screenshots: 126.
+- Master audit SHA-256: E66E849A7ABC1EC69FE1D0098C29688BE8E1B302B08C3EB7D0B2DA24B30FC19C.
+- DHCP diagnostic receipt SHA-256: 8793EE2F249375BB47BE5928B8C99BA289F3DBBC48AD4A5CB80F6521DF7BEE8B.
+- Command register SHA-256: 3087943E7F9A31A0AEAC443F12F227CBC4755C2376E4B0AF73DAB288CABDE95D.
+- No DHCP process terminated, no guest file edited, no service restarted, no network setting changed. DHCP HOLD; discovery/scanning NOT STARTED.
+
+CONTINUATION UPDATE — 8 NOVEMBER 2026 05:24–05:23 WAT
+- Read-only guest capture confirms /var/run/dhclient.eth0.pid contains 4742; the specified /var/lib/dhcp3/dhclient.eth0.leases path does not exist. PID 4742 remains running with PPID 1 and dhclient3 command arguments.
+- Earlier evidence maps /var/run/dhclient.pid to PID 4893. Both DHCP clients have distinct PID-file associations; neither original launcher is yet established.
+- Host-side read-only VirtualBox inspection confirms fixed binding .20 for Metasploitable and .10 for Kali. Server log ACK fields: ciaddr .100, yiaddr .20. Correct reading: .100 is client current/previous address field; .20 is the assigned address in this ACK.
+- VirtualBox lease file still records .100 as acked for the Metasploitable MAC. This lease-file record conflicts with fixed reservation/observed ACK yiaddr. It is not proof that the observed ACK assigned .100.
+- New screenshot: LIVE_SCREENSHOT_Metasploitable_DHCP_ClientSpecific_PID_Lease_Clean_20261108_0524.png; SHA-256 F5AD3037D256F126D874BDB449D1C1CF11A8B6DE35457E8DAFC4480FE53C5FF3.
+- New host read-only snapshot: VIRTUALBOX_DHCP_SERVER_STATE_READONLY_20261108_052255.txt.
+- Current counts: 129 PNG screenshots; 86 command register rows; 164 manifest entries.
+- Master audit SHA-256: 5D9EB185E23B644710FECF72A92FA86837D46CD91B817DC3CE70EA48FFCF4F47.
+- DHCP diagnostic receipt SHA-256: 1853DAF5F31F0F0E1E10CFF0E399B66C778195B7AE5734827F6CC4A0CFFAE4DB.
+- Host DHCP state receipt SHA-256: B84E5B447C17BCACFDB7AB9CF56A56926CE28C3F4C61D6A9C63D88DA807E784E.
+- Command register SHA-256: ADA4749A0FC5D989A19BCD88DB7A38E4CDFC6F3C84A14936D9C3B860951550E0.
+- SHA-256 manifest SHA-256 before this receipt append: 9354737D65C87ECD34FC89BD7CBDAAB9DE840ACC29F91BB733EF757A8D0D8BB4.
+- No process stopped; no guest or host DHCP file edited; no service restarted; no network setting changed. DHCP HOLD; discovery/scanning NOT STARTED.
+
+SUPPLEMENTAL ACTIVITY - 2026-11-08 (Africa/Lagos)
+A live forensic checkpoint was created for Metasploitable 2: CAPSTONE_DHCP_FORENSIC_CHECKPOINT_20261108, UUID 4a91e04b-799b-44c6-bc6b-a2429d1e8136. A standalone full VDI clone was created from the read-locked checkpoint medium at D:\VirtualBox VMs\CAPSTONE138_FORENSIC\Metasploitable_DHCP_Checkpoint_20261108.vdi (UUID 173a33a1-325b-4804-897e-647e89fd9a87; 2,235,564,032 bytes; SHA-256 76AD451FE4A342D0501FFE1B99A613D67A6FE8FDD1D9FB03D3B7C1E15790EB6B). The clone is standalone (Parent UUID base), unmounted, unbooted, and not attached to any VM.
+File-level examination is blocked by missing WSL ext4.vhdx, absent Windows vboximg-mount/qemu/libguestfs tools, and Metasploitable Guest Additions unavailable for guestcontrol. No VM was powered off; no storage was attached to Kali. DHCP remains HOLD. Detailed receipt: 09_Evidence\01_Network_Configuration\DHCP_READONLY_FORENSIC_COPY_RECEIPT_20261108.txt.
+
+SUPPLEMENTAL ACTIVITY — 2026-11-08
+Offline read-only examination of the standalone Metasploitable VDI clone succeeded. Partition map identified an LVM2 PV; the root LV was exposed through a read-only device-mapper mapping and mounted ext3 with `ro,noload`. The ifupdown 0.6.8ubuntu8 binary contains the DHCP command template matching live PID 4742 exactly, and `/etc/init.d/networking` calls `ifup -a`. PID 4742 is strongly attributable to the configured ifupdown DHCP method; PID 4893 remains unattributed. Guest lease history contains `.20` ACK entries; VirtualBox log ACK has `ciaddr .100` and `yiaddr .20`, while the VirtualBox lease XML records `.100`. This discrepancy remains unresolved. No guest or server DHCP state was changed. Detailed receipt: 09_Evidence\01_Network_Configuration\DHCP_OFFLINE_FILESYSTEM_ATTRIBUTION_20261108.txt.
+
+Final forensic working-copy cleanup: the temporary raw derivative was detached from the read-only loop device and deleted. The independent VDI clone was retained and its SHA-256 reverified as 76AD451FE4A342D0501FFE1B99A613D67A6FE8FDD1D9FB03D3B7C1E15790EB6B. Metasploitable remained running on CAPSTONE138_ISOLATED.
+
+
+APPROVED DHCP CORRECTION ATTEMPT — 2026-11-08
+Fresh rollback snapshot created and verified: CAPSTONE_DHCP_PRE_CORRECTION_20261108 (f975d0d1-b15f-440d-99d3-36b98e3de100). Live guest state could not be refreshed because VBoxManage guestcontrol reports Guest Additions not installed/not ready. PID 4893 was not terminated; PID 4742 and all DHCP state remain untouched. HOLD / EXECUTION BLOCKED. See DHCP_PRECORRECTION_APPROVAL_AND_EXECUTION_BLOCK_20261108.txt.
+
+
+
+DHCP SINGLE-CLIENT CORRECTION — 2026-11-08
+The console black screen was awakened with Enter; no reboot. The approved additional DHCP process PID 4893 was gracefully terminated via sudo at the guest console. A fresh process query showed PID 4742 only; PID 4893 absent. eth0 remained 192.168.138.20/24, route unchanged, and ping to Kali 192.168.138.10 succeeded 3/3 with 0% loss. Generic PID file still contains stale 4893 and was not edited. VirtualBox .100 lease XML remains unresolved and untouched. Overall DHCP gate HOLD pending separate lease reconciliation and reverse-direction connectivity verification. No scanning started. Receipt: 09_Evidence\01_Network_Configuration\DHCP_SINGLE_CLIENT_CORRECTION_RESULT_20261108.txt.
+
+
+CONTINUATION UPDATE — 8 NOVEMBER 2026 06:05 WAT
+- Final DHCP/network correction and validation receipt completed: CAPSTONE138_DHCP_AND_BIDIRECTIONAL_NETWORK_FINAL_VERIFICATION_20261108.txt.
+- Metasploitable PID 4893 is absent; PID 4742 remains as the sole active ifupdown dhclient3. eth0 is .20/24; Kali is .10/24.
+- Post-correction ping evidence: Metasploitable -> Kali 3/3, 0% loss; Kali -> Metasploitable 4/4, 0% loss.
+- VirtualBox's read-only dhcpserver findlease reports the old .100 record EXPIRED with TTL 0. The underlying XML record was preserved unchanged. Current later DHCP ACK records yiaddr .20.
+- Network readiness gate: PASS for authorised Metasploitable-only discovery.
+- Kali Nmap 7.98 TCP service/version discovery completed at 06:04:18 +0100. Exact command: nmap -sV --version-light -T3 -oN /home/bonaventure/CAPSTONE138_METASPLOITABLE_TCP_DISCOVERY_20261108.txt 192.168.138.20.
+- Nmap reported 1 host up, 23 open TCP ports, 977 closed TCP ports (reset), and a 16.52-second scan duration across the default top-1,000 TCP port set.
+- Initial TCP service inventory and limitations are recorded in 09_Evidence\02_System_Discovery\CAPSTONE138_INITIAL_TCP_SERVICE_DISCOVERY_20261108.txt. No confirmed vulnerability is assigned from banners alone; no NSE/vulnerability scan, brute force, UDP scan or exploitation occurred.
+- Current evidence inventory counts after this update: 161 PNG images, 49 text files, 135 extracted command-register rows and 196 manifest records (before this receipt's self-entry update).
+- At this append, master audit SHA-256: CF340C7BC2CCE2C34C9FA40B004B85276299ACD95289C6E1BDCEB183860E93F7.
+- At this append, command register SHA-256: 8C25C8B97D8CDBC3609C4CF76C3427A0A4A731CBBC2992B416D54E1EE0FBC908.
+- At this append, SHA-256 manifest: 5C9DD86AB0282358430C31D9D7E8D1214C572A0E652AEC42F9E180D53609CAF2. The receipt's own updated hash is to be recorded as a manifest entry after this append.
+
+
+CONTINUATION UPDATE — 8 NOVEMBER 2026 06:10 WAT
+- Network readiness gate is PASS: duplicate generic dhclient PID 4893 is absent, configured dhclient3 PID 4742 remains, Metasploitable .20/24 and Kali .10/24 are up, and post-correction pings passed in both directions (3/3 and 4/4, 0% loss). The old VirtualBox .100 lease record is EXPIRED (TTL 0) and preserved without manual editing.
+- Initial Nmap 7.98 TCP service/version discovery completed against Metasploitable 192.168.138.20 only. It reported 23 open TCP ports and 977 closed TCP ports in the default top-1,000 TCP set. No UDP, vulnerability NSE, exploit or brute-force testing was done.
+- Read-only service validation confirmed: NFS root filesystem `/` exported to wildcard `*` with `rw,no_root_squash`; anonymous SMB share enumeration and anonymous `tmp` directory listing; default lab credentials disclosed on the HTTP landing page; Telnet/rsh-family listeners; Apache 2.2.8 and PHP 5.2.4 runtime; HTTP 8180 Tomcat/Coyote endpoint.
+- Samba correction: the actual active smb.conf line is `username map script = /etc/samba/scripts/mapusers.sh`; the configured script exists, is executable, root-owned and 0 bytes. A prior check of `mksmbpasswd.sh` was a wrong-filename transcription and is superseded. Samba 3.0.20 is within the upstream CVE-2007-2447 version range, making this a high-confidence candidate; patch state remains unproven and no trigger was sent.
+- OS release confirmed Ubuntu 8.04 Hardy. Do not count CVE-2011-2523 from the vsftpd 2.3.4 banner: Ubuntu lists its official Hardy vsftpd package as not affected and this service binary's provenance is unknown.
+- Preliminary evidence and CVE applicability record: `09_Evidence\02_System_Discovery\CAPSTONE138_PRELIMINARY_VULNERABILITY_CANDIDATES_20261108.txt`; safe configuration record: `CAPSTONE138_SERVICE_CONFIGURATION_VALIDATION_20261108.txt`.
+- Final counts at 06:10 WAT: 177 PNG screenshots, 51 TXT evidence records, 152 extracted command-register rows, and 236 canonical SHA-256 manifest records (234 physical evidence files, master audit, and one external forensic VDI clone record).
+- Master audit SHA-256 at 06:10 WAT: 46E5C8FC0E1C27936A4240CCC9925491B2DC7A21E1C8476F88ED0BFBD310FFDF.
+- Command register SHA-256 at 06:10 WAT: 3735AB3B2EB92908D537B10C149D38992C23F7B392B1FA9EFB021D20AE7367D4.
+- Service validation receipt SHA-256 at 06:10 WAT: 74CB8340EC479094B71B815A4BF7A1BB8CFC14BB3BD0D3F7AE728118FB6D5F73.
+- Preliminary vulnerability candidate report SHA-256 at 06:10 WAT: 627AE1C852C540AB8ADE4A3B7F486F5DB137842752B8440011231D69BD220F86.
+- Manifest SHA-256 immediately before this receipt append: DB506BFF23633239A9137E862EF9E1F402094B977A77D8C6668F64F523A7BFDD. The receipt's own row is refreshed after this append; do not quote the pre-append manifest hash as its final hash.
+- No exploit, brute-force, password submission, NFS mount, remote file write, or unauthorised scope scan occurred.
+
+CONTINUATION UPDATE — 8 NOVEMBER 2026 06:12 WAT
+- Prepared the five-priority-findings risk register: 09_Evidence\02_System_Discovery\CAPSTONE138_FIVE_PRIORITY_FINDINGS_RISK_REGISTER_20261108.txt.
+- The five priority items are NFS root export misconfiguration; Samba CVE-2007-2447 high-confidence candidate pending patch verification; anonymous SMB enumeration/metadata disclosure; default lab credentials disclosed on HTTP landing page; unsupported Apache/PHP web stack. Telnet/rsh-family listeners remain a separately recorded hardening item.
+- The corrected Samba setting is `username map script = /etc/samba/scripts/mapusers.sh`; that actual path exists as a root-owned executable zero-byte file. The former mksmbpasswd.sh transcription/check is superseded.
+- Ubuntu 8.04 Hardy confirmed. CVE-2011-2523 is excluded: Ubuntu marks its official Hardy vsftpd package NOT AFFECTED, and the target service binary provenance is not established.
+- Latest inventory: 177 PNG screenshots, 52 TXT evidence records, 157 command-register rows, 235 physical files in 09_Evidence and 237 manifest records (including the master audit and external forensic VDI clone record).
+- Master audit SHA-256: 1220A051F485C8C510E7316B188C0BF3FE499C5B630B960AD90919DBD088975C.
+- Command register SHA-256: 3BD2B5FC5584F28D90303CB8B254084C01A3BF523E69A0EF9FC03D09026B676E.
+- Five-findings register SHA-256: 23DF8C50F2B688C7DA76A4960B48EA545D72BAEBC38BE30463ACFC158AC7FC28.
+- Manifest SHA-256 immediately before this append: 61910B1B001599AB1B5209C94210AB24726694D688391673F6C26CB3FFB80F70. The audit receipt row will be refreshed after this append, so the manifest hash will change.
+- No exploitation, brute force, credential submission, NFS mount, remote file write, or out-of-scope scan was performed.
+FINAL MANIFEST COUNT ADDENDUM — 8 NOVEMBER 2026
+After refreshing the audit-receipt entry itself, the canonical SHA-256 manifest contains 238 records. The manifest is not self-hashed; it hashes each physical evidence file, the master audit, and the separate forensic VDI clone record.
+
+CANONICAL MANIFEST PATH NORMALISATION — 8 NOVEMBER 2026
+A final manifest path-normalisation removed duplicate entries created by a leading path separator. Rebuilt using one canonical relative path per physical evidence file, plus one master-audit record and one external forensic VDI record. Verified zero duplicate paths, exactly one audit-receipt row and exactly one master-audit row. The corrected canonical manifest contains 237 records (235 physical evidence files + master audit + external VDI). The prior 238 count in the preceding addendum is superseded.
+
+
+TASK 8 EXECUTIVE SUMMARY DRAFT AND FINAL INVENTORY UPDATE — 8 NOVEMBER 2026
+- Prepared `09_Evidence\02_System_Discovery\CAPSTONE138_EXECUTIVE_SUMMARY_DRAFT_20261108.txt` from existing verified network, discovery and service-validation evidence. It is explicitly a lab-only draft and does not attribute Metasploitable findings to HanTech production systems.
+- Updated master audit and command register to record the executive summary.
+- Latest physical evidence inventory: 236 files under 09_Evidence, including 177 PNG images and 53 TXT records.
+- Command register contains 158 rows.
+- Canonical SHA-256 manifest contains 238 records: 236 physical evidence files, one master audit file and one external forensic VDI clone record. Verified zero duplicate paths.
+- Master audit SHA-256: A506ECF65D00F27CB5329F1DB0D62EA5E7688CE0B560DC0278472875F95AF1FE.
+- Command register SHA-256: 915B6B51829891CAFE1121C6F95135FA2166743D6A25984FC7CAD637C86C2BFE.
+- Executive summary draft SHA-256: 4698A3DB6F64FA46E3D5921AF7E5129B7BF8635DFF9DF403E827E4F27A293E27.
+- Five-findings register SHA-256: 23DF8C50F2B688C7DA76A4960B48EA545D72BAEBC38BE30463ACFC158AC7FC28.
+- Manifest SHA-256 immediately before this receipt append: 409200751C82B8C86E81CD881D275FCB5E7AA35C042624A98A54ED6C4B87B090. The audit receipt row is refreshed after this append.

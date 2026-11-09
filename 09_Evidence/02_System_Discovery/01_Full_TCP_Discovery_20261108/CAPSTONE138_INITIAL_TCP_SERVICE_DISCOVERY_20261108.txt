@@ -1,0 +1,71 @@
+CAPSTONE PROJECT 138 — INITIAL TCP SYSTEM / SERVICE DISCOVERY RECEIPT
+Date: 2026-11-08 (Africa/Lagos)
+Assessment source: Kali Linux VM, user bonaventure, hostname Whisper
+Target: Metasploitable 2 — 192.168.138.20
+Target MAC: 08:00:27:f8:7d:a3
+Network: CAPSTONE138_ISOLATED (VirtualBox Internal Network; guest-only)
+Nmap version: 7.98
+
+SCOPE AND EXACT COMMAND
+Only the authorised Metasploitable 2 guest at 192.168.138.20 was scanned.
+Command:
+nmap -sV --version-light -T3 -oN /home/bonaventure/CAPSTONE138_METASPLOITABLE_TCP_DISCOVERY_20261108.txt 192.168.138.20
+
+METHOD / LIMITS
+- Default Nmap TCP port set (top 1,000 TCP ports); TCP connect scan because run as the unprivileged Kali user. No UDP scan.
+- Service/version detection enabled with --version-light. Timing template T3.
+- No NSE scripts, vulnerability scripts, brute-force checks, exploitation or intrusive tests were run.
+- The guest-side Nmap output file is preserved at /home/bonaventure/CAPSTONE138_METASPLOITABLE_TCP_DISCOVERY_20261108.txt.
+- Nmap 7.98 reported 1 host up, scan duration 16.52 seconds, 23 open TCP ports and 977 closed TCP ports (reset).
+- Service/version strings below are Nmap identification results, not independently confirmed software inventory or confirmed vulnerabilities.
+
+DISCOVERED TCP SERVICES
+PORT      STATE  SERVICE / NMAP IDENTIFICATION
+21/tcp    open   ftp — vsftpd 2.3.4
+22/tcp    open   ssh — OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
+23/tcp    open   telnet — Linux telnetd
+25/tcp    open   smtp — Postfix smtpd
+53/tcp    open   domain — ISC BIND 9.4.2
+80/tcp    open   http — Apache httpd 2.2.8 ((Ubuntu) DAV/2)
+111/tcp   open   rpcbind — version not reliably legible in retained terminal capture; verify separately
+139/tcp   open   netbios-ssn — Samba smbd 3.X–4.X (workgroup WORKGROUP)
+445/tcp   open   netbios-ssn — Samba smbd 3.X–4.X (workgroup WORKGROUP)
+512/tcp   open   exec — netkit-rsh rexecd
+513/tcp   open   login — service label detected; version not confirmed
+514/tcp   open   shell — Netkit rshd
+1099/tcp  open   java-rmi — GNU Classpath grmiregistry
+1524/tcp  open   bindshell — Nmap labels this “Metasploitable root shell”; confirm service behavior only through non-exploit evidence
+2049/tcp  open   rpcbind — service identification should be validated in RPC/NFS enumeration
+2121/tcp  open   ftp — ProFTPD 1.3.1
+3306/tcp  open   mysql — MySQL 5.0.51a-3ubuntu5
+5432/tcp  open   postgresql — PostgreSQL DB 8.3.0–8.3.7
+5900/tcp  open   vnc — VNC protocol 3.3
+6000/tcp  open   X11 — access denied reported by version probe
+6667/tcp  open   irc — UnrealIRCd
+8009/tcp  open   ajp13 — Apache JServ (Protocol v1.3)
+8180/tcp  open   http — Apache Tomcat/Coyote JSP engine 1.1
+
+NMAP HOST / SERVICE INFORMATION
+- MAC address: 08:00:27:f8:7d:a3 (Oracle VirtualBox virtual NIC).
+- Service Info includes host labels metasploitable.localdomain and irc.metasploitable.LAN, OS family hints Unix/Linux and a generic Linux kernel CPE. These are service-probe hints, not a definitive OS fingerprint.
+- Scan completion: Sun Nov 8 06:04:18 2026 +0100; 1 IP address (1 host up), scanned in 16.52 seconds.
+
+PRELIMINARY FOLLOW-UP CANDIDATES (NOT FINDINGS)
+- Legacy/version-sensitive service banners include vsftpd 2.3.4, OpenSSH 4.7p1, Apache 2.2.8, ISC BIND 9.4.2, ProFTPD 1.3.1, MySQL 5.0.51a, PostgreSQL 8.3.x, UnrealIRCd and Tomcat.
+- Exposed remote administration/legacy protocols include Telnet, rsh/rlogin-family ports, SMB, VNC, Java RMI and AJP.
+- These are inventory leads only. No CVE or severity is assigned here. Confirm running package/build, configuration, reachability/access control and applicability before counting any item among the five assessed vulnerabilities. A detected banner alone is not a validated vulnerability.
+- Port 1524 is reported by Nmap as a bindshell/Metasploitable root shell. It is recorded as an exposure lead only; no connection or command execution was attempted.
+
+DECISION
+- Initial authorised TCP service discovery: COMPLETE / PASS.
+- Confirmed vulnerability count from this scan alone: 0.
+- System/service inventory now has an evidence-backed baseline for the next controlled validation stage.
+- No exploit or vulnerability NSE scan was run.
+- Do not extend scans to Kali, Dev Guru, the Windows host, external addresses or any other system without separate scope authority.
+
+VISUAL EVIDENCE / SHA-256
+KALI_NMAP_VERSION_20261108.png | 401195 bytes | SHA-256 94CFE260F8D711B551D0728AB98DE1C78496B664668609EEA200566703AA6AAF
+KALI_NMAP_TCP_DISCOVERY_RUNNING_20261108.png | 416296 bytes | SHA-256 235F803F8662342878194BB540F2188C6EEA44C9C01850DDE2AD6978EA38328A
+KALI_NMAP_TCP_DISCOVERY_PROGRESS_20261108.png | 421873 bytes | SHA-256 2275C7C7EA85F37CBE6EE4DF94A9C0068BA9F2611CDBEF205639F6F1B261CD0A
+KALI_NMAP_TCP_DISCOVERY_OUTPUT_1_20261108.png | 407726 bytes | SHA-256 C9BEB84477D869412384DBF5464E6A6E98EFD726F5C7D49397CC2D13D3B05880
+KALI_NMAP_TCP_DISCOVERY_OUTPUT_2_20261108.png | 421977 bytes | SHA-256 1DF85C3296BE67A7A7327B1FC71D45EC16ACBA16F52FB6321C26AA6A9B8698A1

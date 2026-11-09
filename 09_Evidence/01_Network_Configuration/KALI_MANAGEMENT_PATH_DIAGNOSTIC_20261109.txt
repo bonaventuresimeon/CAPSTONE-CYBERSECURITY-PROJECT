@@ -1,0 +1,28 @@
+CAPSTONE PROJECT 138 — KALI MANAGEMENT-PATH DIAGNOSTIC
+Collection date: 2026-11-09 (host-local timestamp to be captured by filesystem metadata)
+Host: PHAMOUS
+Scope: Read-only VirtualBox and host connectivity diagnostics. No target scans or guest configuration changes.
+
+Verified observations:
+1. VirtualBox reports both "Kali Linux" and "Metasploitable" as running.
+2. Kali VM UUID: 8eefef2e-f9a7-44ed-bfda-cf280a9e0b6a.
+3. Kali NIC 1: Internal Network "CAPSTONE138_ISOLATED", MAC 08:00:27:32:09:84, cable connected.
+4. Metasploitable NIC 1: DHCP reservation 192.168.138.20 for MAC 08:00:27:f8:7d:a3 on "CAPSTONE138_ISOLATED".
+5. VirtualBox guest properties for Kali report eth0 UP and IPv4 192.168.138.10/24. Guest property timestamp is 2026-11-08T03:16:54Z; treat as cached/last-reported telemetry, not a fresh in-guest command result.
+6. Kali Guest Additions report one logged-in user, bonaventure. This is Guest Additions telemetry and not proof of current sudo state.
+7. Host has no active VirtualBox host-only adapter; the listed VirtualBox host-only adapter is Not Present. The host Wi-Fi adapter is Up.
+8. SSH attempt from PHAMOUS to 192.168.138.10:22 timed out. No SSH session was established.
+9. The Internal Network is an isolated guest-to-guest network. Host SSH timeout is consistent with the host not being attached to that internal network; do not alter the isolated lab topology merely to enable remote management.
+10. VirtualBox clipboard is Disabled. Drag-and-drop is Bidirectional as currently reported; no setting was changed during this diagnostic.
+
+Decision:
+- Do not attach a host interface to CAPSTONE138_ISOLATED, change NIC mode, enable port forwarding, or expose the lab to the physical LAN merely to obtain remote access.
+- Use the authenticated Kali VM console for scan execution, or establish a separately approved, documented management channel that preserves the target's isolation.
+- UDP top-100 scan: NOT RUN.
+- Targeted TCP recheck ports 3632, 6697, 8787, 33543, 47335, 47852, 60679: NOT RUN / no receipt.
+- No UDP state or new service identification is inferred.
+- No target or Kali guest configuration was changed by this diagnostic.
+
+Evidence limitations:
+- The guest IP and login details above come from VirtualBox Guest Additions telemetry, with the timestamp shown; they are not fresh shell output.
+- The host SSH timeout proves only that this attempted path failed at the time of testing; it does not prove sshd is disabled inside Kali.

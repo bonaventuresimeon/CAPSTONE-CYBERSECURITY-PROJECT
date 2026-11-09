@@ -1,0 +1,45 @@
+﻿HAN TECH CAPSTONE PROJECT 138 - DHCP READ-ONLY FORENSIC COPY RECEIPT
+Record date: 2026-11-08 (Africa/Lagos)
+Host: PHAMOUS / Windows account CHINEDU
+VirtualBox: 7.2.10r174163
+Target VM: Metasploitable (396b158d-852c-463f-b179-0cc971418cc7)
+Network attachment at checkpoint: CAPSTONE138_ISOLATED; MAC 08:00:27:F8:7D:A3
+
+LIVE CHECKPOINT
+Snapshot name: CAPSTONE_DHCP_FORENSIC_CHECKPOINT_20261108
+Snapshot UUID: 4a91e04b-799b-44c6-bc6b-a2429d1e8136
+Operation: VBoxManage snapshot <VM UUID> take ... --live
+Start: 2026-11-08T05:31:04.5659154+01:00
+Completed: 2026-11-08T05:31:15.9942952+01:00
+Result: Snapshot taken. VM remained running.
+Existing parent snapshot preserved: CAPSTONE_PRECONFIG_20261107 (67f55010-6848-44c0-9d7c-05217c277f74).
+At the checkpoint, previous active differencing medium 5a72c11d-754d-4f03-8be9-956b61feb999 became locked-read. VirtualBox created a new active child medium b30e247e-83fe-4180-b252-79e68fff75e1 (locked-write) for subsequent guest writes. This is the expected snapshot chain behaviour; it is a VM storage-chain change, not a guest DHCP/configuration edit.
+
+INDEPENDENT FULL DISK CLONE
+Source medium UUID: 5a72c11d-754d-4f03-8be9-956b61feb999 (checkpoint state; read-locked after live snapshot)
+Clone UUID: 173a33a1-325b-4804-897e-647e89fd9a87
+Clone path: D:\VirtualBox VMs\CAPSTONE138_FORENSIC\Metasploitable_DHCP_Checkpoint_20261108.vdi
+Format: VDI, dynamic; normal base image; Parent UUID: base
+Virtual capacity: 8192 MiB
+File length: 2235564032 bytes
+SHA-256: 76AD451FE4A342D0501FFE1B99A613D67A6FE8FDD1D9FB03D3B7C1E15790EB6B
+Clone operation completed successfully using VBoxManage clonemedium; destination did not exist before the operation. The clone is a standalone copy and was not attached to or booted by any VM.
+
+READ-ONLY INSPECTION PATH CHECKS
+1. WSL Ubuntu-24.04 launch failed: configured ext4.vhdx path under %LOCALAPPDATA%\wsl\{9d4c344b-bd70-4d8a-bdda-ee7b3bc2a3ce} was not found. No WSL repair/reinstall was attempted.
+2. Host VirtualBox installation directory was checked; no vboximg-mount executable was present.
+3. qemu-img, qemu-nbd, guestfish, guestmount, and guestmount-related Windows executables were not present on PATH.
+4. VBoxManage guestcontrol read test for /etc/network/interfaces failed because Guest Additions were not installed or ready in Metasploitable. No guest file was read through guestcontrol.
+5. The cloned VDI has not yet been mounted or inspected at file level. No guest filesystem content is claimed from the clone.
+
+SAFETY / SCOPE
+- Metasploitable remained running on CAPSTONE138_ISOLATED at last verified host check.
+- No DHCP process was terminated.
+- No DHCP configuration, PID file, lease file, or VirtualBox DHCP server configuration was edited.
+- No networking service was restarted and no network adapter was changed.
+- No storage device was attached to Kali; no VM was powered off for this examination.
+- Clone remains separate, unbooted, and available for a read-only filesystem examination when a supported tool/analyst environment is available.
+- DHCP startup attribution and the VirtualBox .100 lease-record discrepancy remain unresolved. DHCP gate remains HOLD. System discovery and vulnerability assessment remain NOT STARTED.
+
+NEXT ALLOWED TECHNICAL STEP
+Use a supported read-only Linux filesystem interface against the standalone VDI (for example Oracle VirtualBox vboximg-mount on a Linux host, which defaults to read-only and supports ext2/ext3/ext4 guest filesystems) or an equivalent approved forensic tool. Do not attach a hard disk to a running Kali VM: Oracle's VirtualBox 7.2 documentation states that changes to hard-disk device slots require the VM to be powered off. Preserve the original VM and this clone unchanged during examination.

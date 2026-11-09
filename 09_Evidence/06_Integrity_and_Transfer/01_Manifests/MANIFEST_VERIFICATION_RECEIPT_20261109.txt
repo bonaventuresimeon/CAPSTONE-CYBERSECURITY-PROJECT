@@ -1,0 +1,34 @@
+﻿CAPSTONE PROJECT 138 — SHA-256 MANIFEST VERIFICATION RECEIPT
+Verification timestamp: 2026-11-09T11:02:17+01:00
+Project scope: Entire project tree under C:\Users\CHINEDU\Desktop\CAPSTONE PROJECT 138
+
+ACTIVE MANIFEST
+File: SHA256_EVIDENCE_MANIFEST_CURRENT_20261109.csv
+Record count: 1528
+Unique relative paths: 1528
+Duplicate path groups: 0
+Refresh script: REFRESH_AND_VERIFY_MANIFEST_20261109.ps1
+Refresh script result: PASS
+Refresh missing files: 0
+Refresh hash mismatches: 0
+Manifest SHA-256: B4963A7F65FC6D3C7EB346DDD070A67A848BE721E2B79D2C6CB17A803F06AE64
+Manifest sidecar: SHA256_EVIDENCE_MANIFEST_CURRENT_20261109.sha256
+Manifest sidecar match: True
+
+INDEPENDENT VERIFICATION
+Method: Independently imported the active CSV, checked relative-path uniqueness, confirmed every referenced file exists, re-computed SHA-256 for every listed file, re-computed the manifest file digest, and compared the digest against the sidecar.
+Independent missing files: 0
+Independent hash mismatches: 0
+Independent duplicate path groups: 0
+Independent manifest digest: B4963A7F65FC6D3C7EB346DDD070A67A848BE721E2B79D2C6CB17A803F06AE64
+Independent sidecar match: True
+INDEPENDENT_VERIFY=PASS
+
+EXCLUSIONS
+The manifest and its sidecar are excluded from their own manifest. This receipt and its separate .sha256 companion are also excluded to avoid a self-referential hash cycle. The receipt is independently protected by its companion SHA-256 file. Paths beneath .dist directories are excluded by the refresh script.
+
+STATUS
+Manifest refresh: PASS.
+Independent per-entry verification: PASS.
+Receipt sidecar: created after this record and independently checked.
+The manifest must be refreshed and independently re-verified after any later project-file modification.
