@@ -103,8 +103,11 @@ directly to that four-page brief and supersedes the 9 November matrix.
 - Generation validation: `10_Final_Report/DOCUMENT_GENERATION_VALIDATION_20261118.txt`
 - SHA-256 receipt: `10_Final_Report/FINAL_REPORT_FILE_HASHES_20261118.sha256`
 - Official requirement matrix: `00_Governance/ASSESSMENT_REQUIREMENT_TO_EVIDENCE_MATRIX_20261118.md`
+- Current finding-to-evidence crosswalk: `04_Vulnerability_Assessment/FINDING_EVIDENCE_RISK_CROSSWALK_20261118.csv`
+- Current CVE applicability matrix: `04_Vulnerability_Assessment/CVE_APPLICABILITY_MATRIX_20261118.csv`
+- Release history: `00_Governance/FINAL_REPORT_RELEASE_LOG_20261118.md`
 
-The final report is a 16-page A4 PDF with a one-page executive summary, five selected
+The locally verified final report is a 16-page A4 PDF with a one-page executive summary, five selected
 findings, contextual risk assessment, control recommendations, five draft GRC policy
 areas, the required cloud-security discussion, conclusion and evidence appendices.
 The brief separately labels the executive summary as “Task 5”; both that summary and

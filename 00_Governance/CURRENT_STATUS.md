@@ -69,7 +69,10 @@ See the 18 November requirement-to-evidence matrix and QA record for the detaile
 - `10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.pdf` — matching 16-page A4 PDF.
 - `10_Final_Report/FINAL_REPORT_SUBMISSION_QA_20261118.md` — official-brief compliance and visual QA record.
 - `10_Final_Report/DOCUMENT_GENERATION_VALIDATION_20261118.txt` — file metadata and generation checks.
-- `10_Final_Report/FINAL_REPORT_FILE_HASHES_20261118.sha256` — SHA-256 hashes of submission artefacts.
+- `10_Final_Report/FINAL_REPORT_FILE_HASHES_20261118.sha256` — SHA-256 hashes of local submission artefacts.
+- `04_Vulnerability_Assessment/FINDING_EVIDENCE_RISK_CROSSWALK_20261118.csv` — refreshed five-finding evidence map.
+- `04_Vulnerability_Assessment/CVE_APPLICABILITY_MATRIX_20261118.csv` — current and separate candidate CVE mapping.
+- `00_Governance/FINAL_REPORT_RELEASE_LOG_20261118.md` — release changes and publication boundary.
 - `10_Final_Report/assets/KALI_HTTP_ROOT_APP_INDEX_20261108_REDACTED.png` — report exhibit image.
 - `01_Project_Brief_and_Scope/TS_ACADEMY_CAPSTONE_PROJECT_138_BRIEF.pdf` — official assignment brief.
 
@@ -79,7 +82,7 @@ The report files are prepared locally and their hashes are recorded. The reposit
 
 The 9 November recursive source-evidence manifest remains a historical integrity record for the evidence tree at its recorded refresh. The new report files and final-report asset have their own 18 November SHA-256 receipt; the old evidence manifest is not represented as covering those additions. The repository commit records the corresponding version change.
 
-Earlier 9 November report-generation and QA records remain in the repository as historical records. The 18 November Word/PDF package and its QA/validation records are the submission-authoritative versions.
+Earlier 9 November report-generation and QA records remain in the repository as historical records. The updated 18 November crosswalk is authoritative for the current five findings; the 9 November crosswalk and CVE research files remain preserved as historical snapshots. The 18 November Word/PDF package and its QA/validation records are the submission-authoritative versions.
 
 ## 8. Remaining qualifications
 
