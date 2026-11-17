@@ -45,7 +45,7 @@ Scores use a qualitative 5×5 likelihood/impact model. They are not CVSS scores 
 - **Security controls:** preventive, detective and corrective control matrix. Recommendations only; no control implementation is claimed.
 - **GRC:** five draft policy requirements and conditional legal/standards applicability. No formal adoption is claimed.
 - **Cloud security:** desk-based shared-responsibility baseline and evidence plan; no live tenant assessment.
-- **Final report:** submission-authoritative Word and PDF files are stored under `10_Final_Report`; the 9 November report set is retained as historical working output.
+- **Final report:** the 18 November Word/PDF report was generated and QA-checked locally. Intended repository destinations are under `10_Final_Report`; binary upload is still pending. The 9 November report set remains in the repository as historical working output.
 - **Presentation:** 14-slide presentation supplied as a professional PowerPoint (.pptx), editable Word-compatible DOCX, Markdown slide script and speaker notes.
 - **References:** standards/framework starter list and public-source applicability log.
 
