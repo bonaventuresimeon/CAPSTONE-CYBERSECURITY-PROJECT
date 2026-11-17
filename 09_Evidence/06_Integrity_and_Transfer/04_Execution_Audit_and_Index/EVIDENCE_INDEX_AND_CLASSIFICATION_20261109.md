@@ -49,3 +49,19 @@ The full per-image inventory, dimensions and SHA-256 values are in SCREENSHOT_CL
 - 01_Network_Configuration\METASPLOITABLE_CONSOLE_WAKE_RECHECK_20261109.png: genuine screenshot after the approved single-Enter display wake.
 - 03_Vulnerability_Assessment\01_Raw_Research_and_Validation\KALI_APPLICATION_LEVEL_INPUT_PATH_DIAGNOSTIC_20261109.png: diagnostic only; it does not show HTTP response results and is not validation evidence.
 - The prior 302-image classification audit predates these two follow-up screenshots; its count is not a current total until the image-classification inventory is refreshed.
+
+
+## Final report presentation derivative — 18 November 2026
+
+The F-04 original screenshot and read-only service-configuration validation receipt
+remain in the canonical vulnerability evidence location. The report appendix uses a
+redacted presentation derivative stored at
+`10_Final_Report/assets/KALI_HTTP_ROOT_APP_INDEX_20261108_REDACTED.png`.
+The derivative is linked to the original capture by the submission QA record and
+SHA-256 receipt. The credentials are masked in the report copy; no authentication
+attempt was performed. The original technical evidence is not replaced by the
+presentation derivative.
+
+The 9 November recursive source-evidence manifest remains a dated integrity record
+for its original evidence-tree snapshot. New submission files and the presentation
+derivative are covered by the separate 18 November final-report SHA-256 receipt.

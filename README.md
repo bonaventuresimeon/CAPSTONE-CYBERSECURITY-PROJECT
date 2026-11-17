@@ -2,8 +2,9 @@
 ## HanTech — From Vulnerability to Compliance: Securing Legacy and Cloud Systems
 
 **Programme:** TS Academy Cybersecurity Capstone  
-**Project evidence date:** 9 November 2026  
-**Project status:** WORKSTREAM DELIVERABLES ASSEMBLED; CONTENT QA PASS WITH EXPLICIT SCOPE LIMITATIONS; EVIDENCE TREE REORGANISED AND AUDITED; FINAL MANIFEST VERIFICATION RECORDED IN GOVERNANCE AND INTEGRITY EVIDENCE.
+**Primary technical evidence dates:** 8–9 November 2026  
+**Final report date:** 18 November 2026  
+**Project status:** FINAL WORD/PDF REPORT AND OFFICIAL-BRIEF TRACEABILITY PACKAGE PREPARED; F-04 EVIDENCE RECOVERED AND REDACTED FOR REPORT PRESENTATION; REPOSITORY PACKAGE UPDATED; NOT YET SUBMITTED.
 
 ## Project objective
 Assess the authorised training environment, discover services, identify five evidence-backed weaknesses, assess contextual risk, recommend security controls, prepare GRC policies and a cloud-security baseline, and assemble the final report and presentation.
@@ -27,7 +28,7 @@ Assess the authorised training environment, discover services, identify five evi
 | ID | Finding | Contextual score |
 |---|---|---:|
 | F-01 | Wildcard writable NFS root export with `no_root_squash` | 20 — Critical |
-| F-02 | Anonymous SMB share enumeration and directory metadata disclosure | 8 — Moderate |
+| F-02 | Anonymous SMB share enumeration and directory metadata disclosure | 8 — Medium |
 | F-03 | Mutillidae configuration resource reachable over HTTP as text/plain | 16 — High |
 | F-04 | Default lab credential pair displayed on public HTTP landing page | 16 — High |
 | F-05 | Telnet and Berkeley r-services exposed on all IPv4 interfaces | 12 — High |
@@ -44,7 +45,7 @@ Scores use a qualitative 5×5 likelihood/impact model. They are not CVSS scores 
 - **Security controls:** preventive, detective and corrective control matrix. Recommendations only; no control implementation is claimed.
 - **GRC:** five draft policy requirements and conditional legal/standards applicability. No formal adoption is claimed.
 - **Cloud security:** desk-based shared-responsibility baseline and evidence plan; no live tenant assessment.
-- **Final report:** integrated report master in Markdown, editable Word-compatible DOCX, and final PDF.
+- **Final report:** submission-authoritative Word and PDF files are stored under `10_Final_Report`; the 9 November report set is retained as historical working output.
 - **Presentation:** 14-slide presentation supplied as a professional PowerPoint (.pptx), editable Word-compatible DOCX, Markdown slide script and speaker notes.
 - **References:** standards/framework starter list and public-source applicability log.
 
@@ -86,3 +87,40 @@ Scores use a qualitative 5×5 likelihood/impact model. They are not CVSS scores 
 
 ## Current completion boundary
 The final report is supplied in Markdown, editable DOCX and PDF formats. The final presentation is supplied as a professional PowerPoint (.pptx), editable DOCX, Markdown slide script and speaker notes. The project is not represented as a production penetration test, live cloud assessment, policy adoption or remediation implementation. Final submission readiness depends on the capstone rubric and any external requirements not contained in the available project scope.
+
+
+## Final submission package — 18 November 2026
+
+The original TS Academy assignment brief is now retained at
+`01_Project_Brief_and_Scope/TS_ACADEMY_CAPSTONE_PROJECT_138_BRIEF.pdf`.
+The official requirement-to-evidence matrix dated 18 November maps the final report
+directly to that four-page brief and supersedes the 9 November matrix.
+
+**Submission-authoritative files**
+- Word: `10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.docx`
+- PDF: `10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.pdf`
+- Submission QA: `10_Final_Report/FINAL_REPORT_SUBMISSION_QA_20261118.md`
+- Generation validation: `10_Final_Report/DOCUMENT_GENERATION_VALIDATION_20261118.txt`
+- SHA-256 receipt: `10_Final_Report/FINAL_REPORT_FILE_HASHES_20261118.sha256`
+- Official requirement matrix: `00_Governance/ASSESSMENT_REQUIREMENT_TO_EVIDENCE_MATRIX_20261118.md`
+
+The final report is a 16-page A4 PDF with a one-page executive summary, five selected
+findings, contextual risk assessment, control recommendations, five draft GRC policy
+areas, the required cloud-security discussion, conclusion and evidence appendices.
+The brief separately labels the executive summary as “Task 5”; both that summary and
+the Cloud Security Basics task are included.
+
+**F-04 evidence:** the original 8 November landing-page capture remains in the source
+evidence archive. The report uses a redacted derivative at
+`10_Final_Report/assets/KALI_HTTP_ROOT_APP_INDEX_20261108_REDACTED.png`.
+The finding proves public-page credential disclosure only; authentication, reuse and
+privilege were not tested.
+
+**Risk-label alignment:** the five-by-five risk band for 5–9 is “Medium”; F-02 is
+8/25 — Medium. The 9 November recursive evidence manifest remains a dated snapshot
+of the source evidence tree and does not cover files added on 18 November. New
+submission files have their own SHA-256 receipt.
+
+**Submission state:** prepared and repository-published; not yet submitted through the
+Academy form and no instructor acceptance is claimed. The deadline in the brief is
+21 November 2026.

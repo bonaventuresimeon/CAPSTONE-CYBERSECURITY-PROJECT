@@ -25,7 +25,7 @@ Likelihood and impact are each scored from 1 to 5.
 | Score band | Rating |
 |---:|---|
 | 1–4 | Low |
-| 5–9 | Moderate |
+| 5–9 | Medium |
 | 10–16 | High |
 | 17–25 | Critical |
 
@@ -35,7 +35,7 @@ The score supports prioritisation; it does not replace professional judgement. A
 | ID | Finding | Likelihood | Impact | Score | Rating | Confidence / qualification |
 |---|---|---:|---:|---:|---|---|
 | F-01 | NFS root filesystem wildcard export with rw and no_root_squash | 4 | 5 | 20 | CRITICAL | Configuration directly confirmed; remote mount/read/write impact not tested. Critical is the potential risk if an untrusted reachable client is accepted by the export. |
-| F-02 | Anonymous SMB share enumeration and tmp metadata disclosure | 4 | 2 | 8 | MODERATE | Anonymous enumeration and directory listing reproduced; file content and write access not tested. |
+| F-02 | Anonymous SMB share enumeration and tmp metadata disclosure | 4 | 2 | 8 | MEDIUM | Anonymous enumeration and directory listing reproduced; file content and write access not tested. |
 | F-03 | Mutillidae database-configuration resource served as text/plain over HTTP | 4 | 4 | 16 | HIGH (PROVISIONAL) | Remote HEAD response confirmed; actual values, credential validity and database access intentionally not retrieved/tested. Score follows the allocated owner's working model and remains conditional on business context. |
 | F-04 | Default lab credential pair disclosed on public landing page | 4 | 4 | 16 | HIGH (PROVISIONAL) | Disclosure is directly visible; credential validity and privileges are unknown. Score follows the allocated owner's working model and remains conditional on business context. |
 | F-05 | Telnet and Berkeley r-services listening on all IPv4 interfaces | 3 | 4 | 12 | HIGH (PROVISIONAL) | Listener and service definitions confirmed; authentication, trust and command access not tested. Score follows the allocated owner's working model and remains conditional on business context. |

@@ -1,3 +1,5 @@
+> **SUPERSEDED 18 NOVEMBER 2026:** This 9 November matrix pre-dated recovery of the original TS Academy brief. Use `ASSESSMENT_REQUIREMENT_TO_EVIDENCE_MATRIX_20261118.md` for the final official-brief mapping. This historical matrix is retained to preserve the earlier audit trail.
+
 # CAPSTONE PROJECT 138 — Assessment Requirement-to-Evidence Matrix
 **Prepared:** 9 November 2026 (Africa/Lagos)
 **Purpose:** Stage A academic compliance audit and traceability baseline.

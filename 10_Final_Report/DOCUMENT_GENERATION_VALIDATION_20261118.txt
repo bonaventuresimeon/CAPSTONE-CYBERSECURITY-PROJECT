@@ -1,0 +1,28 @@
+PROJECT 138 — FINAL WORD/PDF GENERATION AND VALIDATION
+Validation date: 2026-11-18 (Africa/Lagos)
+Assignment brief: 01_Project_Brief_and_Scope/TS_ACADEMY_CAPSTONE_PROJECT_138_BRIEF.pdf
+
+DOCX: 10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.docx
+DOCX bytes: 871862
+DOCX SHA-256: 12a808d8fab59406cdadf3e5e385a509d7b2786080a20cd04ae6d44a56ae6dfe
+DOCX paragraphs: 180
+DOCX native tables: 12
+
+PDF: 10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.pdf
+PDF bytes: 620683
+PDF pages: 16
+PDF page size: A4 (595.304 x 841.89 pt)
+PDF SHA-256: fc09dfc96bb52868784962ac05187e781727a4f7b8fa23454bbe4aa5a4de74b8
+PDF encrypted: no
+PDF tagged: yes
+
+F-04 redacted exhibit:
+Path: 10_Final_Report/assets/KALI_HTTP_ROOT_APP_INDEX_20261108_REDACTED.png
+Bytes: 338047
+SHA-256: 56ea612688219d9274cb075874e53c1d5b4d9caa78a990a7a8cedfcbedb0578d
+Original source screenshot SHA-256: 76f014c81f3ba826b781b38290d650b2d4b6a4bca41e8a6ad62785294c27a949
+
+Structural checks: DOCX ZIP package integrity passed; PDF metadata and text extraction checked; final PDF rendered to 16 pages; final-page image inspection completed.
+Assignment checks: official brief requirements mapped in 00_Governance/ASSESSMENT_REQUIREMENT_TO_EVIDENCE_MATRIX_20261118.md and 10_Final_Report/FINAL_REPORT_SUBMISSION_QA_20261118.md.
+Integrity scope: this receipt covers the submission files and report presentation image. The 9 November evidence manifest remains a historical source-evidence-tree snapshot and is not represented as covering files added on 18 November.
+Submission state: prepared and repository-published; not submitted through the TS Academy form.

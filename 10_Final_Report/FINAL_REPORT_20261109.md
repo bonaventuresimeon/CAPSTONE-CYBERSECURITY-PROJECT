@@ -1,3 +1,5 @@
+> **HISTORICAL WORKING MASTER — SUPERSEDED 18 NOVEMBER 2026.** The submission-authoritative files are `PROJECT_138_FINAL_REPORT_20261118.docx` and `PROJECT_138_FINAL_REPORT_20261118.pdf`. Use `FINAL_REPORT_SUBMISSION_QA_20261118.md` for the official-brief compliance review. This 9 November Markdown master is retained as project history.
+
 # HANTECH CAPSTONE PROJECT 138
 ## From Vulnerability to Compliance: Securing Legacy and Cloud Systems
 

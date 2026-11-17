@@ -3,7 +3,7 @@
 **Project:** HanTech — From Vulnerability to Compliance: Securing Legacy and Cloud Systems  
 **Programme:** TS Academy Cybersecurity Capstone  
 **Submission deadline recorded in project materials:** 21 November 2026  
-**Team size stated in project materials:** 8  
+**Team size:** 9 teammates listed on the final group report  
 **Assessment environment:** HanTech's designated capstone assessment environment is the isolated Metasploitable 2 virtual machine at 192.168.138.20. Kali Linux at 192.168.138.10 is the assessment team's workstation.
 
 ## 1. Project objective
@@ -45,7 +45,19 @@ Names above are allocation labels reproduced from project records. They are not 
 Each finding must be traceable to retained output or screenshots, timestamp, target identity, method and SHA-256 record. A banner alone is not CVE validation. Evidence must distinguish confirmed observations, configuration weaknesses, candidates, exclusions and tests not performed. Hashes demonstrate integrity relative to recorded digests, not the truth of every interpretation.
 
 ## 6. Current execution status
-Lab readiness, full TCP discovery, targeted TCP corroboration, UDP top-100 discovery, five priority findings, contextual risk assessment, control recommendations, GRC policy drafts, desk-based cloud baseline and report/presentation content have been assembled. Document formatting, formal rubric comparison, final cross-document QA, final manifest refresh and independent submission audit remain outstanding. The project is not marked submitted.
+
+As at 18 November 2026, the official TS Academy brief has been recovered and mapped in
+`00_Governance/ASSESSMENT_REQUIREMENT_TO_EVIDENCE_MATRIX_20261118.md`. The final
+submission-authoritative Word and PDF reports are prepared, visually checked, and
+stored in `10_Final_Report`. The report contains the one-page executive summary,
+five reconciled findings, risk assessment, controls, five draft policy areas,
+cloud-security fundamentals and conclusion. The final QA and SHA-256 receipts are
+retained alongside the final files.
+
+Repository publication does not mean the report has been submitted to the Academy.
+Each of the nine group members is to submit the same group-produced report by the
+deadline in the official brief. No individual signature, personal approval or
+instructor acceptance is fabricated.
 
 ## 7. Reporting boundary
 Metasploitable 2 is the designated HanTech assessment environment for this capstone, implemented as an isolated and deliberately vulnerable virtual appliance. Results establish conditions observed in that designated assessment environment. They do not independently establish the state of any separate HanTech production network, system or cloud tenant. Do not describe the environment as an independently tested production estate or infer production applicability without separate asset/configuration evidence and authorisation.
