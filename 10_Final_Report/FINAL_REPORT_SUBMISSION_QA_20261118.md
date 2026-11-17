@@ -88,11 +88,21 @@ The report masks the credential values while retaining enough page context to su
 - Recommendations are designs; control implementation, formal policy adoption, management acceptance and risk treatment closure are not claimed.
 - The final report has been prepared for the nine-member group; no personal signatures or individual attestations have been invented.
 
-## 8. QA decision
+## 8. Repository upload status
+
+The final Word and PDF files have passed local structural and visual checks and their
+SHA-256 values are recorded in the accompanying receipt. The governance and QA
+documentation has been committed to the GitHub repository. The report DOCX/PDF binary
+files and official brief PDF have **not yet been uploaded** to the repository. The
+paths in the report package inventory are intended repository destinations, not proof
+of current presence.
+
+## 9. QA decision
 
 **OFFICIAL BRIEF SECTION COVERAGE: PASS.**  
 **FIVE-FINDING TRACEABILITY: PASS WITH EXPLICIT TESTING LIMITATIONS.**  
 **DOCX/PDF PACKAGE: PASS — 16-PAGE A4 PDF AND EDITABLE WORD FILE.**  
 **F-04 EVIDENCE: RECOVERED, RECONCILED AND REDACTED IN REPORT PRESENTATION.**  
 **CVE/CVSS: ADDRESSED WITH NON-APPLICABILITY EXPLANATION; NO UNSUPPORTED SCORES.**  
+**REPOSITORY BINARY UPLOAD: PENDING; DOCX/PDF LOCALLY AVAILABLE AND HASHED.**  
 **SUBMISSION STATE: PREPARED; GROUP SUBMISSION TO TS ACADEMY NOT YET CLAIMED.**

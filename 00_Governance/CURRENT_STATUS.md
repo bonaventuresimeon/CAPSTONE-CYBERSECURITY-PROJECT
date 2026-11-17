@@ -5,7 +5,7 @@
 **Programme:** TS Academy Cybersecurity Capstone  
 **Group:** 138 — nine named teammates  
 **Submission deadline in the official brief:** 21 November 2026  
-**Current position:** FINAL WORD/PDF REPORT PREPARED, QA-REVIEWED AND PUBLISHED TO THE PROJECT REPOSITORY. NOT YET SUBMITTED THROUGH THE ACADEMY FORM.
+**Current position:** FINAL WORD/PDF REPORT PREPARED LOCALLY AND QA-REVIEWED; GOVERNANCE AND REQUIREMENT DOCUMENTATION PUSHED TO REPOSITORY; BINARY REPORT/BRIEF UPLOAD STILL PENDING. NOT YET SUBMITTED.
 
 ## 1. Authoritative assignment source
 
@@ -73,7 +73,7 @@ See the 18 November requirement-to-evidence matrix and QA record for the detaile
 - `10_Final_Report/assets/KALI_HTTP_ROOT_APP_INDEX_20261108_REDACTED.png` — report exhibit image.
 - `01_Project_Brief_and_Scope/TS_ACADEMY_CAPSTONE_PROJECT_138_BRIEF.pdf` — official assignment brief.
 
-The final files are repository-published and prepared for the group to submit. No submission-form transaction or instructor acceptance is claimed.
+The report files are prepared locally and their hashes are recorded. The repository currently contains the governance and QA documentation, but the DOCX/PDF binaries and the official brief PDF have not yet been uploaded. No submission-form transaction or instructor acceptance is claimed.
 
 ## 7. Integrity and versioning
 

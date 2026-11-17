@@ -4,7 +4,7 @@
 **Programme:** TS Academy Cybersecurity Capstone  
 **Primary technical evidence dates:** 8–9 November 2026  
 **Final report date:** 18 November 2026  
-**Project status:** FINAL WORD/PDF REPORT AND OFFICIAL-BRIEF TRACEABILITY PACKAGE PREPARED; F-04 EVIDENCE RECOVERED AND REDACTED FOR REPORT PRESENTATION; REPOSITORY PACKAGE UPDATED; NOT YET SUBMITTED.
+**Project status:** FINAL WORD/PDF REPORT PREPARED LOCALLY AND QA-REVIEWED; GOVERNANCE AND REQUIREMENT DOCUMENTATION PUSHED TO MAIN; BINARY REPORT/BRIEF UPLOAD STILL PENDING; NOT YET SUBMITTED.
 
 ## Project objective
 Assess the authorised training environment, discover services, identify five evidence-backed weaknesses, assess contextual risk, recommend security controls, prepare GRC policies and a cloud-security baseline, and assemble the final report and presentation.
@@ -124,3 +124,6 @@ submission files have their own SHA-256 receipt.
 **Submission state:** prepared and repository-published; not yet submitted through the
 Academy form and no instructor acceptance is claimed. The deadline in the brief is
 21 November 2026.
+
+
+> **Repository publication note (18 November 2026):** The documentation and governance changes are committed to `main`. The final DOCX/PDF and official brief have been prepared and hashed locally, but the binary files have not yet been added to this repository. The file paths listed above are the intended destinations, not proof that the binaries are already present. The local files remain available in the current conversation download links.
