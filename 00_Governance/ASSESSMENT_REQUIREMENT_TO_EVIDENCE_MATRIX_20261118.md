@@ -1,7 +1,7 @@
 # CAPSTONE PROJECT 138 — Official Brief Requirement-to-Evidence Matrix
 
 **Prepared:** 18 November 2026 (Africa/Lagos)  
-**Authority:** `01_Project_Brief_and_Scope/TS_ACADEMY_CAPSTONE_PROJECT_138_BRIEF.pdf` (four pages)  
+**Authority:** four-page TS Academy brief supplied as a conversation attachment and reviewed directly; a repository PDF copy has not yet been uploaded.  
 **Purpose:** Final traceability check between the TS Academy assignment brief and the submission-authoritative Word/PDF report.
 
 ## 1. Assignment requirement matrix

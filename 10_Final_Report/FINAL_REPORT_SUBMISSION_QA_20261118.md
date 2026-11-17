@@ -1,8 +1,8 @@
 # Project 138 — Final Submission QA Record
 
 **QA date:** 18 November 2026 (Africa/Lagos)  
-**Authoritative assignment source:** `01_Project_Brief_and_Scope/TS_ACADEMY_CAPSTONE_PROJECT_138_BRIEF.pdf`  
-**Submission files:** `PROJECT_138_FINAL_REPORT_20261118.docx` and `PROJECT_138_FINAL_REPORT_20261118.pdf`  
+**Authoritative assignment source:** the four-page TS Academy PDF supplied as a conversation attachment; a repository copy has not yet been uploaded.  
+**Locally verified submission files:** `PROJECT_138_FINAL_REPORT_20261118.docx` and `PROJECT_138_FINAL_REPORT_20261118.pdf` (binary repository upload pending)  
 **Report length:** 16 A4 pages in the PDF render.
 
 ## 1. Scope of this QA
@@ -72,8 +72,8 @@ The report masks the credential values while retaining enough page context to su
 
 ## 6. Document and render checks
 
-- Editable Word report: present; DOCX package integrity checked; 180 paragraphs and 12 native tables.
-- Final PDF: present; 16 pages; A4 page size; no encryption; text extraction and visual page review completed.
+- Editable Word report: local file; DOCX package integrity checked; 180 paragraphs and 12 native tables; GitHub binary upload pending.
+- Final PDF: local file; 16 pages; A4 page size; no encryption; text extraction and visual page review completed; GitHub binary upload pending.
 - Executive summary: one page, page 2 after the title page.
 - Evidence appendices: five findings are supported by exhibits A.1–A.5; F-04 includes the recovered redacted image.
 - The PDF corresponds to the 18 November final report, not the 9 November historical report.

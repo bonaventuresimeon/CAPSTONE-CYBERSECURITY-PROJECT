@@ -9,9 +9,7 @@
 
 ## 1. Authoritative assignment source
 
-The four-page TS Academy assignment brief is retained at:
-
-`01_Project_Brief_and_Scope/TS_ACADEMY_CAPSTONE_PROJECT_138_BRIEF.pdf`
+The four-page TS Academy assignment brief was supplied as a conversation attachment and reviewed directly. A repository copy of the source PDF has not yet been uploaded.
 
 The final compliance mapping is:
 
@@ -65,16 +63,16 @@ See the 18 November requirement-to-evidence matrix and QA record for the detaile
 
 ## 6. Final report and repository deliverables
 
-- `10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.docx` — editable Word report.
-- `10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.pdf` — matching 16-page A4 PDF.
+- Intended repository path (binary upload pending): `10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.docx` — editable Word report.
+- Intended repository path (binary upload pending): `10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.pdf` — matching 16-page A4 PDF.
 - `10_Final_Report/FINAL_REPORT_SUBMISSION_QA_20261118.md` — official-brief compliance and visual QA record.
 - `10_Final_Report/DOCUMENT_GENERATION_VALIDATION_20261118.txt` — file metadata and generation checks.
 - `10_Final_Report/FINAL_REPORT_FILE_HASHES_20261118.sha256` — SHA-256 hashes of local submission artefacts.
 - `04_Vulnerability_Assessment/FINDING_EVIDENCE_RISK_CROSSWALK_20261118.csv` — refreshed five-finding evidence map.
 - `04_Vulnerability_Assessment/CVE_APPLICABILITY_MATRIX_20261118.csv` — current and separate candidate CVE mapping.
 - `00_Governance/FINAL_REPORT_RELEASE_LOG_20261118.md` — release changes and publication boundary.
-- `10_Final_Report/assets/KALI_HTTP_ROOT_APP_INDEX_20261108_REDACTED.png` — report exhibit image.
-- `01_Project_Brief_and_Scope/TS_ACADEMY_CAPSTONE_PROJECT_138_BRIEF.pdf` — official assignment brief.
+- The redacted F-04 derivative is embedded in the locally verified Word/PDF; standalone PNG upload is pending.
+- The official assignment brief PDF was used as an uploaded source attachment; a repository copy is pending.
 
 The report files are prepared locally and their hashes are recorded. The repository currently contains the governance and QA documentation, but the DOCX/PDF binaries and the official brief PDF have not yet been uploaded. No submission-form transaction or instructor acceptance is claimed.
 

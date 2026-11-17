@@ -91,14 +91,11 @@ The final report is supplied in Markdown, editable DOCX and PDF formats. The fin
 
 ## Final submission package — 18 November 2026
 
-The original TS Academy assignment brief is now retained at
-`01_Project_Brief_and_Scope/TS_ACADEMY_CAPSTONE_PROJECT_138_BRIEF.pdf`.
-The official requirement-to-evidence matrix dated 18 November maps the final report
-directly to that four-page brief and supersedes the 9 November matrix.
+The four-page TS Academy assignment brief was supplied separately and reviewed as the source for the 18 November requirement-to-evidence matrix. A copy of that PDF has not yet been uploaded to this repository. The 18 November matrix maps the final report directly to the supplied brief and supersedes the 9 November matrix.
 
 **Submission-authoritative files**
-- Word: `10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.docx`
-- PDF: `10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.pdf`
+- Word (intended repository destination; binary upload pending): `10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.docx`
+- PDF (intended repository destination; binary upload pending): `10_Final_Report/PROJECT_138_FINAL_REPORT_20261118.pdf`
 - Submission QA: `10_Final_Report/FINAL_REPORT_SUBMISSION_QA_20261118.md`
 - Generation validation: `10_Final_Report/DOCUMENT_GENERATION_VALIDATION_20261118.txt`
 - SHA-256 receipt: `10_Final_Report/FINAL_REPORT_FILE_HASHES_20261118.sha256`
@@ -114,8 +111,7 @@ The brief separately labels the executive summary as “Task 5”; both that sum
 the Cloud Security Basics task are included.
 
 **F-04 evidence:** the original 8 November landing-page capture remains in the source
-evidence archive. The report uses a redacted derivative at
-`10_Final_Report/assets/KALI_HTTP_ROOT_APP_INDEX_20261108_REDACTED.png`.
+evidence archive. The locally rendered report uses a redacted derivative; the standalone derivative is not yet stored in GitHub. The original unredacted screenshot remains preserved in the source-evidence archive.
 The finding proves public-page credential disclosure only; authentication, reuse and
 privilege were not tested.
 
@@ -124,8 +120,7 @@ privilege were not tested.
 of the source evidence tree and does not cover files added on 18 November. New
 submission files have their own SHA-256 receipt.
 
-**Submission state:** prepared and repository-published; not yet submitted through the
-Academy form and no instructor acceptance is claimed. The deadline in the brief is
+**Submission state:** report prepared and QA-reviewed locally; governance and requirement documentation committed to GitHub; binary DOCX/PDF and assignment-brief uploads remain pending; not yet submitted through the Academy form and no instructor acceptance is claimed. The deadline in the brief is
 21 November 2026.
 
 
