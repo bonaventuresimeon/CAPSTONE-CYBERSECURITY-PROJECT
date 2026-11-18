@@ -74,7 +74,7 @@ See the 18 November requirement-to-evidence matrix and QA record for the detaile
 - The redacted F-04 derivative is embedded in the locally verified Word/PDF; standalone PNG upload is pending.
 - The official assignment brief PDF was used as an uploaded source attachment; a repository copy is pending.
 
-The report files are prepared locally and their hashes are recorded. The repository currently contains the governance and QA documentation, but the DOCX/PDF binaries and the official brief PDF have not yet been uploaded. No submission-form transaction or instructor acceptance is claimed.
+The report Word and PDF files have now been confirmed as present in the conversation workspace, independently checked and matched to the SHA-256 receipt. The original four-page assignment brief and redacted F-04 PNG were also confirmed locally. The repository currently contains the governance and QA documentation, but the DOCX/PDF binaries, official brief PDF and standalone redacted exhibit PNG have not yet been uploaded. The connected GitHub toolset has no binary file-transfer operation in this session, and the authorized Desktop Commander device is offline. No submission-form transaction or instructor acceptance is claimed.
 
 ## 7. Integrity and versioning
 

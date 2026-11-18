@@ -24,3 +24,34 @@ The connected GitHub interface permits repository reads and Git object/text upda
 
 ## Submission boundary
 This is a prepared group report package, not a submission transaction. Each of the nine group members should submit the same group-produced report through the Academy's prescribed form. No instructor approval or grade is claimed.
+
+
+## Uploaded source-file receipt — verified in conversation workspace
+
+On 18 November 2026 the following files were accessible as actual files in the
+conversation workspace and verified locally:
+
+| File | Size | Verification |
+|---|---:|---|
+| `Project_138_Final_Report.docx` | 871,862 bytes | DOCX ZIP integrity test passed; SHA-256 matches the release hash receipt |
+| `Project_138_Final_Report.pdf` | 620,683 bytes | 16 pages, A4, unencrypted; SHA-256 matches the release hash receipt |
+| `TSACADEMY CAPSTONE PROJECT 138.pdf` | 83,860 bytes | Four pages, unencrypted; SHA-256 recorded in the hash receipt |
+| `KALI_HTTP_ROOT_APP_INDEX_20261108_REDACTED.png` | 338,047 bytes | SHA-256 matches the report's embedded F-04 exhibit |
+
+The PDF was rendered to 16 images. The cover, one-page executive summary and final
+appendix page were visually inspected; no page-count mismatch or obvious clipping was
+observed in those pages. The DOCX package passed ZIP integrity validation and includes
+five embedded media assets.
+
+## GitHub binary-upload status
+
+The source files are available and verified locally, but the connected GitHub toolset
+for this session exposes text-file and Git-object writes only; it does not expose a
+binary upload operation or accept a local file path for blob content. The connected
+Desktop Commander device `Phamous` is offline. Accordingly, the DOCX/PDF, original
+brief PDF and standalone exhibit PNG are **not yet committed as binary files**. The
+repository tree was checked after the latest commit and these exact paths are absent.
+No fake binary placeholders were committed.
+
+This is a transfer-capability limitation, not a missing-source-file issue. The report
+and brief remain available from the conversation attachments/local download links.

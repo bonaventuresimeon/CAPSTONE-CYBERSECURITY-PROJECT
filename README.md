@@ -124,4 +124,4 @@ submission files have their own SHA-256 receipt.
 21 November 2026.
 
 
-> **Repository publication note (18 November 2026):** The documentation and governance changes are committed to `main`. The final DOCX/PDF and official brief have been prepared and hashed locally, but the binary files have not yet been added to this repository. The file paths listed above are the intended destinations, not proof that the binaries are already present. The local files remain available in the current conversation download links.
+> **Repository publication note (18 November 2026):** The final Word/PDF and official brief are verified local attachments and their digests are recorded. The documentation and governance changes are committed to `main`; binary report/brief/exhibit uploads remain pending because the available GitHub connection cannot transfer local binary files in this session. The paths listed above are intended destinations, not proof that the binaries are present. The local files remain available in the conversation download links.

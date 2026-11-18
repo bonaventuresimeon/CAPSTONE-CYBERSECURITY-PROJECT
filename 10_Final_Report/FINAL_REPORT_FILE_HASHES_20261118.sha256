@@ -1,3 +1,13 @@
+# SHA-256 — Project 138 final submission package
+# Digests verified against the exact local files present in the conversation workspace on 18 November 2026.
 12a808d8fab59406cdadf3e5e385a509d7b2786080a20cd04ae6d44a56ae6dfe  PROJECT_138_FINAL_REPORT_20261118.docx
 fc09dfc96bb52868784962ac05187e781727a4f7b8fa23454bbe4aa5a4de74b8  PROJECT_138_FINAL_REPORT_20261118.pdf
 56ea612688219d9274cb075874e53c1d5b4d9caa78a990a7a8cedfcbedb0578d  assets/KALI_HTTP_ROOT_APP_INDEX_20261108_REDACTED.png
+2a50c64c1b17b5a407510d2942bdcca0c25890e6cc2da9c4605ebc3ba7e070f1  ../01_Project_Brief_and_Scope/TS_ACADEMY_CAPSTONE_PROJECT_138_BRIEF.pdf
+
+# File sizes
+# Word report: 871862 bytes; DOCX ZIP integrity test: PASS
+# PDF report: 620683 bytes; 16 pages; A4; unencrypted
+# Official assignment brief: 83860 bytes; 4 pages; unencrypted
+# Redacted F-04 screenshot: 338047 bytes
+# Note: These digests are verified against local/source attachments. They do not imply that the binary files have been uploaded to GitHub.
